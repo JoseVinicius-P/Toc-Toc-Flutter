@@ -9,7 +9,7 @@ class HomeStore extends Store<int> {
     await Future.delayed(Duration(seconds: 1));
 
     int value = state + 1;
-    if (value < 5) {
+    if (value < 15) {
       update(value);
     } else {
       setError(Exception('Error: state not can be > 4'));
