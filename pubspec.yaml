@@ -31,14 +31,15 @@ dependencies:
   flutter:
     sdk: flutter
 
-  #Para modularizacao, roteamento e injeção de dependencia
-  flutter_modular: ^5.0.3
-
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  #Para gerenciamento de estado
   flutter_triple: ^2.0.1
+  #Para modularizacao, roteamento e injeção de dependencia
+  flutter_modular: ^5.0.3
+  #Para facilitar a implementação da responsividade
+  responsive_builder: ^0.7.0
 
 dev_dependencies:
   flutter_test:
