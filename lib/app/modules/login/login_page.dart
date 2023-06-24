@@ -3,6 +3,10 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/login/login_store.dart';
 import 'package:flutter/material.dart';
+import 'package:toctoc/app/modules/login/widgets/google_button_widget.dart';
+import 'package:toctoc/app/modules/login/widgets/text_field_password_widget.dart';
+import 'package:toctoc/app/modules/login/widgets/text_field_user_widget.dart';
+import 'package:toctoc/app/shared/my_colors.dart';
 
 class LoginPage extends StatefulWidget {
   final String title;
@@ -10,6 +14,7 @@ class LoginPage extends StatefulWidget {
   @override
   LoginPageState createState() => LoginPageState();
 }
+
 class LoginPageState extends State<LoginPage> {
   final LoginStore store = Modular.get();
 
@@ -25,81 +30,103 @@ class LoginPageState extends State<LoginPage> {
                 width: double.infinity,
                 color: Colors.white,
               ),
-              Stack(
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+              Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: SafeArea(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Opacity(
-                        opacity: 0.3,
-                        child: Container(
-                          child: isPortrait ?
-                          Image(
-                            height: 70.sh,
+                      const SizedBox(height: 10,),
+                      const Flexible(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: Image(
                             image: const AssetImage('assets/images/capa_login.png'),
                             fit: BoxFit.cover,
-                          ) :
-                          Expanded(child:
-                            Image(
-                              width: 60.sh,
-                              image: const AssetImage('assets/images/capa_login_landscape.png'),
-                              fit: BoxFit.cover,
-                            )
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                  SafeArea(
-                    child: Row(
-                      mainAxisAlignment: isPortrait ? MainAxisAlignment.center : MainAxisAlignment.end,
-                      children: [
-                        Flexible(
-                          child: Column(
-                            mainAxisAlignment: isPortrait ? MainAxisAlignment.end : MainAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(5.0),
+                      const SizedBox(height: 45,),
+                      AutoSizeText(
+                        'Login',
+                        style: theme.textTheme.titleMedium!.copyWith(fontSize: 8.sw.roundToDouble()),
+                        maxFontSize: 8.sw.roundToDouble(),
+                        minFontSize: 4.sw.roundToDouble(),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 15,),
+                      TextFieldUserWidget(),
+                      const SizedBox(height: 10,),
+                      TextFieldPasswordWidget(),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          TextButton(
+                            onPressed: (){},
+                            child:  AutoSizeText(
+                              'Esqueci minha senha',
+                              style: theme.textTheme.labelMedium,
+                              maxFontSize: 4.sw.roundToDouble(),
+                              minFontSize: 3.sw.roundToDouble(),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          )
+                        ],
+                      ),
+                      const SizedBox(height: 25,),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: MyColors.blue, // Altera a cor de fundo
+                              ),
+                              onPressed: (){},
+                              child: Padding(
+                                padding: const EdgeInsets.all(15.0),
                                 child: AutoSizeText(
-                                  'Campainha virtual',
-                                  style: theme.textTheme.titleMedium!.copyWith(fontSize: 8.sw.roundToDouble()),
-                                  maxFontSize: 8.sw.roundToDouble(),
-                                  minFontSize: 4.sw.roundToDouble(),
+                                  'Login',
+                                  style: theme.textTheme.titleMedium!.copyWith(color: Colors.white, fontSize: 25),
+                                  maxFontSize: 6.sw.roundToDouble(),
+                                  minFontSize: 3.sw.roundToDouble(),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(right: 3.0, bottom: 5.0, left: 5.0),
-                                child: SizedBox(
-                                  width: 40.sw.roundToDouble(),
-                                  child: AutoSizeText(
-                                    'Avise seus amigos sobre uma visita tocando a campainha',
-                                    maxLines: 2,
-                                    softWrap: true,
-                                    textAlign: TextAlign.center,
-                                    style: theme.textTheme.titleSmall!.copyWith(fontSize: 5.sw.roundToDouble()),
-                                    maxFontSize: 5.sw.roundToDouble(),
-                                    minFontSize: 2.3.sw.roundToDouble(),
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 30),
-                              Container(
-                                child: isPortrait ? SizedBox(height: 10.sh) : const SizedBox(),
-                              ),
-                            ],
+                              ),),
                           ),
+                        ],
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 35.0, horizontal: 35.0),
+                        child: Divider(
+                          color: Colors.grey,  // Cor do divisor
+                          height: 1,  // Altura do divisor
+                          thickness: 1,  // Espessura do divisor
                         ),
-                        Container(
-                          child: isPortrait ? const SizedBox(height: 0) : SizedBox(width: 25.sw),
-                        ),
-                      ],
+                      ),
+                      Center(child: GoogleButtonWidget()),
+                    ],
+                  ) ,
+                ),
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      alignment: Alignment.bottomCenter,
+                      child: const Image(
+                        image: AssetImage('assets/images/fundo_login.png'),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ],
-              ),
+              )
             ],
           )
       );
