@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:toctoc/app/modules/login/login_controller.dart';
 import 'package:toctoc/app/modules/login/login_store.dart';
 import 'package:flutter/material.dart';
 import 'package:toctoc/app/modules/login/widgets/google_button_widget.dart';
@@ -17,6 +18,7 @@ class LoginPage extends StatefulWidget {
 
 class LoginPageState extends State<LoginPage> {
   final LoginStore store = Modular.get();
+  final LoginController controller = Modular.get();
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +92,7 @@ class LoginPageState extends State<LoginPage> {
                                   borderRadius: BorderRadius.circular(15.0),
                                 ),
                               ),
-                              onPressed: (){},
+                              onPressed: () => controller.toCompleteRegistrationModule(),
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: AutoSizeText(
