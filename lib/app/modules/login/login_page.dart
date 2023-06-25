@@ -24,6 +24,7 @@ class LoginPageState extends State<LoginPage> {
     Widget getScaffold(bool isPortrait, BuildContext context){
       var theme = Theme.of(context);
       return Scaffold(
+        resizeToAvoidBottomInset: false,
           body: Stack(
             children: [
               Container(
