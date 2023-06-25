@@ -16,7 +16,7 @@ class TextFieldUserWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(
-          Radius.circular(5),
+          Radius.circular(15),
         ),
         border: Border.all(
           width: 1,
@@ -43,11 +43,11 @@ class TextFieldUserWidget extends StatelessWidget {
         decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.transparent),
-              borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.circular(15),
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.transparent),
-              borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.circular(15),
             ),
             //Definindo hint usando varivel da classe personalizada MyStrings
             hintText: 'Email ou telefone',

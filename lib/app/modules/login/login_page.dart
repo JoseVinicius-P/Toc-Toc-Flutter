@@ -85,10 +85,13 @@ class LoginPageState extends State<LoginPage> {
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: MyColors.blue, // Altera a cor de fundo
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
                               ),
                               onPressed: (){},
                               child: Padding(
-                                padding: const EdgeInsets.all(15.0),
+                                padding: const EdgeInsets.all(8.0),
                                 child: AutoSizeText(
                                   'Login',
                                   style: theme.textTheme.titleMedium!.copyWith(color: Colors.white, fontSize: 25),

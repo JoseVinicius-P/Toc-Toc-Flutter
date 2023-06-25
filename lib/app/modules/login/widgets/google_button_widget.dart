@@ -12,10 +12,11 @@ class GoogleButtonWidget extends StatelessWidget {
     var theme = Theme.of(context);
     var buttonWidth = 50.sw.roundToDouble();
     var buttonHeight = buttonWidth/4.roundToDouble();
+    var radius = buttonHeight/3.roundToDouble();
 
     Widget getGoogleButton(bool isPortrait){
       return InkWell(
-        borderRadius: BorderRadius.circular(buttonHeight),
+        borderRadius: BorderRadius.circular(radius),
         //Se a authenticação estiver sendo feita o botão não funcionará
         onTap: (){}/*loginController.inAuthentication ? null : () async {
           await loginController.signInWithGoogle();
@@ -26,14 +27,14 @@ class GoogleButtonWidget extends StatelessWidget {
           width: buttonWidth,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(
-              Radius.circular(buttonHeight),
+              Radius.circular(radius),
             ),
           ),
           child: SizedBox.expand(
             child: Container(
               decoration: BoxDecoration(
                 color: MyColors.lightGray,
-                borderRadius: BorderRadius.circular(buttonHeight),
+                borderRadius: BorderRadius.circular(radius),
               ),
               child: Padding(
                 padding: EdgeInsets.all(buttonHeight/5.roundToDouble()),
