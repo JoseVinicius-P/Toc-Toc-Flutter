@@ -44,9 +44,12 @@ class LoginPageState extends State<LoginPage> {
                       const Flexible(
                         child: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: Image(
-                            image: const AssetImage('assets/images/capa_login.png'),
-                            fit: BoxFit.cover,
+                          child: Opacity(
+                            opacity: 0.7,
+                            child: Image(
+                              image: const AssetImage('assets/images/capa_login.png'),
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ),
@@ -111,29 +114,16 @@ class LoginPageState extends State<LoginPage> {
                       const Padding(
                         padding: EdgeInsets.symmetric(vertical: 35.0, horizontal: 35.0),
                         child: Divider(
-                          color: Colors.grey,  // Cor do divisor
+                          color: MyColors.lightGray,  // Cor do divisor
                           height: 1,  // Altura do divisor
                           thickness: 1,  // Espessura do divisor
                         ),
                       ),
-                      Center(child: GoogleButtonWidget()),
+                      const Center(child: GoogleButtonWidget()),
                     ],
                   ) ,
                 ),
               ),
-              Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      alignment: Alignment.bottomCenter,
-                      child: const Image(
-                        image: AssetImage('assets/images/fundo_login.png'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ],
-              )
             ],
           )
       );

@@ -33,7 +33,7 @@ class GoogleButtonWidget extends StatelessWidget {
           child: SizedBox.expand(
             child: Container(
               decoration: BoxDecoration(
-                color: MyColors.lightGray,
+                color: MyColors.lightGray.withOpacity(0.5),
                 borderRadius: BorderRadius.circular(radius),
               ),
               child: Padding(
