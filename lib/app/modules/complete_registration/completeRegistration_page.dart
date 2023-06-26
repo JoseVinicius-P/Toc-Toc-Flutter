@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/complete_registration/completeRegistration_store.dart';
@@ -24,7 +25,9 @@ class CompleteRegistrationPageState extends State<CompleteRegistrationPage> {
         appBar: AppBar(
           centerTitle: true,
           leading: IconButton(
-              onPressed: () => Modular.to.pop(),
+              onPressed: (){
+                SystemNavigator.pop();
+              },
               icon: const Icon(Icons.close, color: Colors.black)
           ),
           forceMaterialTransparency: true,

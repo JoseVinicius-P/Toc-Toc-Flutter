@@ -15,8 +15,8 @@ class CompleteRegistrationModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => CompleteRegistrationPage()),
-    ChildRoute('/select_sound', child: (_, args) => SelectSoundPage()),
+    ChildRoute('/', child: (_, args) => const CompleteRegistrationPage()),
+    ChildRoute('/select_sound', child: (_, args) => const SelectSoundPage()),
   ];
 
 }
