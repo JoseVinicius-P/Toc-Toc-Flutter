@@ -1,6 +1,9 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/set_home/setHome_store.dart';
 import 'package:flutter/material.dart';
+import 'package:toctoc/app/shared/my_colors.dart';
 
 class SetHomePage extends StatefulWidget {
   final String title;
@@ -13,13 +16,126 @@ class SetHomePageState extends State<SetHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Column(
-        children: <Widget>[],
-      ),
+        appBar: AppBar(
+          centerTitle: true,
+          leading: IconButton(
+              onPressed: () => Modular.to.pop(),
+              icon: const Icon(Icons.close, color: Colors.black)
+          ),
+          forceMaterialTransparency: true,
+          title: Text(
+            "Localização da sua casa",
+            style: theme.textTheme.titleSmall!.copyWith(color: MyColors.blue),
+          ),
+        ),
+        body: Stack(
+          children: [
+            Container(
+              width: double.infinity,
+              color: Colors.white,
+            ),
+            Padding(
+              padding: EdgeInsets.all(30.0),
+              child: SafeArea(
+                child: Stack(
+                  children: [
+                    Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              AutoSizeText(
+                                'A localização será usada para que seus amigos possam tocar a "campainha", quando estiverem próximos!',
+                                style: theme.textTheme.titleSmall!.copyWith(fontSize: 18),
+                                maxFontSize: 6.sw.roundToDouble(),
+                                minFontSize: 3.sw.roundToDouble(),
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.center,
+                              ),
+                              SizedBox(height: 5,),
+                              AutoSizeText(
+                                '*Você deve estar em casa para definir a localização!',
+                                style: theme.textTheme.titleSmall!.copyWith(fontSize: 13, color: Colors.red),
+                                maxFontSize: 6.sw.roundToDouble(),
+                                minFontSize: 3.sw.roundToDouble(),
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 20,),
+                        Flexible(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(15),
+                              ),
+                              border: Border.all(
+                                width: 1,
+                                style: BorderStyle.solid,
+                                color: Colors.grey,
+                              ),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(15),
+                              ),
+                              child: Image(
+                                height: 60.sh,
+                                width: double.infinity,
+                                image: const AssetImage('assets/images/map.jpg'),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: MyColors.blue, // Altera a cor de fundo
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                              ),
+                              onPressed: () {},
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: AutoSizeText(
+                                  'Salvar',
+                                  style: theme.textTheme.titleMedium!.copyWith(color: Colors.white, fontSize: 25),
+                                  maxFontSize: 6.sw.roundToDouble(),
+                                  minFontSize: 3.sw.roundToDouble(),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ) ,
+              ),
+            ),
+          ],
+        )
     );
   }
 }
