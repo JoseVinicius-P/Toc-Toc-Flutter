@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/complete_registration/completeRegistration_store.dart';
 import 'package:flutter/material.dart';
+import 'package:toctoc/app/modules/complete_registration/complete_registration_controller.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 
 class CompleteRegistrationPage extends StatefulWidget {
@@ -14,6 +15,7 @@ class CompleteRegistrationPage extends StatefulWidget {
 
 class CompleteRegistrationPageState extends State<CompleteRegistrationPage> {
   final CompleteRegistrationStore store = Modular.get();
+  final controller = Modular.get<CompleteRegistrationController>();
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +147,7 @@ class CompleteRegistrationPageState extends State<CompleteRegistrationPage> {
                                   borderRadius: BorderRadius.circular(15.0),
                                 ),
                               ),
-                              onPressed: (){},
+                              onPressed: () => controller.toSelectSoundPage(),
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: AutoSizeText(
