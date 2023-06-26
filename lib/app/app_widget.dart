@@ -4,8 +4,9 @@ import 'package:flutter_modular/flutter_modular.dart';
 class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Modular.setInitialRoute('/');
     return MaterialApp.router(
-      title: 'Flutter Slidy',
+      title: 'Toctoc',
       theme: ThemeData(
         primaryColor: const Color(0xFF771F98),
         textTheme: const TextTheme(
