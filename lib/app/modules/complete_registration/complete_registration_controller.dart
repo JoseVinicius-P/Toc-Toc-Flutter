@@ -13,4 +13,8 @@ class CompleteRegistrationController implements Disposable{
     Modular.to.pushNamed('./select_sound');
   }
 
+  void toSetHomeModule(){
+    Modular.to.pushNamed('./set_home/');
+  }
+
 }

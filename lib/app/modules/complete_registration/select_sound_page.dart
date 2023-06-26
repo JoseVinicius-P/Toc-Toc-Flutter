@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:toctoc/app/modules/complete_registration/complete_registration_controller.dart';
 import 'package:toctoc/app/modules/complete_registration/select_sound_store.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 
@@ -13,6 +14,7 @@ class SelectSoundPage extends StatefulWidget {
 }
 class SelectSoundPageState extends State<SelectSoundPage> {
   final SelectSoundStore store = Modular.get();
+  final controller = Modular.get<CompleteRegistrationController>();
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +113,7 @@ class SelectSoundPageState extends State<SelectSoundPage> {
                                   borderRadius: BorderRadius.circular(15.0),
                                 ),
                               ),
-                              onPressed: (){},
+                              onPressed: () => controller.toSetHomeModule(),
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: AutoSizeText(
