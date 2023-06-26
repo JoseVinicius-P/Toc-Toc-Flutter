@@ -106,6 +106,23 @@ class SetHomePageState extends State<SetHomePage> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Expanded(
+                            child: TextButton(
+                              onPressed: () {},
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: AutoSizeText(
+                                  'Mais tarde',
+                                  style: theme.textTheme.titleSmall!.copyWith(color: MyColors.blue, fontSize: 20),
+                                  maxFontSize: 6.sw.roundToDouble(),
+                                  minFontSize: 3.sw.roundToDouble(),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.left,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: MyColors.blue, // Altera a cor de fundo
