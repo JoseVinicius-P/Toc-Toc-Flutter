@@ -5,7 +5,9 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/complete_registration/stores/completeRegistration_store.dart';
 import 'package:flutter/material.dart';
 import 'package:toctoc/app/modules/complete_registration/complete_registration_controller.dart';
+import 'package:toctoc/app/modules/complete_registration/widgets/select_avatar_widget.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
+import 'package:toctoc/app/shared/widgets/button_blue_rounded_widget.dart';
 
 class CompleteRegistrationPage extends StatefulWidget {
   final String title;
@@ -64,39 +66,8 @@ class CompleteRegistrationPageState extends State<CompleteRegistrationPage> {
                         ),
                       ),
                       const SizedBox(height: 35,),
-                      Center(
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Stack(
-                              children: [
-                                SizedBox(
-                                  width: 40.sw.roundToDouble(),
-                                  height: 40.sw.roundToDouble(),
-                                  child: CircleAvatar(
-                                    backgroundImage: const AssetImage('assets/images/perfil.png'),
-                                    radius: 40.sw.roundToDouble(),
-                                  ),
-                                ),
-                                Positioned(
-                                  bottom: 5,
-                                  right: -15,
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: MyColors.blue, // Altera a cor de fundo
-                                      shape: CircleBorder(),
-                                    ),
-                                    onPressed: (){},
-                                    child: const Padding(
-                                      padding: EdgeInsets.all(13.0),
-                                      child: Icon(Icons.camera_alt_outlined, color: Colors.white70,),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
+                      const Center(
+                        child: SelectAvatarWidget(),
                       ),
                       const SizedBox(height: 30,),
                       Container(
@@ -139,33 +110,7 @@ class CompleteRegistrationPageState extends State<CompleteRegistrationPage> {
                   ),
                     Align(
                       alignment: Alignment.bottomRight,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Expanded(
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: MyColors.blue, // Altera a cor de fundo
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                ),
-                              ),
-                              onPressed: () => controller.toSelectSoundPage(),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: AutoSizeText(
-                                  'Salvar',
-                                  style: theme.textTheme.titleMedium!.copyWith(color: Colors.white, fontSize: 25),
-                                  maxFontSize: 6.sw.roundToDouble(),
-                                  minFontSize: 3.sw.roundToDouble(),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                      child: ButtonBlueRoundedWidget(title: 'Salvar', onPressed: () => controller.toSelectSoundPage()),
                     ),
                   ],
                 ) ,

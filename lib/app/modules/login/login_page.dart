@@ -8,6 +8,7 @@ import 'package:toctoc/app/modules/login/widgets/google_button_widget.dart';
 import 'package:toctoc/app/modules/login/widgets/text_field_password_widget.dart';
 import 'package:toctoc/app/modules/login/widgets/text_field_user_widget.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
+import 'package:toctoc/app/shared/widgets/button_blue_rounded_widget.dart';
 
 class LoginPage extends StatefulWidget {
   final String title;
@@ -84,33 +85,7 @@ class LoginPageState extends State<LoginPage> {
                         ],
                       ),
                       const SizedBox(height: 25,),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Expanded(
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: MyColors.blue, // Altera a cor de fundo
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                ),
-                              ),
-                              onPressed: () => controller.toCompleteRegistrationModule(),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: AutoSizeText(
-                                  'Login',
-                                  style: theme.textTheme.titleMedium!.copyWith(color: Colors.white, fontSize: 25),
-                                  maxFontSize: 6.sw.roundToDouble(),
-                                  minFontSize: 3.sw.roundToDouble(),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                      ButtonBlueRoundedWidget(title: 'Login', onPressed: () => controller.toCompleteRegistrationModule()),
                       const Padding(
                         padding: EdgeInsets.symmetric(vertical: 35.0, horizontal: 35.0),
                         child: Divider(

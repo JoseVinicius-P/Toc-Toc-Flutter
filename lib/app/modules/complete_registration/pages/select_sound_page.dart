@@ -5,6 +5,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/complete_registration/complete_registration_controller.dart';
 import 'package:toctoc/app/modules/complete_registration/stores/select_sound_store.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
+import 'package:toctoc/app/shared/widgets/button_blue_rounded_widget.dart';
 
 class SelectSoundPage extends StatefulWidget {
   final String title;
@@ -102,33 +103,7 @@ class SelectSoundPageState extends State<SelectSoundPage> {
                     ),
                     Align(
                       alignment: Alignment.bottomRight,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Expanded(
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: MyColors.blue, // Altera a cor de fundo
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                ),
-                              ),
-                              onPressed: () => controller.toSetHomeModule(),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: AutoSizeText(
-                                  'Salvar',
-                                  style: theme.textTheme.titleMedium!.copyWith(color: Colors.white, fontSize: 25),
-                                  maxFontSize: 6.sw.roundToDouble(),
-                                  minFontSize: 3.sw.roundToDouble(),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                      child: ButtonBlueRoundedWidget(title: 'Salvar', onPressed: () => controller.toSetHomeModule()),
                     ),
                   ],
                 ) ,
