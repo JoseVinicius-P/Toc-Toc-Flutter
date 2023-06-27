@@ -1,4 +1,3 @@
-import 'package:toctoc/app/modules/complete_registration/completeRegistration_module.dart';
 import 'package:toctoc/app/modules/login/login_controller.dart';
 import 'package:toctoc/app/modules/login/login_page.dart';
 import 'package:toctoc/app/modules/login/login_store.dart';
@@ -14,7 +13,6 @@ class LoginModule extends Module {
   @override
   final List<ModularRoute> routes = [
     ChildRoute('/', child: (_, args) => LoginPage()),
-    ModuleRoute('/complete_registration', module: CompleteRegistrationModule())
   ];
 
 }

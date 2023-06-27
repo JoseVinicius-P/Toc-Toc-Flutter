@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/set_home/setHome_store.dart';
 import 'package:flutter/material.dart';
+import 'package:toctoc/app/modules/set_home/set_home_controller.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 import 'package:toctoc/app/shared/widgets/button_blue_rounded_widget.dart';
 
@@ -14,6 +15,7 @@ class SetHomePage extends StatefulWidget {
 }
 class SetHomePageState extends State<SetHomePage> {
   final SetHomeStore store = Modular.get();
+  final controller = Modular.get<SetHomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class SetHomePageState extends State<SetHomePage> {
               color: Colors.white,
             ),
             Padding(
-              padding: EdgeInsets.all(30.0),
+              padding: const EdgeInsets.all(30.0),
               child: SafeArea(
                 child: Stack(
                   children: [
@@ -60,7 +62,7 @@ class SetHomePageState extends State<SetHomePage> {
                                 overflow: TextOverflow.ellipsis,
                                 textAlign: TextAlign.center,
                               ),
-                              SizedBox(height: 5,),
+                              const SizedBox(height: 5,),
                               AutoSizeText(
                                 '*Você deve estar em casa para definir a localização!',
                                 style: theme.textTheme.titleSmall!.copyWith(fontSize: 13, color: Colors.red),
@@ -73,7 +75,7 @@ class SetHomePageState extends State<SetHomePage> {
                             ],
                           ),
                         ),
-                        SizedBox(height: 20,),
+                        const SizedBox(height: 20,),
                         Flexible(
                           child: Container(
                             decoration: BoxDecoration(
@@ -87,7 +89,7 @@ class SetHomePageState extends State<SetHomePage> {
                               ),
                             ),
                             child: ClipRRect(
-                              borderRadius: BorderRadius.all(
+                              borderRadius: const BorderRadius.all(
                                 Radius.circular(15),
                               ),
                               child: Image(
@@ -123,7 +125,7 @@ class SetHomePageState extends State<SetHomePage> {
                               ),
                             ),
                           ),
-                          Expanded(child: ButtonBlueRoundedWidget(title: 'Salvar', onPressed: () {})),
+                          Expanded(child: ButtonBlueRoundedWidget(title: 'Salvar', onPressed: () => controller.toHomeModule())),
                         ],
                       ),
                     ),
