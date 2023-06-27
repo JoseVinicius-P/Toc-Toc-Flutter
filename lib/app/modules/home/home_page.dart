@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/home/home_controller.dart';
+import 'package:toctoc/app/modules/home/pages/friend_list_page.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 import 'home_store.dart';
 
@@ -30,7 +31,7 @@ class _HomePageState extends State<HomePage> {
         //Controller
         controller: controller.pageViewController,
         children: [
-          SizedBox(),
+          FriendListPage(),
           SizedBox(),
           SizedBox(),
           //Paginas
