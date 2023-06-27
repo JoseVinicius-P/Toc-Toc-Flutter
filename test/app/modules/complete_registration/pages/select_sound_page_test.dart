@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:toctoc/app/modules/complete_registration/select_sound_page.dart';
+import 'package:toctoc/app/modules/complete_registration/pages/select_sound_page.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:modular_test/modular_test.dart';
 
 // Função auxiliar para envolver os widgets a serem testados.
 Widget buildTestableWidget(Widget widget) => MaterialApp(home: widget);

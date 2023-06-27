@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:toctoc/app/modules/complete_registration/select_sound_store.dart';
+import 'package:toctoc/app/modules/complete_registration/stores/select_sound_store.dart';
  
 void main() {
   late SelectSoundStore store;

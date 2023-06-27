@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/complete_registration/complete_registration_controller.dart';
-import 'package:toctoc/app/modules/complete_registration/select_sound_store.dart';
+import 'package:toctoc/app/modules/complete_registration/stores/select_sound_store.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 
 class SelectSoundPage extends StatefulWidget {
