@@ -6,6 +6,7 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     Modular.setInitialRoute('/');
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       title: 'Toctoc',
       theme: ThemeData(
         primaryColor: const Color(0xFF771F98),
