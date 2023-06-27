@@ -25,7 +25,7 @@ class SetHomePageState extends State<SetHomePage> {
           centerTitle: true,
           leading: IconButton(
               onPressed: () => Modular.to.pop(),
-              icon: const Icon(Icons.close, color: Colors.black)
+              icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.black)
           ),
           forceMaterialTransparency: true,
           title: Text(

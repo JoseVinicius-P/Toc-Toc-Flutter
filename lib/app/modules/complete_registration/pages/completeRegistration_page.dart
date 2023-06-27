@@ -30,7 +30,7 @@ class CompleteRegistrationPageState extends State<CompleteRegistrationPage> {
               onPressed: (){
                 SystemNavigator.pop();
               },
-              icon: const Icon(Icons.close, color: Colors.black)
+              icon: const Icon(Icons.close_rounded, color: Colors.black, size: 25,)
           ),
           forceMaterialTransparency: true,
           title: Text(
@@ -45,7 +45,7 @@ class CompleteRegistrationPageState extends State<CompleteRegistrationPage> {
               color: Colors.white,
             ),
             Padding(
-              padding: EdgeInsets.all(30.0),
+              padding: const EdgeInsets.all(30.0),
               child: SafeArea(
                 child: Stack(
                   children: [
