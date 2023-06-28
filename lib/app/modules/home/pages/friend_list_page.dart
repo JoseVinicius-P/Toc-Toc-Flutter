@@ -16,7 +16,7 @@ class FriendListPageState extends State<FriendListPage> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(top: 15.0, left: 30.0, right: 30.0),
+          padding: const EdgeInsets.only(top: 15.0, left: 20.0, right: 20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
