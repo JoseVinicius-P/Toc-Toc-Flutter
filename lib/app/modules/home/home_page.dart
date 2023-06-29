@@ -4,6 +4,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/home/home_controller.dart';
 import 'package:toctoc/app/modules/home/pages/add_friend_page.dart';
 import 'package:toctoc/app/modules/home/pages/friend_list_page.dart';
+import 'package:toctoc/app/modules/home/pages/settings_page.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 import 'home_store.dart';
 
@@ -34,7 +35,7 @@ class _HomePageState extends State<HomePage> {
         children: [
           FriendListPage(),
           AddFriendPage(),
-          SizedBox(),
+          SettingsPage(),
           //Paginas
           //ListsPage(),
           //SearchPage(),
