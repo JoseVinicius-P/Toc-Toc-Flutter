@@ -21,7 +21,7 @@ class AddFriendPageState extends State<AddFriendPage> {
               color: Colors.white,
             ),
             Padding(
-              padding: const EdgeInsets.all(30.0),
+              padding: const EdgeInsets.all(20.0),
               child: SafeArea(
                 child: Stack(
                   children: [
