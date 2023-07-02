@@ -1,12 +1,20 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:toctoc/app/modules/login/login_controller.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 
-class GoogleButtonWidget extends StatelessWidget {
+class GoogleButtonWidget extends StatefulWidget {
   final String title;
   const GoogleButtonWidget({Key? key, this.title = "GoogleButtonWidget"}) : super(key: key);
 
+  @override
+  State<GoogleButtonWidget> createState() => _GoogleButtonWidgetState();
+}
+
+class _GoogleButtonWidgetState extends State<GoogleButtonWidget> {
+  final controller = Modular.get<LoginController>();
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -18,10 +26,13 @@ class GoogleButtonWidget extends StatelessWidget {
       return InkWell(
         borderRadius: BorderRadius.circular(radius),
         //Se a authenticação estiver sendo feita o botão não funcionará
-        onTap: (){}/*loginController.inAuthentication ? null : () async {
-          await loginController.signInWithGoogle();
-          loginController.toHomeModule();
-        }*/,
+        onTap: () async {
+          if(await controller.signInWithGoogle()){
+            controller.toCompleteRegistrationModule();
+          }else{
+            print("ERRO");
+          }
+        },
         child: Container(
           height: buttonHeight,
           width: buttonWidth,
