@@ -41,29 +41,29 @@ class LoginPageState extends State<LoginPage> {
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 10,),
-                      const Flexible(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: Opacity(
-                            opacity: 0.7,
-                            child: Image(
-                              image: const AssetImage('assets/images/capa_login.png'),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
+                      Center(
+                        child: AutoSizeText(
+                          'Bem-vindo de volta',
+                          style: theme.textTheme.titleMedium!.copyWith(fontSize: 8.sw.roundToDouble(), color: Colors.black54),
+                          maxFontSize: 8.sw.roundToDouble(),
+                          minFontSize: 4.sw.roundToDouble(),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      const SizedBox(height: 45,),
-                      AutoSizeText(
-                        'Login',
-                        style: theme.textTheme.titleMedium!.copyWith(fontSize: 8.sw.roundToDouble()),
-                        maxFontSize: 8.sw.roundToDouble(),
-                        minFontSize: 4.sw.roundToDouble(),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
+                      const SizedBox(height: 10,),
+                      Center(
+                        child: AutoSizeText(
+                          'Entre em um mundo de conexões virtuais! Abra a porta para tocar a campainha dos seus amigos e criar momentos especiais.',
+                          style: theme.textTheme.titleSmall!.copyWith(fontSize: 15),
+                          maxFontSize: 6.sw.roundToDouble(),
+                          minFontSize: 3.sw.roundToDouble(),
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
+                        ),
                       ),
-                      const SizedBox(height: 15,),
+                      const SizedBox(height: 55,),
                       TextFieldUserWidget(),
                       const SizedBox(height: 10,),
                       TextFieldPasswordWidget(),
