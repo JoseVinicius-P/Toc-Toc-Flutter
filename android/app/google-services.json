@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "122559113987",
+    "project_id": "toctoc-cfeaf",
+    "storage_bucket": "toctoc-cfeaf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122559113987:android:a4d60b321fbd3030c55736",
+        "android_client_info": {
+          "package_name": "com.jv.toctoc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "122559113987-ru90ml3amvcbh3u24j17j5uqeeh846sb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAI7bs3Z2NfyjIQNhYc7979pgKq7hiERyQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "122559113987-ru90ml3amvcbh3u24j17j5uqeeh846sb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "122559113987-3fss8ftidnlopjsu656j1ctflobv6qrs.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.jv.toctoc"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
