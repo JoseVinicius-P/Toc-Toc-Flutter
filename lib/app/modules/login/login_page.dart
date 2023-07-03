@@ -88,7 +88,7 @@ class LoginPageState extends State<LoginPage> {
                       const SizedBox(height: 25,),
                       TripleBuilder(
                         store: store,//the store to be observed
-                        builder: (context, triple) => ButtonBlueRoundedWidget(title: 'Login', onPressed: () => controller.toCompleteRegistrationModule()),//called when any segment changes
+                        builder: (context, triple) => ButtonBlueRoundedWidget(title: 'Login', onPressed: triple.isLoading ? null : () => controller.toCompleteRegistrationModule()),//called when any segment changes
                       ),
                       const Padding(
                         padding: EdgeInsets.symmetric(vertical: 35.0, horizontal: 35.0),
