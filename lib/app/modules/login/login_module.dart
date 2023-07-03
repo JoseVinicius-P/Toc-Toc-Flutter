@@ -8,8 +8,8 @@ class LoginModule extends Module {
   @override
   final List<Bind> binds = [
     Bind.lazySingleton((i) => AuthService()),
-    Bind.lazySingleton((i) => LoginStore()),
-    Bind.lazySingleton((i) => LoginController(authService: i())),
+    Bind.lazySingleton((i) => LoginController()),
+    Bind.lazySingleton((i) => LoginStore(i(), i())),
   ];
 
   @override

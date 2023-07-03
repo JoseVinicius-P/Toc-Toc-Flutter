@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_triple/flutter_triple.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/login/login_controller.dart';
 import 'package:toctoc/app/modules/login/login_store.dart';
@@ -85,7 +86,10 @@ class LoginPageState extends State<LoginPage> {
                         ],
                       ),
                       const SizedBox(height: 25,),
-                      ButtonBlueRoundedWidget(title: 'Login', onPressed: () => controller.toCompleteRegistrationModule()),
+                      TripleBuilder(
+                        store: store,//the store to be observed
+                        builder: (context, triple) => ButtonBlueRoundedWidget(title: 'Login', onPressed: () => controller.toCompleteRegistrationModule()),//called when any segment changes
+                      ),
                       const Padding(
                         padding: EdgeInsets.symmetric(vertical: 35.0, horizontal: 35.0),
                         child: Divider(
@@ -94,7 +98,13 @@ class LoginPageState extends State<LoginPage> {
                           thickness: 1,  // Espessura do divisor
                         ),
                       ),
-                      const Center(child: GoogleButtonWidget()),
+                      Center(
+                        child:
+                        TripleBuilder(
+                          store: store,//the store to be observed
+                          builder: (context, triple) => GoogleButtonWidget(onTap: triple.isLoading ? null : () => store.signInWithGoogle(),),//called when any segment changes
+                        ),
+                      ),
                     ],
                   ) ,
                 ),
