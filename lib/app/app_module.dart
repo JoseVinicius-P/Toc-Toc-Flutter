@@ -12,11 +12,11 @@ class AppModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ModuleRoute('/', module: LoginModule()),
+    ModuleRoute('/', module: SplashScreenModule()),
+    ModuleRoute('/login', module: LoginModule()),
     ModuleRoute('/home', module: HomeModule()),
     ModuleRoute('/complete_registration', module: CompleteRegistrationModule()),
     ModuleRoute('/create_account', module: CreateAccountModule()),
-    ModuleRoute('/splash_screen', module: SplashScreenModule())
   ];
 
 }
