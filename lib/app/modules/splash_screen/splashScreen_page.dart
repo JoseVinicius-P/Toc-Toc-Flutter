@@ -33,44 +33,43 @@ class SplashScreenPageState extends State<SplashScreenPage> {
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        AutoSizeText(
-                          'Toc toc!',
-                          style: theme.textTheme.titleMedium!.copyWith(fontSize: 10.sw.roundToDouble()),
-                          maxFontSize: 12.sw.roundToDouble(),
-                          minFontSize: 4.sw.roundToDouble(),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.start,
-                        ),
-                        const SizedBox(height: 20,),
-                        AutoSizeText(
-                          'Um toque, uma conexão instantânea. Conecte-se com seus amigos!',
-                          style: theme.textTheme.titleSmall!.copyWith(fontSize: 17),
-                          maxFontSize: 6.sw.roundToDouble(),
-                          minFontSize: 3.sw.roundToDouble(),
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.start,
-                        ),
-                      ],
+                    AutoSizeText(
+                      'Toc toc!',
+                      style: theme.textTheme.titleMedium!.copyWith(fontSize: 10.sw.roundToDouble()),
+                      maxFontSize: 12.sw.roundToDouble(),
+                      minFontSize: 4.sw.roundToDouble(),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.start,
                     ),
-                    const SizedBox(height: 50,),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Image(
-                            image: const AssetImage('assets/images/capa.png'),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ],
-                    )
+                    const SizedBox(height: 20,),
+                    AutoSizeText(
+                      'Um toque, uma conexão instantânea. Conecte-se com seus amigos!',
+                      style: theme.textTheme.titleSmall!.copyWith(fontSize: 17),
+                      maxFontSize: 6.sw.roundToDouble(),
+                      minFontSize: 3.sw.roundToDouble(),
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.start,
+                    ),
                   ],
                 ) ,
+              ),
+            ),
+            const Align(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: EdgeInsets.all(30.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Image(
+                        image: AssetImage('assets/images/capa.png'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             Align(
