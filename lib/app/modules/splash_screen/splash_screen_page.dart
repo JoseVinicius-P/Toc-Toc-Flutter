@@ -81,7 +81,7 @@ class SplashScreenPageState extends State<SplashScreenPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    ButtonBlueRoundedWidget(title: 'Criar uma conta', onPressed: (){},),
+                    ButtonBlueRoundedWidget(title: 'Criar uma conta', onPressed: () => controller.toCreateAccountModule(),),
                     TextButton(
                       onPressed: () => controller.toLoginModule(),
                       child: Padding(
