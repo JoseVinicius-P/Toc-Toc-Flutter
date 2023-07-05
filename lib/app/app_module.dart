@@ -4,7 +4,7 @@ import 'package:toctoc/app/modules/complete_registration/completeRegistration_mo
 import 'package:toctoc/app/modules/create_account/createAccount_module.dart';
 import 'package:toctoc/app/modules/home/home_module.dart';
 import 'package:toctoc/app/modules/login/login_module.dart';
-import 'package:toctoc/app/modules/splash_screen/splashScreen_module.dart';
+import 'package:toctoc/app/modules/splash_screen/splash_screen_module.dart';
 
 class AppModule extends Module {
   @override

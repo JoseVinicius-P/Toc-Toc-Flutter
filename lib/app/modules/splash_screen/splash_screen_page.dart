@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:toctoc/app/modules/splash_screen/splashScreen_store.dart';
+import 'package:toctoc/app/modules/splash_screen/splash_screen_store.dart';
 import 'package:flutter/material.dart';
 import 'package:toctoc/app/shared/widgets/button_blue_rounded_widget.dart';
 import 'package:toctoc/app/shared/my_colors.dart';

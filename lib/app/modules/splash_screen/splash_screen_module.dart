@@ -1,5 +1,5 @@
-import 'package:toctoc/app/modules/splash_screen/splashScreen_page.dart';
-import 'package:toctoc/app/modules/splash_screen/splashScreen_store.dart';
+import 'package:toctoc/app/modules/splash_screen/splash_screen_page.dart';
+import 'package:toctoc/app/modules/splash_screen/splash_screen_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class SplashScreenModule extends Module {
