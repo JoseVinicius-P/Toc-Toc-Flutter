@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -29,6 +30,16 @@ class LoginPageState extends State<LoginPage> {
       var theme = Theme.of(context);
       return Scaffold(
         resizeToAvoidBottomInset: false,
+          appBar: AppBar(
+            centerTitle: true,
+            leading: IconButton(
+                onPressed: (){
+                  Modular.to.pop();
+                },
+                icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.black, size: 25,)
+            ),
+            forceMaterialTransparency: true,
+          ),
           body: Stack(
             children: [
               Container(

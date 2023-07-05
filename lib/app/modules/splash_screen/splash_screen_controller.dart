@@ -10,7 +10,7 @@ class SplashScreenController implements Disposable{
   }
 
   void toLoginModule(){
-    Modular.to.navigate('/login/');
+    Modular.to.pushNamed('/login/');
   }
 
 }
