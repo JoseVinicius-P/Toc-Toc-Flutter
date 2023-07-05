@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:toctoc/app/modules/splash_screen/splash_screen_controller.dart';
 import 'package:toctoc/app/modules/splash_screen/splash_screen_store.dart';
 import 'package:flutter/material.dart';
 import 'package:toctoc/app/shared/widgets/button_blue_rounded_widget.dart';
@@ -14,6 +15,7 @@ class SplashScreenPage extends StatefulWidget {
 }
 class SplashScreenPageState extends State<SplashScreenPage> {
   final SplashScreenStore store = Modular.get();
+  final controller = Modular.get<SplashScreenController>();
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +83,7 @@ class SplashScreenPageState extends State<SplashScreenPage> {
                   children: [
                     ButtonBlueRoundedWidget(title: 'Criar uma conta', onPressed: (){},),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () => controller.toLoginModule(),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: AutoSizeText(
