@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:toctoc/app/modules/login/widgets/google_button_widget.dart';
+import 'package:toctoc/app/shared/widgets/google_button_widget.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:modular_test/modular_test.dart';
 

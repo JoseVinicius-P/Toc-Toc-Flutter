@@ -6,9 +6,9 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/login/login_controller.dart';
 import 'package:toctoc/app/modules/login/login_store.dart';
 import 'package:flutter/material.dart';
-import 'package:toctoc/app/modules/login/widgets/google_button_widget.dart';
-import 'package:toctoc/app/modules/login/widgets/text_field_password_widget.dart';
-import 'package:toctoc/app/modules/login/widgets/text_field_user_widget.dart';
+import 'package:toctoc/app/shared/widgets/google_button_widget.dart';
+import 'package:toctoc/app/shared/widgets/text_field_password_widget.dart';
+import 'package:toctoc/app/shared/widgets/text_field_user_widget.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 import 'package:toctoc/app/shared/widgets/button_blue_rounded_widget.dart';
 
@@ -76,9 +76,9 @@ class LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       const SizedBox(height: 55,),
-                      TextFieldUserWidget(),
+                      TextFieldUserWidget(hint: 'Telefone'),
                       const SizedBox(height: 10,),
-                      TextFieldPasswordWidget(),
+                      TextFieldPasswordWidget(hint: 'Senha'),
                       Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.end,

@@ -5,7 +5,8 @@ import 'package:toctoc/app/shared/my_colors.dart';
 
 class TextFieldPasswordWidget extends StatelessWidget {
   final String title;
-  const TextFieldPasswordWidget({Key? key, this.title = "TextFieldPasswordWidget"}) : super(key: key);
+  final String hint;
+  const TextFieldPasswordWidget({Key? key, this.title = "TextFieldPasswordWidget", required this.hint}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +52,7 @@ class TextFieldPasswordWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
           ),
           //Definindo hint usando varivel da classe personalizada MyStrings
-          hintText: 'Senha',
+          hintText: hint,
           hintStyle: theme.textTheme.labelMedium,
           prefixIcon: const Icon(Icons.lock_open_outlined, color: MyColors.textColor,),
           suffixIcon: IconButton(icon: Icon(Icons.visibility_off_outlined, color: MyColors.textColor,), onPressed: () {  },),

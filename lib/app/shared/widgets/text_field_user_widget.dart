@@ -5,7 +5,8 @@ import 'package:toctoc/app/shared/my_colors.dart';
 
 class TextFieldUserWidget extends StatelessWidget {
   final String title;
-  const TextFieldUserWidget({Key? key, this.title = "TextFieldUserWidget"}) : super(key: key);
+  final String hint;
+  const TextFieldUserWidget({Key? key, this.title = "TextFieldUserWidget", required this.hint}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +51,7 @@ class TextFieldUserWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
             ),
             //Definindo hint usando varivel da classe personalizada MyStrings
-            hintText: 'Email ou telefone',
+            hintText: hint,
             hintStyle: theme.textTheme.labelMedium,
             prefixIcon: const Icon(Icons.person_outline, color: MyColors.textColor,),
             filled: false,

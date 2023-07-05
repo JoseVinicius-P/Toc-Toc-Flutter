@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:toctoc/app/modules/login/widgets/text_field_user_widget.dart';
+import 'package:toctoc/app/shared/widgets/text_field_user_widget.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:modular_test/modular_test.dart';
 
