@@ -45,6 +45,7 @@ dependencies:
   firebase_core: ^2.14.0
   firebase_auth: ^4.6.3
   google_sign_in: ^6.1.4
+  mask_text_input_formatter: ^2.4.0
 
 dev_dependencies:
   flutter_test:
