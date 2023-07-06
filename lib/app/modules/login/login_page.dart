@@ -7,7 +7,6 @@ import 'package:toctoc/app/modules/login/login_controller.dart';
 import 'package:toctoc/app/modules/login/login_store.dart';
 import 'package:flutter/material.dart';
 import 'package:toctoc/app/shared/widgets/google_button_widget.dart';
-import 'package:toctoc/app/shared/widgets/text_field_password_widget.dart';
 import 'package:toctoc/app/shared/widgets/text_field_user_widget.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 import 'package:toctoc/app/shared/widgets/button_blue_rounded_widget.dart';
@@ -55,7 +54,7 @@ class LoginPageState extends State<LoginPage> {
                     children: [
                       Center(
                         child: AutoSizeText(
-                          'Bem-vindo de volta',
+                          'Bem-vindo ao Toc toc',
                           style: theme.textTheme.titleMedium!.copyWith(fontSize: 8.sw.roundToDouble(), color: Colors.black54),
                           maxFontSize: 8.sw.roundToDouble(),
                           minFontSize: 4.sw.roundToDouble(),
@@ -77,29 +76,10 @@ class LoginPageState extends State<LoginPage> {
                       ),
                       const SizedBox(height: 55,),
                       TextFieldUserWidget(hint: 'Telefone'),
-                      const SizedBox(height: 10,),
-                      TextFieldPasswordWidget(hint: 'Senha'),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          TextButton(
-                            onPressed: (){},
-                            child:  AutoSizeText(
-                              'Esqueci minha senha',
-                              style: theme.textTheme.labelMedium,
-                              maxFontSize: 4.sw.roundToDouble(),
-                              minFontSize: 3.sw.roundToDouble(),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          )
-                        ],
-                      ),
-                      const SizedBox(height: 25,),
+                      const SizedBox(height: 55,),
                       TripleBuilder(
                         store: store,//the store to be observed
-                        builder: (context, triple) => ButtonBlueRoundedWidget(title: 'Login', onPressed: triple.isLoading ? null : () => controller.toCompleteRegistrationModule()),//called when any segment changes
+                        builder: (context, triple) => ButtonBlueRoundedWidget(title: 'Enviar código', onPressed: triple.isLoading ? null : () => controller.toCompleteRegistrationModule()),//called when any segment changes
                       ),
                       const Padding(
                         padding: EdgeInsets.symmetric(vertical: 35.0, horizontal: 35.0),

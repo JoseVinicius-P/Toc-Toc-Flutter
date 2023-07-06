@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 
@@ -11,7 +9,6 @@ class TextFieldUserWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    Timer? delay;
 
 
     return Container(
@@ -53,7 +50,7 @@ class TextFieldUserWidget extends StatelessWidget {
             //Definindo hint usando varivel da classe personalizada MyStrings
             hintText: hint,
             hintStyle: theme.textTheme.labelMedium,
-            prefixIcon: const Icon(Icons.person_outline, color: MyColors.textColor,),
+            prefixIcon: const Icon(Icons.phone_rounded, color: MyColors.textColor,),
             filled: false,
         ),
       ),

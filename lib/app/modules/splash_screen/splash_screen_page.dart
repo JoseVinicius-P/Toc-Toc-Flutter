@@ -5,7 +5,6 @@ import 'package:toctoc/app/modules/splash_screen/splash_screen_controller.dart';
 import 'package:toctoc/app/modules/splash_screen/splash_screen_store.dart';
 import 'package:flutter/material.dart';
 import 'package:toctoc/app/shared/widgets/button_blue_rounded_widget.dart';
-import 'package:toctoc/app/shared/my_colors.dart';
 
 class SplashScreenPage extends StatefulWidget {
   final String title;
@@ -81,22 +80,7 @@ class SplashScreenPageState extends State<SplashScreenPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    ButtonBlueRoundedWidget(title: 'Criar uma conta', onPressed: () => controller.toCreateAccountModule(),),
-                    TextButton(
-                      onPressed: () => controller.toLoginModule(),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: AutoSizeText(
-                          'Já tenho uma conta',
-                          style: theme.textTheme.titleSmall!.copyWith(color: MyColors.blue, fontSize: 20),
-                          maxFontSize: 6.sw.roundToDouble(),
-                          minFontSize: 3.sw.roundToDouble(),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.left,
-                        ),
-                      ),
-                    ),
+                    ButtonBlueRoundedWidget(title: 'Entrar', onPressed: () => controller.toLoginModule(),),
                   ],
                 ),
               ),
