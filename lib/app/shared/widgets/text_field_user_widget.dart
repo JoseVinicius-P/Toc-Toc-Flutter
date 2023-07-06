@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 
 class TextFieldUserWidget extends StatelessWidget {
   final String title;
   final String hint;
-  const TextFieldUserWidget({Key? key, this.title = "TextFieldUserWidget", required this.hint}) : super(key: key);
+  final MaskTextInputFormatter maskFormatter;
+
+  const TextFieldUserWidget({Key? key, this.title = "TextFieldUserWidget", required this.hint, required this.maskFormatter}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-
 
     return Container(
       decoration: BoxDecoration(
@@ -23,6 +25,8 @@ class TextFieldUserWidget extends StatelessWidget {
         ),
       ),
       child: TextFormField(
+        inputFormatters: [maskFormatter],
+        keyboardType: TextInputType.number,
         onChanged: (text){}
         /*(text){
           delay?.cancel();

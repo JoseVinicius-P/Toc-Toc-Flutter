@@ -19,8 +19,20 @@ class LoginStore extends Store<bool> {
     if(!state){
       setLoading(false);
     }
-
   }
+
+  /*void signInWithPhoneNumber() async {
+    setLoading(true);
+    if(await authService.signInWithPhoneNumber()){
+      controller.toCompleteRegistrationModule();
+      update(true);
+    }else{
+      setLoading(false);
+    }
+    if(!state){
+      setLoading(false);
+    }
+  }*/
 
 
 }

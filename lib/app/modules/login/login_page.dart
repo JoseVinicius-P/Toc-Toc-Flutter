@@ -75,11 +75,11 @@ class LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       const SizedBox(height: 55,),
-                      TextFieldUserWidget(hint: 'Telefone'),
+                      TextFieldUserWidget(hint: 'Telefone', maskFormatter: controller.maskFormatter,),
                       const SizedBox(height: 55,),
                       TripleBuilder(
                         store: store,//the store to be observed
-                        builder: (context, triple) => ButtonBlueRoundedWidget(title: 'Enviar código', onPressed: triple.isLoading ? null : () => controller.toCompleteRegistrationModule()),//called when any segment changes
+                        builder: (context, triple) => ButtonBlueRoundedWidget(title: 'Enviar código', onPressed: triple.isLoading ? null : () => controller.sendCode(controller.maskFormatter.getUnmaskedText())),//called when any segment changes
                       ),
                       const Padding(
                         padding: EdgeInsets.symmetric(vertical: 35.0, horizontal: 35.0),
