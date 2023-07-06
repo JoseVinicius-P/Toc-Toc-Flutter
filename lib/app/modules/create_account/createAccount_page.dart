@@ -92,7 +92,7 @@ class CreateAccountPageState extends State<CreateAccountPage> {
                       child:
                       TripleBuilder(
                         store: store,//the store to be observed
-                        builder: (context, triple) => GoogleButtonWidget(onTap: triple.isLoading ? null : (){},),//called when any segment changes
+                        builder: (context, triple) => GoogleButtonWidget(onTap: triple.isLoading ? null : () => store.signInWithGoogle(),),//called when any segment changes
                       ),
                     ),
                   ],
