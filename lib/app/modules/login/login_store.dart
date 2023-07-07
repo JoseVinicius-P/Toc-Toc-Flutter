@@ -1,3 +1,4 @@
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:toctoc/app/modules/login/auth_service.dart';
 import 'package:toctoc/app/modules/login/login_controller.dart';
@@ -21,18 +22,32 @@ class LoginStore extends Store<bool> {
     }
   }
 
-  /*void signInWithPhoneNumber() async {
+  void verifyPhoneNumber(String phoneNumber) async {
     setLoading(true);
-    if(await authService.signInWithPhoneNumber()){
+    try{
+      await authService.verifyPhoneNumber(
+          phoneNumber,
+          (){},
+          (String verificationId){
+            controller.toSmsCodePage(verificationId);
+            setLoading(false);
+          }
+      );
+    }catch(e){
+      print("ERRO: $e");
+    }
+  }
+
+  void signInWithPhoneNumber(String smsCode, String verificationId) async {
+    setLoading(true);
+    if(await authService.signInWithPhoneNumber(smsCode, verificationId)){
       controller.toCompleteRegistrationModule();
-      update(true);
+      setLoading(false);
     }else{
       setLoading(false);
     }
-    if(!state){
-      setLoading(false);
-    }
-  }*/
+
+  }
 
 
 }

@@ -20,8 +20,11 @@ class LoginController implements Disposable{
     Modular.to.navigate('/complete_registration/');
   }
 
-  void sendCode(String number){
-    print(number);
+  void toSmsCodePage(String verificationId){
+    Modular.to.pushNamed("./sms_code", arguments: {
+      'verificationId': verificationId,
+    });
   }
+
 
 }
