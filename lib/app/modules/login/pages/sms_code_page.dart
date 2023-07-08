@@ -1,8 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_triple/flutter_triple.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/login/login_controller.dart';
+import 'package:toctoc/app/modules/login/login_store.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 import 'package:toctoc/app/shared/widgets/button_blue_rounded_widget.dart';
 
@@ -14,7 +16,9 @@ class SmsCodePage extends StatefulWidget {
   SmsCodePageState createState() => SmsCodePageState();
 }
 class SmsCodePageState extends State<SmsCodePage> {
+  final store = Modular.get<LoginStore>();
   final controller = Modular.get<LoginController>();
+
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -103,7 +107,15 @@ class SmsCodePageState extends State<SmsCodePage> {
                     ),
                     Align(
                       alignment: Alignment.bottomRight,
-                      child: ButtonBlueRoundedWidget(title: 'Confirmar', onPressed: () {}),
+                      child: TripleBuilder(
+                        store: store,//the store to be observed
+                        builder: (context, triple) => ButtonBlueRoundedWidget(
+                            title: 'Confirmar',
+                            onPressed: () => store.signInWithPhoneNumber(
+                                controller.smsCodeMaskFormatter.getUnmaskedText(),
+                                widget.verificationId)
+                        ),
+                      ),
                     ),
                   ],
                 ) ,
