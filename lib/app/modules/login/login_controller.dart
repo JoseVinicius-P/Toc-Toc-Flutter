@@ -3,8 +3,14 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class LoginController implements Disposable{
 
-  final maskFormatter = MaskTextInputFormatter(
+  final phoneMaskFormatter = MaskTextInputFormatter(
       mask: '(##) # ####-####',
+      filter: { "#": RegExp(r'[0-9]') },
+      type: MaskAutoCompletionType.lazy
+  );
+
+  final smsCodeMaskFormatter = MaskTextInputFormatter(
+      mask: '# # # # # #',
       filter: { "#": RegExp(r'[0-9]') },
       type: MaskAutoCompletionType.lazy
   );
