@@ -42,7 +42,7 @@ class _TextFieldUserWidgetState extends State<TextFieldUserWidget> {
         autocorrect: false,
         //definindo estilo do container do textfield
         decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 17.0),
+            contentPadding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 17.0),
             enabledBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.transparent),
               borderRadius: BorderRadius.circular(15),

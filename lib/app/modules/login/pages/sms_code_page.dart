@@ -65,44 +65,52 @@ class SmsCodePageState extends State<SmsCodePage> {
                           ),
                         ),
                         const SizedBox(height: 30,),
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(15),
-                            ),
-                            border: Border.all(
-                              width: 1,
-                              style: BorderStyle.solid,
-                              color: Colors.grey,
+                        TripleBuilder(
+                          store: store,
+                          builder: (context, triple) => Opacity(
+                            opacity: triple.isLoading ? 0.5 : 1,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(15),
+                                ),
+                                border: Border.all(
+                                  width: 1,
+                                  style: BorderStyle.solid,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              child: TextFormField(
+                                enabled: !triple.isLoading,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [controller.smsCodeMaskFormatter],
+                                onChanged: (text){},
+                                //definindo estilo do texto
+                                style: theme.textTheme.labelMedium,
+                                cursorColor: MyColors.textColor,
+                                //retirando autocorreção de texto
+                                autocorrect: false,
+                                //definindo estilo do container do textfield
+                                decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 17.0),
+                                    enabledBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(color: Colors.transparent),
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(color: Colors.transparent),
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  //Definindo hint usando varivel da classe personalizada MyStrings
+                                  hintText: 'Código',
+                                  hintStyle: theme.textTheme.labelMedium,
+                                  prefixIcon: const Icon(Icons.sms_outlined, color: MyColors.textColor,),
+                                  filled: false,
+                                ),
+                              ),
                             ),
                           ),
-                          child: TextFormField(
-                            keyboardType: TextInputType.number,
-                            inputFormatters: [controller.smsCodeMaskFormatter],
-                            onChanged: (text){},
-                            //definindo estilo do texto
-                            style: theme.textTheme.labelMedium,
-                            cursorColor: MyColors.textColor,
-                            //retirando autocorreção de texto
-                            autocorrect: false,
-                            //definindo estilo do container do textfield
-                            decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(color: Colors.transparent),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(color: Colors.transparent),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              //Definindo hint usando varivel da classe personalizada MyStrings
-                              hintText: 'Código',
-                              hintStyle: theme.textTheme.labelMedium,
-                              prefixIcon: const Icon(Icons.sms_outlined, color: MyColors.textColor,),
-                              filled: false,
-                            ),
-                          ),
-                        ),
+                        )
                       ],
                     ),
                     Align(
@@ -110,8 +118,8 @@ class SmsCodePageState extends State<SmsCodePage> {
                       child: TripleBuilder(
                         store: store,//the store to be observed
                         builder: (context, triple) => ButtonBlueRoundedWidget(
-                            title: 'Confirmar',
-                            onPressed: () => store.signInWithPhoneNumber(
+                            title: triple.isLoading ? 'Confirmando' : 'Confirmar',
+                            onPressed: triple.isLoading ? (){} : () => store.signInWithPhoneNumber(
                                 controller.smsCodeMaskFormatter.getUnmaskedText(),
                                 widget.verificationId)
                         ),
