@@ -75,11 +75,14 @@ class LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       const SizedBox(height: 55,),
-                      TextFieldUserWidget(hint: 'Telefone', maskFormatter: controller.phoneMaskFormatter,),
+                      TripleBuilder(
+                        store: store,
+                        builder: (context, triple) => TextFieldUserWidget(hint: 'Telefone', maskFormatter: controller.phoneMaskFormatter, enable: !triple.isLoading,)
+                      ),
                       const SizedBox(height: 55,),
                       TripleBuilder(
                         store: store,//the store to be observed
-                        builder: (context, triple) => ButtonBlueRoundedWidget(title: 'Enviar código', onPressed: triple.isLoading ? null : () => store.verifyPhoneNumber(controller.phoneMaskFormatter.getUnmaskedText())),//called when any segment changes
+                        builder: (context, triple) => ButtonBlueRoundedWidget(title: triple.isLoading ? 'Enviando' : 'Enviar código', onPressed: triple.isLoading ? null : () => store.verifyPhoneNumber(controller.phoneMaskFormatter.getUnmaskedText())),//called when any segment changes
                       ),
                       const Padding(
                         padding: EdgeInsets.symmetric(vertical: 35.0, horizontal: 35.0),
