@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:toctoc/app/modules/perfil/stores/complete_registration_store.dart';
+import 'package:toctoc/app/modules/perfil/stores/your_data_store.dart';
 import 'package:flutter/material.dart';
 import 'package:toctoc/app/modules/perfil/perfil_controller.dart';
 import 'package:toctoc/app/modules/perfil/widgets/select_avatar_widget.dart';
@@ -10,15 +10,15 @@ import 'package:toctoc/app/shared/my_colors.dart';
 import 'package:toctoc/app/shared/widgets/button_blue_rounded_widget.dart';
 import 'package:toctoc/app/shared/widgets/text_field_widget.dart';
 
-class CompleteRegistrationPage extends StatefulWidget {
+class YourDataPage extends StatefulWidget {
   final String title;
-  const CompleteRegistrationPage({Key? key, this.title = 'CompleteRegistrationPage'}) : super(key: key);
+  const YourDataPage({Key? key, this.title = 'CompleteRegistrationPage'}) : super(key: key);
   @override
-  CompleteRegistrationPageState createState() => CompleteRegistrationPageState();
+  YourDataPageState createState() => YourDataPageState();
 }
 
-class CompleteRegistrationPageState extends State<CompleteRegistrationPage> {
-  final CompleteRegistrationStore store = Modular.get();
+class YourDataPageState extends State<YourDataPage> {
+  final YourDataStore store = Modular.get();
   final controller = Modular.get<CompleteRegistrationController>();
 
   @override
