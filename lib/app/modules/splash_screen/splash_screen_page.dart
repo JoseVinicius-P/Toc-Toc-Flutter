@@ -80,7 +80,7 @@ class SplashScreenPageState extends State<SplashScreenPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    ButtonBlueRoundedWidget(title: 'Entrar', onPressed: () => controller.toLoginModule(),),
+                    ButtonBlueRoundedWidget(title: 'Vamos começar', onPressed: () => controller.toLoginModule(),),
                   ],
                 ),
               ),
