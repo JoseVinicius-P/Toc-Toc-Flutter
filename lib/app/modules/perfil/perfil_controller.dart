@@ -1,8 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:toctoc/app/modules/perfil/services/image_picker_service.dart';
 
-class CompleteRegistrationController implements Disposable{
+class PerfilController implements Disposable{
+  final ImagePickerService imagePickerService;
 
-  CompleteRegistrationController();
+  PerfilController(this.imagePickerService);
 
   @override
   void dispose() {
@@ -15,6 +19,10 @@ class CompleteRegistrationController implements Disposable{
 
   void toSetHomeModule(){
     Modular.to.pushNamed('./set_home/');
+  }
+
+  FutureOr<String> pickImage() async{
+    return await imagePickerService.pickImage();
   }
 
 }

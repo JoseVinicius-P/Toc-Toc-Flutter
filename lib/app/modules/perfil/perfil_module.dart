@@ -1,3 +1,4 @@
+import 'package:toctoc/app/modules/perfil/services/image_picker_service.dart';
 import 'package:toctoc/app/modules/perfil/perfil_controller.dart';
 import 'package:toctoc/app/modules/perfil/pages/select_sound_page.dart';
 import 'package:toctoc/app/modules/perfil/stores/select_sound_store.dart';
@@ -10,9 +11,10 @@ import 'package:toctoc/app/shared/services/auth_guard_service.dart';
 class CompleteRegistrationModule extends Module {
   @override
   final List<Bind> binds = [
+    Bind.lazySingleton((i) => ImagePickerService()),
     Bind.lazySingleton((i) => SelectSoundStore()),
     Bind.lazySingleton((i) => YourDataStore()),
-    Bind.lazySingleton((i) => CompleteRegistrationController()),
+    Bind.lazySingleton((i) => PerfilController(i())),
   ];
 
   @override

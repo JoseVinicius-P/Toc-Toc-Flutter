@@ -15,7 +15,7 @@ class SelectSoundPage extends StatefulWidget {
 }
 class SelectSoundPageState extends State<SelectSoundPage> {
   final SelectSoundStore store = Modular.get();
-  final controller = Modular.get<CompleteRegistrationController>();
+  final controller = Modular.get<PerfilController>();
 
   @override
   Widget build(BuildContext context) {

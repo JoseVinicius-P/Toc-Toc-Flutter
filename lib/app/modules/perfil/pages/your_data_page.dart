@@ -19,7 +19,7 @@ class YourDataPage extends StatefulWidget {
 
 class YourDataPageState extends State<YourDataPage> {
   final YourDataStore store = Modular.get();
-  final controller = Modular.get<CompleteRegistrationController>();
+  final controller = Modular.get<PerfilController>();
 
   @override
   Widget build(BuildContext context) {
