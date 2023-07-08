@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:toctoc/app/modules/complete_registration/widgets/select_avatar_widget.dart';
+import 'package:toctoc/app/modules/perfil/widgets/select_avatar_widget.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 
 class SettingsPage extends StatefulWidget {

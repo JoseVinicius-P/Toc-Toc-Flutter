@@ -2,10 +2,10 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:toctoc/app/modules/complete_registration/stores/completeRegistration_store.dart';
+import 'package:toctoc/app/modules/perfil/stores/completeRegistration_store.dart';
 import 'package:flutter/material.dart';
-import 'package:toctoc/app/modules/complete_registration/complete_registration_controller.dart';
-import 'package:toctoc/app/modules/complete_registration/widgets/select_avatar_widget.dart';
+import 'package:toctoc/app/modules/perfil/complete_registration_controller.dart';
+import 'package:toctoc/app/modules/perfil/widgets/select_avatar_widget.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 import 'package:toctoc/app/shared/widgets/button_blue_rounded_widget.dart';
 
