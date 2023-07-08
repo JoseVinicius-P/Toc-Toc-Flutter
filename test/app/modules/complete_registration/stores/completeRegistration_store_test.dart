@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:toctoc/app/modules/complete_registration/stores/completeRegistration_store.dart';
+import 'package:toctoc/app/modules/complete_registration/stores/complete_registration_store.dart';
  
 void main() {
   late CompleteRegistrationStore store;
