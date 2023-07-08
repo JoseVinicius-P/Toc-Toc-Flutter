@@ -7,7 +7,7 @@ import 'package:toctoc/app/modules/login/login_controller.dart';
 import 'package:toctoc/app/modules/login/login_store.dart';
 import 'package:flutter/material.dart';
 import 'package:toctoc/app/shared/widgets/google_button_widget.dart';
-import 'package:toctoc/app/shared/widgets/text_field_user_widget.dart';
+import 'package:toctoc/app/shared/widgets/text_field_widget.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 import 'package:toctoc/app/shared/widgets/button_blue_rounded_widget.dart';
 
@@ -77,7 +77,13 @@ class LoginPageState extends State<LoginPage> {
                       const SizedBox(height: 55,),
                       TripleBuilder(
                         store: store,
-                        builder: (context, triple) => TextFieldUserWidget(hint: 'Telefone', maskFormatter: controller.phoneMaskFormatter, enable: !triple.isLoading,)
+                        builder: (context, triple) => TextFieldWidget(
+                          hint: 'Telefone',
+                          maskFormatter: controller.phoneMaskFormatter,
+                          enable: !triple.isLoading,
+                          icon: const Icon(Icons.phone_rounded, color: MyColors.textColor,),
+                          keyboardType: TextInputType.number,
+                        )
                       ),
                       const SizedBox(height: 55,),
                       TripleBuilder(

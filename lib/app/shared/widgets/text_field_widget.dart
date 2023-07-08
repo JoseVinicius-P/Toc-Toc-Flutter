@@ -2,19 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 
-class TextFieldUserWidget extends StatefulWidget {
+class TextFieldWidget extends StatefulWidget {
   final String title;
   final String hint;
   final bool enable;
-  final MaskTextInputFormatter maskFormatter;
+  final MaskTextInputFormatter? maskFormatter;
+  final Widget icon;
+  final TextInputType keyboardType;
 
-  const TextFieldUserWidget({Key? key, this.title = "TextFieldUserWidget", required this.hint, required this.maskFormatter, required this.enable}) : super(key: key);
+  const TextFieldWidget({
+    Key? key, this.title = "TextFieldUserWidget",
+    required this.hint,
+    this.maskFormatter,
+    required this.enable,
+    required this.icon,
+    required this.keyboardType
+  }) : super(key: key);
 
   @override
-  State<TextFieldUserWidget> createState() => _TextFieldUserWidgetState();
+  State<TextFieldWidget> createState() => _TextFieldWidgetState();
 }
 
-class _TextFieldUserWidgetState extends State<TextFieldUserWidget> {
+class _TextFieldWidgetState extends State<TextFieldWidget> {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -32,8 +41,8 @@ class _TextFieldUserWidgetState extends State<TextFieldUserWidget> {
       ),
       child: TextFormField(
         enabled: widget.enable,
-        inputFormatters: [widget.maskFormatter],
-        keyboardType: TextInputType.number,
+        inputFormatters: widget.maskFormatter != null ? [widget.maskFormatter!] : [],
+        keyboardType: widget.keyboardType,
         onChanged: (text){},
         //definindo estilo do texto
         style: theme.textTheme.labelMedium,
@@ -54,7 +63,7 @@ class _TextFieldUserWidgetState extends State<TextFieldUserWidget> {
             //Definindo hint usando varivel da classe personalizada MyStrings
             hintText: widget.hint,
             hintStyle: theme.textTheme.labelMedium,
-            prefixIcon: const Icon(Icons.phone_rounded, color: MyColors.textColor,),
+            prefixIcon: widget.icon,
             filled: false,
         ),
       ),
