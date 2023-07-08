@@ -1,7 +1,5 @@
 import 'dart:async';
-
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
@@ -28,20 +26,18 @@ class AuthService {
     }
   }
 
-  Future<void> verifyPhoneNumber(String phoneNumber, Function verificationCompleted, Function(String) codeSent) async {
+  Future<void> verifyPhoneNumber(String phoneNumber, Function(String) codeSent) async {
     FirebaseAuth auth = FirebaseAuth.instance;
 
     await auth.verifyPhoneNumber(
       phoneNumber: '+55$phoneNumber',
       verificationCompleted: (PhoneAuthCredential credential) async {
-        UserCredential user = await auth.signInWithCredential(credential);
-        if(user.user != null){
-          () => verificationCompleted();
-        }
+        await auth.signInWithCredential(credential);
       },
       verificationFailed: (FirebaseAuthException error) {  },
       codeSent: (String verificationId, int? forceResendingToken) {
-        () => codeSent(verificationId);
+        print('Verification 2: $verificationId');
+        codeSent(verificationId);
       },
       codeAutoRetrievalTimeout: (String verificationId) {  },
     );

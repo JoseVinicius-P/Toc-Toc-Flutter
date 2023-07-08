@@ -16,7 +16,7 @@ class LoginModule extends Module {
   @override
   final List<ModularRoute> routes = [
     ChildRoute('/', child: (_, args) => LoginPage()),
-    ChildRoute('/sms_code', child: (_, args) => SmsCodePage(verificationId: args.data)),
+    ChildRoute('/sms_code', child: (_, args) => SmsCodePage(verificationId: args.data['verificationId'])),
   ];
 
 }

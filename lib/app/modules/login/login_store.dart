@@ -1,4 +1,3 @@
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:toctoc/app/modules/login/auth_service.dart';
 import 'package:toctoc/app/modules/login/login_controller.dart';
@@ -25,13 +24,10 @@ class LoginStore extends Store<bool> {
   void verifyPhoneNumber(String phoneNumber) async {
     setLoading(true);
     try{
-      await authService.verifyPhoneNumber(
-          phoneNumber,
-          (){},
-          (String verificationId){
-            controller.toSmsCodePage(verificationId);
-            setLoading(false);
-          }
+      await authService.verifyPhoneNumber(phoneNumber, (String verificationId){
+          controller.toSmsCodePage(verificationId);
+          setLoading(false);
+        }
       );
     }catch(e){
       print("ERRO: $e");
