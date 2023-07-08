@@ -8,6 +8,7 @@ import 'package:toctoc/app/modules/perfil/perfil_controller.dart';
 import 'package:toctoc/app/modules/perfil/widgets/select_avatar_widget.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 import 'package:toctoc/app/shared/widgets/button_blue_rounded_widget.dart';
+import 'package:toctoc/app/shared/widgets/text_field_widget.dart';
 
 class CompleteRegistrationPage extends StatefulWidget {
   final String title;
@@ -70,41 +71,11 @@ class CompleteRegistrationPageState extends State<CompleteRegistrationPage> {
                         child: SelectAvatarWidget(),
                       ),
                       const SizedBox(height: 30,),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                          border: Border.all(
-                            width: 1,
-                            style: BorderStyle.solid,
-                            color: Colors.grey,
-                          ),
-                        ),
-                        child: TextFormField(
-                          onChanged: (text){},
-                          //definindo estilo do texto
-                          style: theme.textTheme.labelMedium,
-                          cursorColor: MyColors.textColor,
-                          //retirando autocorreção de texto
-                          autocorrect: false,
-                          //definindo estilo do container do textfield
-                          decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.transparent),
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.transparent),
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            //Definindo hint usando varivel da classe personalizada MyStrings
-                            hintText: 'Nome',
-                            hintStyle: theme.textTheme.labelMedium,
-                            prefixIcon: const Icon(Icons.person_outline, color: MyColors.textColor,),
-                            filled: false,
-                          ),
-                        ),
+                      TextFieldWidget(
+                        hint: 'Nome de usuário',
+                        enable: true,
+                        icon: const Icon(Icons.person_outline, color: MyColors.textColor),
+                        keyboardType: TextInputType.text
                       ),
                     ],
                   ),
