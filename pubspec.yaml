@@ -42,11 +42,17 @@ dependencies:
   responsive_builder: ^0.7.0
   #Para Text que se redimencionam automaticamente
   auto_size_text: ^3.0.0
+  #FIREBASE
   firebase_core: ^2.14.0
+  #Autenticação do firebase
   firebase_auth: ^4.6.3
+  #Autenticação do google
   google_sign_in: ^6.1.4
+  #Mascara de texto
   mask_text_input_formatter: ^2.4.0
+  #Abrir galeria para selecionar imagem
   image_picker: ^1.0.0
+  image_cropper: ^5.0.0
 
 dev_dependencies:
   flutter_test:
