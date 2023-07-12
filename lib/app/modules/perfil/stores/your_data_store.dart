@@ -1,7 +1,7 @@
 import 'package:flutter_triple/flutter_triple.dart';
 
-class YourDataStore extends Store<int> {
+class YourDataStore extends Store<bool> {
 
-  YourDataStore() : super(0);
+  YourDataStore() : super(false);
 
 }
