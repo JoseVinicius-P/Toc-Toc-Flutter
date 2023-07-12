@@ -75,7 +75,9 @@ class YourDataPageState extends State<YourDataPage> {
                         hint: 'Nome de usuário',
                         enable: true,
                         icon: const Icon(Icons.person_outline, color: MyColors.textColor),
-                        keyboardType: TextInputType.text
+                        keyboardType: TextInputType.text,
+                        maxLength: 30,
+                        controller: controller.textEditingController,
                       ),
                     ],
                   ),
