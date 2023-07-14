@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/perfil/perfil_controller.dart';
@@ -24,8 +25,8 @@ class SelectSoundPageState extends State<SelectSoundPage> {
         appBar: AppBar(
           centerTitle: true,
           leading: IconButton(
-              onPressed: () => Modular.to.pop(),
-              icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.black)
+              onPressed: () => SystemNavigator.pop(),
+              icon: const Icon(Icons.close_rounded, color: Colors.black)
           ),
           forceMaterialTransparency: true,
           title: Text(
