@@ -12,10 +12,11 @@ import 'package:toctoc/app/shared/services/auth_guard_service.dart';
 
 class PerfilModule extends Module {
   @override
-  final List<Bind> binds = [Bind.lazySingleton((i) => SaveUserDataService()),
+  final List<Bind> binds = [
+    Bind.lazySingleton((i) => SaveUserDataService()),
     Bind.lazySingleton((i) => ImagePickerService()),
     Bind.lazySingleton((i) => SelectSoundStore()),
-    Bind.lazySingleton((i) => YourDataStore()),
+    Bind.lazySingleton((i) => YourDataStore(i())),
     Bind.lazySingleton((i) => SelectAvatarStore(i())),
     Bind.lazySingleton((i) => PerfilController(i())),
   ];

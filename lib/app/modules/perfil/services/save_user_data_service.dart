@@ -11,10 +11,8 @@ class SaveUserDataService {
   
   void saveProfilePicture(String path) async {
     final reference = storage.ref().child("profile_pictures/${FirebaseAuth.instance.currentUser!.uid}.jpg");
-
-    File file = File(path);
-
     try {
+      File file = File(path);
       await reference.putFile(file);
     } on FirebaseException catch (e) {
       print(e);
