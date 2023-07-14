@@ -32,7 +32,7 @@ class _SelectAvatarWidgetState extends State<SelectAvatarWidget> {
                 store: store,
                 builder: (context, triple) => CircleAvatar(
                   backgroundImage: const AssetImage('assets/images/perfil.png'),
-                  foregroundImage: FileImage(File(triple.state.toString())),
+                  foregroundImage: triple.state.toString().startsWith('http') ? NetworkImage(triple.state.toString()) as ImageProvider : FileImage(File(triple.state.toString())),
                   radius: 40.sw.roundToDouble(),
                 ),
               ),

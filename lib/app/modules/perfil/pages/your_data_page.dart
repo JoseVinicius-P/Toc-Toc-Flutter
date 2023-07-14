@@ -3,8 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:toctoc/app/modules/perfil/models/user_model.dart';
-import 'package:toctoc/app/modules/perfil/stores/select_avatar_store.dart';
 import 'package:toctoc/app/modules/perfil/stores/your_data_store.dart';
 import 'package:flutter/material.dart';
 import 'package:toctoc/app/modules/perfil/perfil_controller.dart';
@@ -22,8 +20,13 @@ class YourDataPage extends StatefulWidget {
 
 class YourDataPageState extends State<YourDataPage> {
   final store = Modular.get<YourDataStore>();
-  final selectAvatarStore = Modular.get<SelectAvatarStore>();
   final controller = Modular.get<PerfilController>();
+
+  @override
+  void initState() {
+    super.initState();
+    store.loadUserdata();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,18 +98,15 @@ class YourDataPageState extends State<YourDataPage> {
 
                     ],
                   ),
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: TripleBuilder(
-                        store: store,//the store to be observed
-                        builder: (context, triple) => ButtonBlueRoundedWidget(
-                          title: triple.isLoading ? 'Salvando' : 'Salvar',
-                          onPressed: triple.isLoading ? null : () => store.saveUserData(
-                              selectAvatarStore.state,
-                              UserModel(name: controller.textEditingController.text)
-                          ),
-                        ),//called when any segment changes
-                      ),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: TripleBuilder(
+                      store: store,//the store to be observed
+                      builder: (context, triple) => ButtonBlueRoundedWidget(
+                        title: triple.isLoading ? 'Salvando' : 'Salvar',
+                        onPressed: triple.isLoading ? null : () => store.saveUserData()
+                        ),
+                      ),//called when any segment changes
                     ),
                   ],
                 ) ,

@@ -30,4 +30,16 @@ class UserDataService {
       return false;
     }
   }
+
+  Future<DocumentSnapshot> loadUserData() async{
+    DocumentReference docRef = db.collection('Users').doc(FirebaseAuth.instance.currentUser!.uid);
+    DocumentSnapshot snapshot = await docRef.get();
+    return snapshot;
+  }
+
+  Future<String> getUrlProfilePicture() async {
+    return await storage.ref().child("profile_pictures/${FirebaseAuth.instance.currentUser!.uid}.jpg").getDownloadURL();
+  }
+
+
 }
