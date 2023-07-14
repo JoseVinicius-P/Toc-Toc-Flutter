@@ -22,8 +22,8 @@ class LoginController implements Disposable{
 
   }
 
-  void toCompleteRegistrationModule(){
-    Modular.to.navigate('/complete_registration/');
+  void toPerfilModule(){
+    Modular.to.navigate('/perfil/');
   }
 
   void toSmsCodePage(String verificationId){

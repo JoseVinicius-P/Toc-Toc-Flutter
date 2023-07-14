@@ -19,7 +19,7 @@ class AppModule extends Module {
     ModuleRoute('/', module: SplashScreenModule()),
     ModuleRoute('/login', module: LoginModule()),
     ModuleRoute('/home', module: HomeModule()),
-    ModuleRoute('/complete_registration', module: PerfilModule()),
+    ModuleRoute('/perfil', module: PerfilModule()),
   ];
 
 }

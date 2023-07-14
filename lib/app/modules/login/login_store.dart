@@ -11,7 +11,7 @@ class LoginStore extends Store<bool> {
   void signInWithGoogle() async {
     setLoading(true);
     if(await authService.signInWithGoogle()){
-      controller.toCompleteRegistrationModule();
+      controller.toPerfilModule();
       update(true);
     }else{
       setLoading(false);
@@ -37,7 +37,7 @@ class LoginStore extends Store<bool> {
   void signInWithPhoneNumber(String smsCode, String verificationId) async {
     setLoading(true);
     if(await authService.signInWithPhoneNumber(smsCode, verificationId)){
-      controller.toCompleteRegistrationModule();
+      controller.toPerfilModule();
       setLoading(false);
     }else{
       setLoading(false);
