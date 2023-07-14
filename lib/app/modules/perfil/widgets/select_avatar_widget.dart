@@ -4,14 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:toctoc/app/modules/perfil/perfil_controller.dart';
-import 'package:toctoc/app/modules/perfil/services/image_picker_service.dart';
 import 'package:toctoc/app/modules/perfil/stores/select_avatar_store.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 
 class SelectAvatarWidget extends StatefulWidget {
   final String title;
-  const SelectAvatarWidget({Key? key, this.title = "SelectAvatarWidget"}) : super(key: key);
+  final bool enable;
+  const SelectAvatarWidget({Key? key, this.title = "SelectAvatarWidget", required this.enable}) : super(key: key);
 
   @override
   State<SelectAvatarWidget> createState() => _SelectAvatarWidgetState();

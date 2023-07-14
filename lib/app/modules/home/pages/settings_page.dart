@@ -30,7 +30,7 @@ class SettingsPageState extends State<SettingsPage> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SelectAvatarWidget(),
+                      SelectAvatarWidget(enable: true,),
                     ],
                   ),
                   const SizedBox(height: 30,),

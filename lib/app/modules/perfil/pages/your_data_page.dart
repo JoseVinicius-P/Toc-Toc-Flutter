@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_triple/flutter_triple.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/perfil/models/user_model.dart';
 import 'package:toctoc/app/modules/perfil/stores/select_avatar_store.dart';
@@ -70,25 +71,41 @@ class YourDataPageState extends State<YourDataPage> {
                         ),
                       ),
                       const SizedBox(height: 35,),
-                      const Center(
-                        child: SelectAvatarWidget(),
+                      Center(
+                        child: TripleBuilder(
+                          store: store,
+                          builder: (context, triple) => Opacity(
+                              opacity: triple.isLoading ? 0.5 : 1,
+                              child: SelectAvatarWidget(enable: !triple.isLoading)
+                          ),
+                        ),
                       ),
                       const SizedBox(height: 30,),
-                      TextFieldWidget(
-                        hint: 'Nome de usuário',
-                        enable: true,
-                        icon: const Icon(Icons.person_outline, color: MyColors.textColor),
-                        keyboardType: TextInputType.text,
-                        maxLength: 30,
-                        controller: controller.textEditingController,
+                      TripleBuilder(
+                          store: store,
+                          builder: (context, triple) => TextFieldWidget(
+                            hint: 'Nome de usuário',
+                            enable: !triple.isLoading,
+                            icon: const Icon(Icons.person_outline, color: MyColors.textColor),
+                            keyboardType: TextInputType.text,
+                            maxLength: 30,
+                            controller: controller.textEditingController,
+                          ),
                       ),
+
                     ],
                   ),
                     Align(
                       alignment: Alignment.bottomRight,
-                      child: ButtonBlueRoundedWidget(title: 'Salvar', onPressed: (){
-                          store.saveUserData(selectAvatarStore.state, UserModel(name: controller.textEditingController.text));
-                        }
+                      child: TripleBuilder(
+                        store: store,//the store to be observed
+                        builder: (context, triple) => ButtonBlueRoundedWidget(
+                          title: triple.isLoading ? 'Salvando' : 'Salvar',
+                          onPressed: triple.isLoading ? null : () => store.saveUserData(
+                              selectAvatarStore.state,
+                              UserModel(name: controller.textEditingController.text)
+                          ),
+                        ),//called when any segment changes
                       ),
                     ),
                   ],
