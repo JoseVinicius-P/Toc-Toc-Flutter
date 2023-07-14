@@ -1,10 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:toctoc/app/modules/perfil/services/save_user_data_service.dart';
+import 'package:toctoc/app/modules/perfil/services/user_data_service.dart';
  
 void main() {
-  late SaveUserDataService service;
+  late UserDataService service;
 
   setUpAll(() {
-    service = SaveUserDataService();
+    service = UserDataService();
   });
 }

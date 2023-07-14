@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:toctoc/app/modules/perfil/models/user_model.dart';
 
-class SaveUserDataService {
+class UserDataService {
   final storage = FirebaseStorage.instance;
   final db = FirebaseFirestore.instance;
   

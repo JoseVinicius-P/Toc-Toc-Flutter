@@ -1,4 +1,4 @@
-import 'package:toctoc/app/modules/perfil/services/save_user_data_service.dart';
+import 'package:toctoc/app/modules/perfil/services/user_data_service.dart';
 import 'package:toctoc/app/modules/perfil/stores/select_avatar_store.dart';
 import 'package:toctoc/app/modules/perfil/services/image_picker_service.dart';
 import 'package:toctoc/app/modules/perfil/perfil_controller.dart';
@@ -13,7 +13,7 @@ import 'package:toctoc/app/shared/services/auth_guard_service.dart';
 class PerfilModule extends Module {
   @override
   final List<Bind> binds = [
-    Bind.lazySingleton((i) => SaveUserDataService()),
+    Bind.lazySingleton((i) => UserDataService()),
     Bind.lazySingleton((i) => ImagePickerService()),
     Bind.lazySingleton((i) => SelectSoundStore()),
     Bind.lazySingleton((i) => YourDataStore(i(), i())),
