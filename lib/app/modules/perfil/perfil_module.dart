@@ -16,7 +16,7 @@ class PerfilModule extends Module {
     Bind.lazySingleton((i) => SaveUserDataService()),
     Bind.lazySingleton((i) => ImagePickerService()),
     Bind.lazySingleton((i) => SelectSoundStore()),
-    Bind.lazySingleton((i) => YourDataStore(i())),
+    Bind.lazySingleton((i) => YourDataStore(i(), i())),
     Bind.lazySingleton((i) => SelectAvatarStore(i())),
     Bind.lazySingleton((i) => PerfilController(i())),
   ];
