@@ -25,7 +25,7 @@ class SelectSoundPageState extends State<SelectSoundPage> {
         appBar: AppBar(
           centerTitle: true,
           leading: IconButton(
-              onPressed: () => SystemNavigator.pop(),
+              onPressed: () => Modular.to.pop(),
               icon: const Icon(Icons.close_rounded, color: Colors.black)
           ),
           forceMaterialTransparency: true,

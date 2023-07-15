@@ -16,7 +16,7 @@ class PerfilController implements Disposable{
   }
 
   void toSelectSoundPage(){
-    Modular.to.navigate('./select_sound');
+    Modular.to.pushNamed('./select_sound');
   }
 
   void toSetHomeModule(){

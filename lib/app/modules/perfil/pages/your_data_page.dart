@@ -103,7 +103,7 @@ class YourDataPageState extends State<YourDataPage> {
                     child: TripleBuilder(
                       store: store,//the store to be observed
                       builder: (context, triple) => ButtonBlueRoundedWidget(
-                        title: triple.isLoading ? 'Salvando' : 'Salvar',
+                        title: 'Continuar',
                         onPressed: triple.isLoading ? null : () => store.saveUserData()
                         ),
                       ),//called when any segment changes
