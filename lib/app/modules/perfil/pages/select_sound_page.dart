@@ -6,6 +6,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/perfil/perfil_controller.dart';
 import 'package:toctoc/app/modules/perfil/services/sounds_service.dart';
 import 'package:toctoc/app/modules/perfil/stores/select_sound_store.dart';
+import 'package:toctoc/app/modules/perfil/stores/sound_store.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 import 'package:toctoc/app/shared/widgets/button_blue_rounded_widget.dart';
 
@@ -16,13 +17,14 @@ class SelectSoundPage extends StatefulWidget {
   SelectSoundPageState createState() => SelectSoundPageState();
 }
 class SelectSoundPageState extends State<SelectSoundPage> {
-  final SelectSoundStore store = Modular.get();
+  final selectSoundStore = Modular.get<SelectSoundStore>();
+  final soundStore = Modular.get<SoundStore>();
   final controller = Modular.get<PerfilController>();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    store.findSounds(context);
+    selectSoundStore.findSounds(context);
   }
 
   @override
@@ -71,7 +73,7 @@ class SelectSoundPageState extends State<SelectSoundPage> {
                           ),
                           const SizedBox(height: 35,),
                           TripleBuilder(
-                            store: store,
+                            store: selectSoundStore,
                             builder: (context, triple){
                               List<String> sounds = (triple.state as List).map((elemento) => elemento.toString()).toList();
                               return ListView.separated(
@@ -99,7 +101,7 @@ class SelectSoundPageState extends State<SelectSoundPage> {
                                             style: theme.textTheme.labelSmall,
                                           ),
                                           const Spacer(),
-                                          IconButton(onPressed: onPressed, icon: Icon(Icons.play_arrow_rounded, color: MyColors.blue, size: 27,)),
+                                          IconButton(onPressed: () => soundStore.playSound(sounds[index]), icon: Icon(Icons.play_arrow_rounded, color: MyColors.blue, size: 27,)),
                                         ],
                                       ),
                                     ),
