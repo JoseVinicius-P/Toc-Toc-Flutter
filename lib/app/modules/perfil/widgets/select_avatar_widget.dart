@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
@@ -32,7 +33,7 @@ class _SelectAvatarWidgetState extends State<SelectAvatarWidget> {
                 store: store,
                 builder: (context, triple) => CircleAvatar(
                   backgroundImage: const AssetImage('assets/images/perfil.png'),
-                  foregroundImage: triple.state.toString().startsWith('http') ? NetworkImage(triple.state.toString()) as ImageProvider : FileImage(File(triple.state.toString())),
+                  foregroundImage: triple.state.toString().startsWith('http') ? CachedNetworkImageProvider(triple.state.toString()) as ImageProvider : FileImage(File(triple.state.toString())),
                   radius: 40.sw.roundToDouble(),
                 ),
               ),
