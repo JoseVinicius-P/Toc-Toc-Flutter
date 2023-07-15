@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_triple/flutter_triple.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/perfil/perfil_controller.dart';
 import 'package:toctoc/app/modules/perfil/services/sounds_service.dart';
@@ -22,7 +22,7 @@ class SelectSoundPageState extends State<SelectSoundPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    SoundsService().findFiles(context);
+    store.findSounds(context);
   }
 
   @override
@@ -70,39 +70,45 @@ class SelectSoundPageState extends State<SelectSoundPage> {
                             ),
                           ),
                           const SizedBox(height: 35,),
-                          ListView.separated(
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: 10,
-                            shrinkWrap: true,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(15),
-                                  ),
-                                  border: Border.all(
-                                    width: 1,
-                                    style: BorderStyle.solid,
-                                    color: MyColors.lightGray,
-                                  ),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(15.0),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        "Musica $index",
-                                        style: theme.textTheme.labelSmall,
+                          TripleBuilder(
+                            store: store,
+                            builder: (context, triple){
+                              List<String> sounds = (triple.state as List).map((elemento) => elemento.toString()).toList();
+                              return ListView.separated(
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: sounds.length,
+                                shrinkWrap: true,
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(15),
                                       ),
-                                      const Spacer(),
-                                      Icon(Icons.play_arrow_rounded, color: MyColors.blue, size: 27,),
-                                    ],
-                                  ),
-                                ),
+                                      border: Border.all(
+                                        width: 1,
+                                        style: BorderStyle.solid,
+                                        color: MyColors.lightGray,
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(15.0),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            sounds[index].replaceAll('assets/sounds/', '').replaceAll('.mp3', ''),
+                                            style: theme.textTheme.labelSmall,
+                                          ),
+                                          const Spacer(),
+                                          IconButton(onPressed: onPressed, icon: Icon(Icons.play_arrow_rounded, color: MyColors.blue, size: 27,)),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                                separatorBuilder: (BuildContext context, int index) {
+                                  return const SizedBox(height: 5);
+                                },
                               );
-                            },
-                            separatorBuilder: (BuildContext context, int index) {
-                              return const SizedBox(height: 5);
                             },
                           ),
                           SizedBox(height: 60,)

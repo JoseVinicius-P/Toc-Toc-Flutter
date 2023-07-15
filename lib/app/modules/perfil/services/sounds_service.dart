@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 
 class SoundsService {
 
-  Future<List<String>> findFiles(BuildContext context) async {
+  Future<List<String>> findSounds(BuildContext context) async {
     var manifest =
     await DefaultAssetBundle.of(context).loadString('AssetManifest.json');
 
@@ -14,7 +14,7 @@ class SoundsService {
         .map((dynamic key) => key.toString())
         .toList();
 
-    return Future.value(values);
+    return values;
   }
 
 }
