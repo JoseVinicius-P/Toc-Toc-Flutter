@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/perfil/perfil_controller.dart';
+import 'package:toctoc/app/modules/perfil/services/sounds_service.dart';
 import 'package:toctoc/app/modules/perfil/stores/select_sound_store.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 import 'package:toctoc/app/shared/widgets/button_blue_rounded_widget.dart';
@@ -17,6 +18,12 @@ class SelectSoundPage extends StatefulWidget {
 class SelectSoundPageState extends State<SelectSoundPage> {
   final SelectSoundStore store = Modular.get();
   final controller = Modular.get<PerfilController>();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    SoundsService().findFiles(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +33,7 @@ class SelectSoundPageState extends State<SelectSoundPage> {
           centerTitle: true,
           leading: IconButton(
               onPressed: () => Modular.to.pop(),
-              icon: const Icon(Icons.close_rounded, color: Colors.black)
+              icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.black)
           ),
           forceMaterialTransparency: true,
           title: Text(
