@@ -6,7 +6,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/perfil/perfil_controller.dart';
 import 'package:toctoc/app/modules/perfil/services/sounds_service.dart';
 import 'package:toctoc/app/modules/perfil/stores/select_sound_store.dart';
-import 'package:toctoc/app/modules/perfil/stores/sound_store.dart';
+import 'package:toctoc/app/modules/perfil/stores/sound_reproduction_store.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 import 'package:toctoc/app/shared/widgets/button_blue_rounded_widget.dart';
 
@@ -18,13 +18,15 @@ class SelectSoundPage extends StatefulWidget {
 }
 class SelectSoundPageState extends State<SelectSoundPage> {
   final selectSoundStore = Modular.get<SelectSoundStore>();
-  final soundStore = Modular.get<SoundStore>();
+  final soundReproductionStore = Modular.get<SoundReproductionStore>();
   final controller = Modular.get<PerfilController>();
+  late Future<List<String>> futureSounds;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    selectSoundStore.findSounds(context);
+    futureSounds = controller.findSounds(context);
   }
 
   @override
@@ -72,39 +74,48 @@ class SelectSoundPageState extends State<SelectSoundPage> {
                             ),
                           ),
                           const SizedBox(height: 35,),
-                          TripleBuilder(
-                            store: selectSoundStore,
-                            builder: (context, triple){
-                              List<String> sounds = (triple.state as List).map((elemento) => elemento.toString()).toList();
+                          FutureBuilder<List<String>>(
+                            future: futureSounds,
+                            builder: (context, snapshot){
                               return ListView.separated(
                                 physics: const NeverScrollableScrollPhysics(),
-                                itemCount: sounds.length,
+                                itemCount: snapshot.data!.length,
                                 shrinkWrap: true,
                                 itemBuilder: (context, index) {
-                                  return Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: const BorderRadius.all(
-                                        Radius.circular(15),
-                                      ),
-                                      border: Border.all(
-                                        width: 1,
-                                        style: BorderStyle.solid,
-                                        color: MyColors.lightGray,
-                                      ),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(15.0),
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            sounds[index].replaceAll('assets/sounds/', '').replaceAll('.mp3', ''),
-                                            style: theme.textTheme.labelSmall,
+                                  return TripleBuilder(
+                                    store: soundReproductionStore,
+                                    builder: (context, triple) {
+                                      print("Recarregou");
+                                      Icon icon = triple.isLoading ? Icon(Icons.music_note_rounded, color: MyColors.blue, size: 27,) : Icon(Icons.play_arrow_rounded, color: MyColors.blue, size: 27,);
+                                      return Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: const BorderRadius.all(
+                                            Radius.circular(15),
                                           ),
-                                          const Spacer(),
-                                          IconButton(onPressed: () => soundStore.playSound(sounds[index]), icon: Icon(Icons.play_arrow_rounded, color: MyColors.blue, size: 27,)),
-                                        ],
-                                      ),
-                                    ),
+                                          border: Border.all(
+                                            width: 1,
+                                            style: BorderStyle.solid,
+                                            color: MyColors.lightGray,
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(15.0),
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                snapshot.data![index].replaceAll('assets/sounds/', '').replaceAll('.mp3', ''),
+                                                style: theme.textTheme.labelSmall,
+                                              ),
+                                              const Spacer(),
+                                              IconButton(
+                                                  onPressed: () => soundReproductionStore.playSound(snapshot.data![index], index),
+                                                  icon: icon
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    },
                                   );
                                 },
                                 separatorBuilder: (BuildContext context, int index) {

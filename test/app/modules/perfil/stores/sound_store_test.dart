@@ -1,11 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:toctoc/app/modules/perfil/stores/sound_store.dart';
+import 'package:toctoc/app/modules/perfil/stores/sound_reproduction_store.dart';
  
 void main() {
-  late SoundStore store;
+  late SoundReproductionStore store;
 
   setUpAll(() {
-    store = SoundStore();
+    store = SoundReproductionStore();
   });
 
   test('increment count', () async {

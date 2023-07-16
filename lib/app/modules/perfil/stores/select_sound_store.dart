@@ -8,8 +8,4 @@ class SelectSoundStore extends Store<List<String>> {
 
   SelectSoundStore(this.service) : super([]);
 
-  void findSounds(BuildContext context) async {
-    update(await service.findSounds(context));
-  }
-
 }
