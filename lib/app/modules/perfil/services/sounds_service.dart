@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:just_audio/just_audio.dart';
 
 class SoundsService {
+  late AudioPlayer currentPlayer = AudioPlayer();
 
   Future<List<String>> findSounds(BuildContext context) async {
     var manifest =
@@ -18,17 +19,19 @@ class SoundsService {
     return values;
   }
 
-  Future<bool> playSound(String path) async {
-    bool isCompleted = false;
-    AudioPlayer audioPlayer = AudioPlayer();
-    await audioPlayer.setAsset(path);
-    await audioPlayer.play();
-    audioPlayer.playerStateStream.listen((event) {
+  void playSound(String path, Function() audioComplete) async {
+    pauseCurrentSound();
+    await currentPlayer.setAsset(path);
+    await currentPlayer.play();
+    currentPlayer.playerStateStream.listen((event) {
       if (event.processingState == ProcessingState.completed) {
-        isCompleted = true;
+        audioComplete();
       }
     });
-    return isCompleted;
+  }
+
+  void pauseCurrentSound(){
+    currentPlayer.pause();
   }
 
 }
