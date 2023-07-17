@@ -76,59 +76,71 @@ class SelectSoundPageState extends State<SelectSoundPage> {
                           FutureBuilder<List<String>>(
                             future: futureSounds,
                             builder: (context, snapshot){
-                              return TripleBuilder(
-                                  store: soundReproductionStore,
-                                  builder: (context, triple) => ListView.separated(
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  itemCount: snapshot.data!.length,
-                                  shrinkWrap: true,
-                                  itemBuilder: (context, index) {
-                                    late Icon icon;
-                                    late Function onPressed;
-                                    if(triple.isLoading && int.parse(triple.state.toString()) == index){
-                                      icon = const Icon(Icons.pause_rounded, color: MyColors.blue, size: 27,);
-                                      onPressed = () => soundReproductionStore.pauseCurrentSong();
-                                    }else{
-                                      icon = const Icon(Icons.play_arrow_rounded, color: MyColors.blue, size: 27,);
-                                      onPressed = () => soundReproductionStore.playSound(snapshot.data![index], index);
-                                    }
-
-
-
-                                    return Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: const BorderRadius.all(
-                                          Radius.circular(15),
+                              return ListView.separated(
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: snapshot.data!.length,
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) {
+                                return TripleBuilder(
+                                  store: selectSoundStore,
+                                  builder: (context, selectSoundTriple) {
+                                    return InkWell(
+                                      onTap: () => selectSoundStore.selectSound(snapshot.data![index].replaceAll('assets/sounds/', '')),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: const BorderRadius.all(
+                                            Radius.circular(15),
+                                          ),
+                                          border: Border.all(
+                                            width: 1,
+                                            style: BorderStyle.solid,
+                                            color: selectSoundTriple.state.toString().contains(snapshot.data![index].replaceAll('assets/sounds/', '')) ? MyColors.blue : MyColors.lightGray,
+                                          ),
                                         ),
-                                        border: Border.all(
-                                          width: 1,
-                                          style: BorderStyle.solid,
-                                          color: MyColors.lightGray,
-                                        ),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(15.0),
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              snapshot.data![index].replaceAll('assets/sounds/', '').replaceAll('.mp3', ''),
-                                              style: theme.textTheme.labelSmall,
-                                            ),
-                                            const Spacer(),
-                                            IconButton(
-                                                onPressed: () => onPressed(),
-                                                icon: icon
-                                            ),
-                                          ],
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(15.0),
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                snapshot.data![index].replaceAll('assets/sounds/', '').replaceAll('.mp3', ''),
+                                                style: theme.textTheme.labelSmall,
+                                              ),
+                                              const Spacer(),
+                                              TripleBuilder(
+                                                store: soundReproductionStore,
+                                                builder: (context, soundReproductionTriple){
+                                                  late Icon icon;
+                                                  late Function onPressed;
+                                                  if(soundReproductionTriple.isLoading && int.parse(soundReproductionTriple.state.toString()) == index){
+                                                    icon = const Icon(Icons.pause_rounded, color: MyColors.blue, size: 27,);
+                                                    onPressed = () => soundReproductionStore.pauseCurrentSong();
+                                                  }else{
+                                                    icon = const Icon(Icons.play_arrow_rounded, color: MyColors.blue, size: 27,);
+                                                    onPressed = () {
+                                                      selectSoundStore.selectSound(snapshot.data![index].replaceAll('assets/sounds/', ''));
+                                                      soundReproductionStore.playSound(snapshot.data![index], index);
+                                                    };
+                                                  }
+
+                                                  return IconButton(
+                                                      onPressed: () => onPressed(),
+                                                      icon: icon
+                                                  );
+                                                }
+                                              ),
+
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     );
-                                  },
-                                  separatorBuilder: (BuildContext context, int index) {
-                                    return const SizedBox(height: 5);
-                                  },
-                                ),
-                              );
+                                  }
+                                );
+                              },
+                              separatorBuilder: (BuildContext context, int index) {
+                                return const SizedBox(height: 5);
+                              },
+                                );
                             },
                           ),
                           SizedBox(height: 60,)
@@ -137,7 +149,7 @@ class SelectSoundPageState extends State<SelectSoundPage> {
                     ),
                     Align(
                       alignment: Alignment.bottomRight,
-                      child: ButtonBlueRoundedWidget(title: 'Salvar', onPressed: () => controller.toSetHomeModule()),
+                      child: ButtonBlueRoundedWidget(title: 'Salvar', onPressed: () => selectSoundStore.saveSound('')),
                     ),
                   ],
                 ) ,

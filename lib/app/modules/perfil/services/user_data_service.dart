@@ -20,11 +20,21 @@ class UserDataService {
   }
 
   Future<bool> saveUserData(UserModel user) async {
-
     try{
       await db.collection("Users")
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .set(user.toFirestore());
+      return true;
+    }catch(e){
+      return false;
+    }
+  }
+
+  Future<bool> saveSound(String nameSound) async{
+    try{
+      await db.collection("Users")
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .set({"sound" : nameSound});
       return true;
     }catch(e){
       return false;
