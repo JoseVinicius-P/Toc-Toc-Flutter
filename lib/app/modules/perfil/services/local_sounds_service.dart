@@ -1,10 +1,16 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:just_audio/just_audio.dart';
 
-class LoacalSoundsService {
+class LoacalSoundsService implements Disposable{
   late AudioPlayer currentPlayer = AudioPlayer();
+
+  @override
+  void dispose() {
+    currentPlayer.dispose();
+  }
 
   Future<List<String>> findSounds(BuildContext context) async {
     var manifest =
