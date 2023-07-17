@@ -149,7 +149,7 @@ class SelectSoundPageState extends State<SelectSoundPage> {
                     ),
                     Align(
                       alignment: Alignment.bottomRight,
-                      child: ButtonBlueRoundedWidget(title: 'Salvar', onPressed: () => selectSoundStore.saveSound('')),
+                      child: ButtonBlueRoundedWidget(title: 'Salvar', onPressed: () => selectSoundStore.saveSound()),
                     ),
                   ],
                 ) ,
