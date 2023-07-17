@@ -57,6 +57,8 @@ dependencies:
   firebase_storage: ^11.2.5
   cached_network_image: ^3.2.3
   just_audio: ^0.9.34
+  flutter_map: ^5.0.0
+  geolocator: ^9.0.2
 
 dev_dependencies:
   flutter_test:
