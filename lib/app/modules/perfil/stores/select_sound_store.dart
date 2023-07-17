@@ -16,11 +16,12 @@ class SelectSoundStore extends Store<String> {
         controller.toSetHomeModule();
       }else{
         setError("Algo deu errado, tente novamente!");
+        setLoading(false);
       }
     }else{
       setError("Selecione um som");
+      setLoading(false);
     }
-    setLoading(false);
   }
 
   void selectSound(String nameSound){
