@@ -47,6 +47,23 @@ class UserDataService {
     return snapshot;
   }
 
+  Future<bool> isDataComplete() async {
+    DocumentSnapshot snapshot = await getUserData();
+    if(snapshot.exists){
+      try{
+        if(snapshot.get('sound') != null){
+          return true;
+        }else{
+          return false;
+        }
+      }catch(e){
+        return false;
+      }
+    }else{
+      return false;
+    }
+  }
+
   Future<String> getUrlProfilePicture() async {
     return await storage.ref().child("profile_pictures/${FirebaseAuth.instance.currentUser!.uid}.jpg").getDownloadURL();
   }

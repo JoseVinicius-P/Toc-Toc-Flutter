@@ -1,3 +1,5 @@
+import 'package:toctoc/app/modules/perfil/services/user_data_service.dart';
+import 'package:toctoc/app/modules/set_home/setHome_module.dart';
 import 'package:toctoc/app/shared/services/auth_service.dart';
 import 'package:toctoc/app/shared/services/auth_guard_service.dart';
 
@@ -12,6 +14,7 @@ class AppModule extends Module {
   final List<Bind> binds = [
     Bind.lazySingleton((i) => AuthService()),
     Bind.lazySingleton((i) => AuthGuardService()),
+    Bind.lazySingleton((i) => UserDataService()),
   ];
 
   @override
@@ -20,6 +23,7 @@ class AppModule extends Module {
     ModuleRoute('/login', module: LoginModule()),
     ModuleRoute('/home', module: HomeModule()),
     ModuleRoute('/perfil', module: PerfilModule()),
+    ModuleRoute('/set_home', module: SetHomeModule()),
   ];
 
 }

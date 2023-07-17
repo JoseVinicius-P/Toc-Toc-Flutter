@@ -22,7 +22,7 @@ class PerfilController implements Disposable{
   }
 
   void toSetHomeModule(){
-    Modular.to.pushNamed('./set_home/');
+    Modular.to.navigate('./set_home/');
   }
 
   FutureOr<String> pickImage() async{
