@@ -23,7 +23,7 @@ class UserDataService {
     try{
       await db.collection("Users")
           .doc(FirebaseAuth.instance.currentUser!.uid)
-          .set(user.toFirestore());
+          .set(user.toFirestore(), SetOptions(merge: true));
       return true;
     }catch(e){
       return false;
@@ -34,7 +34,7 @@ class UserDataService {
     try{
       await db.collection("Users")
           .doc(FirebaseAuth.instance.currentUser!.uid)
-          .set({"sound" : nameSound});
+          .set({"sound" : nameSound}, SetOptions(merge: true));
       return true;
     }catch(e){
       return false;
