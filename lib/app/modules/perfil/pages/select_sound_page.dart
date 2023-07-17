@@ -84,9 +84,17 @@ class SelectSoundPageState extends State<SelectSoundPage> {
                                   itemCount: snapshot.data!.length,
                                   shrinkWrap: true,
                                   itemBuilder: (context, index) {
-                                    Icon icon = triple.isLoading && int.parse(triple.state.toString()) == index ?
-                                    const Icon(Icons.pause_rounded, color: MyColors.blue, size: 27,) :
-                                    const Icon(Icons.play_arrow_rounded, color: MyColors.blue, size: 27,);
+                                    late Icon icon;
+                                    late Function onPressed;
+                                    if(triple.isLoading && int.parse(triple.state.toString()) == index){
+                                      icon = const Icon(Icons.pause_rounded, color: MyColors.blue, size: 27,);
+                                      onPressed = () => soundReproductionStore.pauseCurrentSong();
+                                    }else{
+                                      icon = const Icon(Icons.play_arrow_rounded, color: MyColors.blue, size: 27,);
+                                      onPressed = () => soundReproductionStore.playSound(snapshot.data![index], index);
+                                    }
+
+
 
                                     return Container(
                                       decoration: BoxDecoration(
@@ -109,7 +117,7 @@ class SelectSoundPageState extends State<SelectSoundPage> {
                                             ),
                                             const Spacer(),
                                             IconButton(
-                                                onPressed: () => soundReproductionStore.playSound(snapshot.data![index], index),
+                                                onPressed: () => onPressed(),
                                                 icon: icon
                                             ),
                                           ],

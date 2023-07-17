@@ -14,4 +14,9 @@ class SoundReproductionStore extends Store<int> {
     soundsService.playSound(path, () => setLoading(false));
   }
 
+  void pauseCurrentSong(){
+    soundsService.pauseCurrentSound();
+    setLoading(false);
+  }
+
 }
