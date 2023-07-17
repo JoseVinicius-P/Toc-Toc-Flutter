@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:just_audio/just_audio.dart';
 
-class SoundsService {
+class LoacalSoundsService {
   late AudioPlayer currentPlayer = AudioPlayer();
 
   Future<List<String>> findSounds(BuildContext context) async {

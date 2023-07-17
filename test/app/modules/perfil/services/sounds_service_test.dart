@@ -1,10 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:toctoc/app/modules/perfil/services/sounds_service.dart';
+import 'package:toctoc/app/modules/perfil/services/local_sounds_service.dart';
  
 void main() {
-  late SoundsService service;
+  late LoacalSoundsService service;
 
   setUpAll(() {
-    service = SoundsService();
+    service = LoacalSoundsService();
   });
 }
