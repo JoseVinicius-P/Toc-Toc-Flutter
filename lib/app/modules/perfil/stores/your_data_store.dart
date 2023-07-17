@@ -34,7 +34,7 @@ class YourDataStore extends Store<void> {
 
   void loadUserdata() async {
     setLoading(true);
-    DocumentSnapshot snapshot = await userDataService.loadUserData();
+    DocumentSnapshot snapshot = await userDataService.getUserData();
     if(snapshot.exists){
       selectAvatarStore.update(await userDataService.getUrlProfilePicture());
       controller.textEditingController.text = snapshot.get('name');

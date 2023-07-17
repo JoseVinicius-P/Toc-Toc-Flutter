@@ -31,7 +31,7 @@ class UserDataService {
     }
   }
 
-  Future<DocumentSnapshot> loadUserData() async{
+  Future<DocumentSnapshot> getUserData() async{
     DocumentReference docRef = db.collection('Users').doc(FirebaseAuth.instance.currentUser!.uid);
     DocumentSnapshot snapshot = await docRef.get();
     return snapshot;
