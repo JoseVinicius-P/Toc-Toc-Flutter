@@ -1,11 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_triple/flutter_triple.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/set_home/setHome_store.dart';
 import 'package:flutter/material.dart';
 import 'package:toctoc/app/modules/set_home/set_home_controller.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 import 'package:toctoc/app/shared/widgets/button_blue_rounded_widget.dart';
+import 'package:latlong2/latlong.dart';
 
 class SetHomePage extends StatefulWidget {
   final String title;
@@ -14,8 +17,20 @@ class SetHomePage extends StatefulWidget {
   SetHomePageState createState() => SetHomePageState();
 }
 class SetHomePageState extends State<SetHomePage> {
-  final SetHomeStore store = Modular.get();
+  final store = Modular.get<SetHomeStore>();
   final controller = Modular.get<SetHomeController>();
+
+  @override
+  void initState() {
+    super.initState();
+    getLocation();
+  }
+
+  void getLocation() async {
+    if(await controller.requestLocationPermission()){
+      store.getLocation();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,15 +107,17 @@ class SetHomePageState extends State<SetHomePage> {
                               borderRadius: const BorderRadius.all(
                                 Radius.circular(15),
                               ),
-                              child: Image(
+                              child: _buildMap(),
+                              /*Image(
                                 height: 60.sh,
                                 width: double.infinity,
                                 image: const AssetImage('assets/images/map.jpg'),
                                 fit: BoxFit.cover,
-                              ),
+                              ),*/
                             ),
                           ),
                         ),
+                        SizedBox(height: 70,),
                       ],
                     ),
                     Align(
@@ -136,5 +153,42 @@ class SetHomePageState extends State<SetHomePage> {
           ],
         )
     );
+  }
+
+  // Método para construir o mapa
+  Widget _buildMap() {
+      return TripleBuilder(
+        store: store,
+        builder: (context, triple) {
+          return FlutterMap(
+            mapController: controller.mapController,
+            options: MapOptions(
+              center: triple.state as LatLng,
+              zoom: 18.0,
+              maxZoom: 18.0,
+              minZoom: 18.0,
+            ),
+            nonRotatedChildren: [
+              TileLayer(
+                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                userAgentPackageName: 'com.example.app',
+              ),
+              MarkerLayer(
+                markers: [
+                  Marker(
+                    point: triple.state as LatLng,
+                    width: 33,
+                    height: 100,
+                    builder: (context) => Image(
+                      image: AssetImage('assets/images/marker.png'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          );
+        }
+      );
   }
 }

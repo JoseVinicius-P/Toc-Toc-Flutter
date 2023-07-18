@@ -6,7 +6,7 @@ import 'package:toctoc/app/modules/set_home/set_home_controller.dart';
 class SetHomeModule extends Module {
   @override
   final List<Bind> binds = [
-    Bind.lazySingleton((i) => SetHomeStore()),
+    Bind.lazySingleton((i) => SetHomeStore(i())),
     Bind.lazySingleton((i) => SetHomeController())
   ];
 
