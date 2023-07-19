@@ -167,6 +167,7 @@ class SetHomePageState extends State<SetHomePage> {
               zoom: 18.0,
               maxZoom: 18.0,
               minZoom: 18.0,
+              interactiveFlags: InteractiveFlag.none
             ),
             nonRotatedChildren: [
               TileLayer(
