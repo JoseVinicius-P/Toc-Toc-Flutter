@@ -37,12 +37,13 @@ class SetHomePageState extends State<SetHomePage> {
   6 - Se na caixa do sistema for negada o fluxo se repete
   */
   void getLocation() async {
+    store.setLoading(true);
     if(await controller.locationIsAllowed()){
-      store.getLocation();
+      store.getPosition();
     }else{
       if(await _showMyDialog()){
         if(await controller.requestLocationPermission()){
-          store.getLocation();
+          store.getPosition();
         }else{
           getLocation();
         }
@@ -59,7 +60,9 @@ class SetHomePageState extends State<SetHomePage> {
         appBar: AppBar(
           centerTitle: true,
           leading: IconButton(
-              onPressed: () => Modular.to.pop(),
+              onPressed: () {
+                SystemNavigator.pop();
+              },
               icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.black)
           ),
           forceMaterialTransparency: true,
@@ -137,7 +140,7 @@ class SetHomePageState extends State<SetHomePage> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 70,),
+                        const SizedBox(height: 70,),
                       ],
                     ),
                     Align(
@@ -181,7 +184,7 @@ class SetHomePageState extends State<SetHomePage> {
       barrierColor: Colors.black.withOpacity(0.4),
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return AlertDialogLocationWidget();
+        return const AlertDialogLocationWidget();
       },
     );
   }
