@@ -1,7 +1,5 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 
 class AlertDialogLocationWidget extends StatelessWidget {
@@ -13,43 +11,61 @@ class AlertDialogLocationWidget extends StatelessWidget {
     var theme =  Theme.of(context);
     return AlertDialog(
       backgroundColor: Colors.white,
-      title: Text(
-        'Precisamos da sua localização',
-        style: theme.textTheme.titleSmall,
-        textAlign: TextAlign.center,
+      title: Column(
+        children: [
+          Icon(Icons.location_on_outlined, color: MyColors.blue, size: 30,),
+          Text(
+            'Precisamos da sua localização',
+            style: theme.textTheme.titleSmall!.copyWith(color: MyColors.blue),
+            textAlign: TextAlign.center,
+          ),
+        ],
       ),
-      content: AutoSizeText(
-        'SUa localização será usada para que seus amigos possam tocar a "campainha" quando estiverem próximos!',
-        style: theme.textTheme.titleSmall!.copyWith(fontSize: 18),
-        maxFontSize: 6.sw.roundToDouble(),
-        minFontSize: 3.sw.roundToDouble(),
-        maxLines: 3,
-        overflow: TextOverflow.ellipsis,
-        textAlign: TextAlign.center,
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            'Sua localização será usada para que seus amigos possam tocar a "campainha" quando estiverem próximos!',
+            style: theme.textTheme.titleSmall!.copyWith(fontSize: 16),
+            textAlign: TextAlign.center,
+          ),
+        ],
       ),
       actions: <Widget>[
-        TextButton(
-          child: const Text(
-            'Não permitir e fechar app',
-            style: TextStyle(
-              color: MyColors.textColor,
+        Row(
+          children: [
+            Expanded(
+              child: TextButton(
+                child: const Text(
+                  'Não permitir e fechar app',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: MyColors.textColor,
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop(false);
+                },
+              ),
             ),
-          ),
-          onPressed: () {
-            Navigator.of(context).pop(false);
-          },
-        ),
-        TextButton(
-          onPressed: (){
-            Navigator.of(context).pop(true);
-          },
-          child: const Text(
-            'Permitir',
-            style: TextStyle(
-              color: MyColors.textColor,
+            Expanded(
+              child: TextButton(
+                onPressed: (){
+                  Navigator.of(context).pop(true);
+                },
+                child: const Text(
+                  'Permitir',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: MyColors.blue,
+                    fontSize: 18
+                  ),
+                ),
+              ),
             ),
-          ),
-        ),
+          ],
+        )
+
       ],
     );
   }
