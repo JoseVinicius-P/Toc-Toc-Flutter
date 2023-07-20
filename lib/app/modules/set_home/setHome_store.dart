@@ -9,6 +9,7 @@ class SetHomeStore extends Store<LatLng> {
   SetHomeStore(this.controller) : super(const LatLng(-10.2524869, -48.3256559));
 
   void getLocation() async {
+    setLoading(true);
     Position? position;
 
     try {
@@ -17,9 +18,12 @@ class SetHomeStore extends Store<LatLng> {
       );
       update(LatLng(position.latitude, position.longitude));
       controller.mapController.move(LatLng(position.latitude, position.longitude), 18.0);
+      setLoading(false);
     } catch (e) {
       print("Erro ao obter a localização: $e");
       position = null;
+      getLocation();
+      setLoading(false);
     }
   }
 

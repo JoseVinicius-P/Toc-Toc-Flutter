@@ -160,34 +160,39 @@ class SetHomePageState extends State<SetHomePage> {
       return TripleBuilder(
         store: store,
         builder: (context, triple) {
-          return FlutterMap(
-            mapController: controller.mapController,
-            options: MapOptions(
-              center: triple.state as LatLng,
-              zoom: 18.0,
-              maxZoom: 18.0,
-              minZoom: 18.0,
-              interactiveFlags: InteractiveFlag.none
-            ),
-            nonRotatedChildren: [
-              TileLayer(
-                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                userAgentPackageName: 'com.example.app',
+          return Opacity(
+            opacity: triple.isLoading ? 0.5 : 1,
+            child: FlutterMap(
+              mapController: controller.mapController,
+              options: MapOptions(
+                center: triple.state as LatLng,
+                zoom: 18.0,
+                maxZoom: 18.0,
+                minZoom: 18.0,
+                interactiveFlags: InteractiveFlag.none
               ),
-              MarkerLayer(
-                markers: [
-                  Marker(
-                    point: triple.state as LatLng,
-                    width: 33,
-                    height: 100,
-                    builder: (context) => Image(
-                      image: AssetImage('assets/images/marker.png'),
-                      fit: BoxFit.cover,
+              nonRotatedChildren: [
+                TileLayer(
+                  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                  userAgentPackageName: 'com.example.app',
+                ),
+                MarkerLayer(
+                  markers: [
+                    Marker(
+                      point: triple.state as LatLng,
+                      width: 33,
+                      height: triple.isLoading ? 33 : 100,
+                      builder: (context) => triple.isLoading ?
+                      const CircularProgressIndicator(color: MyColors.blue,) :
+                      const Image(
+                        image: AssetImage('assets/images/marker.png'),
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           );
         }
       );
