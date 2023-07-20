@@ -17,13 +17,21 @@ class SetHomeController implements Disposable{
     Modular.to.navigate('/home/');
   }
 
+  Future<bool> locationIsAllowed() async{
+    permission = await Geolocator.checkPermission();
+    if(permission == LocationPermission.denied){
+      return false;
+    }else{
+      return true;
+    }
+  }
+
   Future<bool> requestLocationPermission() async {
     bool isAllowed = false;
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
+    if (!await locationIsAllowed()) {
       permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
+      if (!await locationIsAllowed()) {
+        isAllowed = false;
       }else{
         isAllowed = true;
       }

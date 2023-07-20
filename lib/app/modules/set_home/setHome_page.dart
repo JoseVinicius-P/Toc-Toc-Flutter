@@ -1,8 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:toctoc/app/modules/set_home/alert_dialog_location_widget.dart';
 import 'package:toctoc/app/modules/set_home/setHome_store.dart';
 import 'package:flutter/material.dart';
 import 'package:toctoc/app/modules/set_home/set_home_controller.dart';
@@ -26,9 +28,27 @@ class SetHomePageState extends State<SetHomePage> {
     getLocation();
   }
 
+  /*O fluxo é o seguinte:
+  1 - Verifica se a Localização já foi permitida
+  2 - Se sim consulta se não
+  3 - Exibe uma Dialog explicando e pedindo a permissão
+  4 - Se não retorna false e o app é fechado
+  5 - Se for dada a caixa do sistema é aberta para permissão
+  6 - Se na caixa do sistema for negada o fluxo se repete
+  */
   void getLocation() async {
-    if(await controller.requestLocationPermission()){
+    if(await controller.locationIsAllowed()){
       store.getLocation();
+    }else{
+      if(await _showMyDialog()){
+        if(await controller.requestLocationPermission()){
+          store.getLocation();
+        }else{
+          getLocation();
+        }
+      }else{
+        SystemNavigator.pop();
+      }
     }
   }
 
@@ -152,6 +172,17 @@ class SetHomePageState extends State<SetHomePage> {
             ),
           ],
         )
+    );
+  }
+
+  Future<bool> _showMyDialog() async {
+    return await showDialog(
+      context: context,
+      barrierColor: Colors.black.withOpacity(0.4),
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialogLocationWidget();
+      },
     );
   }
 
