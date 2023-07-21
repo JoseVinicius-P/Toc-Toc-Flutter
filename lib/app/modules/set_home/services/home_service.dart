@@ -15,4 +15,23 @@ class HomeService {
     }
   }
 
+  Future<bool> isLocationExists() async {
+    DocumentReference docRef = db.collection('Users').doc(FirebaseAuth.instance.currentUser!.uid);
+    DocumentSnapshot snapshot = await docRef.get();
+    if(snapshot.exists){
+      try{
+        if(snapshot.get('location') != null){
+          return true;
+        }else{
+          return false;
+        }
+      }catch(e){
+        return false;
+      }
+    }else{
+      return false;
+    }
+  }
+
+
 }
