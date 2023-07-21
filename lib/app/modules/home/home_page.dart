@@ -4,7 +4,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/home/home_controller.dart';
 import 'package:toctoc/app/modules/home/pages/add_friend_page.dart';
 import 'package:toctoc/app/modules/home/pages/friend_list_page.dart';
-import 'package:toctoc/app/modules/home/pages/perfil_page.dart';
+import 'package:toctoc/app/modules/perfil/pages/perfil_page.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 import 'home_store.dart';
 
@@ -25,6 +25,14 @@ class _HomePageState extends State<HomePage> {
     Modular.dispose<HomeStore>();
     super.dispose();
   }
+
+  @override
+  void initState() {
+    super.initState();
+    Modular.to.navigate('./perfil');
+    //controller.addPageListener();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,10 +43,7 @@ class _HomePageState extends State<HomePage> {
         children: [
           FriendListPage(),
           AddFriendPage(),
-          PerfilPage(),
-          //Paginas
-          //ListsPage(),
-          //SearchPage(),
+          RouterOutlet(),
         ],
       ),
       //Criando o BottomNavigation

@@ -1,3 +1,4 @@
+import 'package:toctoc/app/modules/perfil/pages/perfil_page.dart';
 import 'package:toctoc/app/modules/perfil/services/user_data_guard_service.dart';
 import 'package:toctoc/app/modules/perfil/stores/sound_reproduction_store.dart';
 import 'package:toctoc/app/modules/perfil/services/local_sounds_service.dart';
@@ -28,7 +29,8 @@ class PerfilModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => const YourDataPage(), guards: [AuthGuardService(), UserDataGuardService()]),
+    ChildRoute('/', child: (_, args) => const PerfilPage()),
+    ChildRoute('/your_data', child: (_, args) => const YourDataPage(), guards: [AuthGuardService(), UserDataGuardService()]),
     ChildRoute('/select_sound', child: (_, args) => const SelectSoundPage(), guards: [AuthGuardService(), UserDataGuardService()]),
   ];
 

@@ -23,7 +23,7 @@ class LoginController implements Disposable{
   }
 
   void toPerfilModule(){
-    Modular.to.navigate('/perfil/');
+    Modular.to.navigate('/perfil/your_data');
   }
 
   void toSmsCodePage(String verificationId){

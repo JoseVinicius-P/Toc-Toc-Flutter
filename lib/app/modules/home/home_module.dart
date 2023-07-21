@@ -1,5 +1,9 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:toctoc/app/modules/home/home_controller.dart';
+import 'package:toctoc/app/modules/home/pages/add_friend_page.dart';
+import 'package:toctoc/app/modules/home/pages/friend_list_page.dart';
+import 'package:toctoc/app/modules/perfil/pages/perfil_page.dart';
+import 'package:toctoc/app/modules/perfil/perfil_module.dart';
 import 'home_store.dart'; 
 
 import 'home_page.dart';
@@ -13,6 +17,9 @@ class HomeModule extends Module {
 
  @override
  final List<ModularRoute> routes = [
-   ChildRoute('/', child: (_, args) => HomePage()),
+   ChildRoute('/', child: (_, args) => HomePage(), children: [
+     ModuleRoute('./perfil', module: PerfilModule()),
+   ]),
+
  ];
 }
