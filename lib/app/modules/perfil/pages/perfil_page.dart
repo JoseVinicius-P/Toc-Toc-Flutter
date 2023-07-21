@@ -1,7 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:toctoc/app/modules/perfil/perfil_controller.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 
 class PerfilPage extends StatefulWidget {
@@ -11,6 +13,7 @@ class PerfilPage extends StatefulWidget {
   PerfilPageState createState() => PerfilPageState();
 }
 class PerfilPageState extends State<PerfilPage> {
+  final controller = Modular.get<PerfilController>();
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -72,7 +75,7 @@ class PerfilPageState extends State<PerfilPage> {
                         ],
                       ),
                       const Spacer(),
-                      const Icon(Icons.edit, color: MyColors.blue),
+                      IconButton(onPressed: () => controller.toYourDataPage(), icon: const Icon(Icons.edit, color: MyColors.blue)),
                       const SizedBox(width: 10,),
                     ],
                   ),
