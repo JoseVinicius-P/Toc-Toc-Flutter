@@ -17,11 +17,6 @@ class PerfilController implements Disposable{
 
   }
 
-  void toYourDataPage(){
-    Modular.to.navigate('./your_data');
-    print("Caminho: ${Modular.to.path}");
-  }
-
   void toSelectSoundPage(){
     Modular.to.pushNamed('./select_sound');
   }

@@ -30,7 +30,7 @@ class PerfilModule extends Module {
   @override
   final List<ModularRoute> routes = [
     ChildRoute('/', child: (_, args) => const PerfilPage()),
-    ChildRoute('/your_data', child: (_, args) => const YourDataPage(), guards: [AuthGuardService(), UserDataGuardService()]),
+    ChildRoute('/your_data', child: (_, args) => YourDataPage(), guards: [AuthGuardService(), UserDataGuardService()]),
     ChildRoute('/select_sound', child: (_, args) => const SelectSoundPage(), guards: [AuthGuardService(), UserDataGuardService()]),
   ];
 

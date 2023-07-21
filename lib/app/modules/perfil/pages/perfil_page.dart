@@ -75,7 +75,7 @@ class PerfilPageState extends State<PerfilPage> {
                         ],
                       ),
                       const Spacer(),
-                      IconButton(onPressed: () => controller.toYourDataPage(), icon: const Icon(Icons.edit, color: MyColors.blue)),
+                      IconButton(onPressed: () => Navigator.of(context).pushNamed('./your_data'), icon: const Icon(Icons.edit, color: MyColors.blue)),
                       const SizedBox(width: 10,),
                     ],
                   ),

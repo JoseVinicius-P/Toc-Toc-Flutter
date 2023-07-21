@@ -12,7 +12,7 @@ class YourDataStore extends Store<void> {
 
   YourDataStore(this.userDataService, this.controller, this.selectAvatarStore) : super(null);
 
-  void saveUserData() async {
+  void saveUserData(Function whenToComplete) async {
     String path = selectAvatarStore.state;
     UserModel user = UserModel(name: controller.textEditingController.text);
     setLoading(true);
@@ -21,7 +21,7 @@ class YourDataStore extends Store<void> {
     }
     if(user.name.isNotEmpty){
       if(await userDataService.saveUserData(user)){
-        controller.toSelectSoundPage();
+        whenToComplete();
         setLoading(false);
       }else{
         setError("Não foi possível salvar os dados, tente novamente!");

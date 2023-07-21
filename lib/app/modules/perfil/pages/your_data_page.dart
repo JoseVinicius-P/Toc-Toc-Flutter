@@ -21,6 +21,7 @@ class YourDataPage extends StatefulWidget {
 class YourDataPageState extends State<YourDataPage> {
   final store = Modular.get<YourDataStore>();
   final controller = Modular.get<PerfilController>();
+  final bool isForHome = Modular.to.path.contains('home');
 
   @override
   void initState() {
@@ -36,9 +37,13 @@ class YourDataPageState extends State<YourDataPage> {
           centerTitle: true,
           leading: IconButton(
               onPressed: (){
-                SystemNavigator.pop();
+                if(isForHome){
+                  Navigator.of(context).pop();
+                }else{
+                  SystemNavigator.pop();
+                }
               },
-              icon: const Icon(Icons.close_rounded, color: Colors.black, size: 25,)
+              icon: Icon(isForHome ? Icons.arrow_back_ios_new_rounded : Icons.close_rounded, color: Colors.black, size: 25,)
           ),
           forceMaterialTransparency: true,
           title: Text(
@@ -103,8 +108,8 @@ class YourDataPageState extends State<YourDataPage> {
                     child: TripleBuilder(
                       store: store,//the store to be observed
                       builder: (context, triple) => ButtonBlueRoundedWidget(
-                        title: 'Continuar',
-                        onPressed: triple.isLoading ? null : () => store.saveUserData()
+                        title: 'Salvar',
+                        onPressed: triple.isLoading ? null : () => store.saveUserData(() => isForHome ? Navigator.of(context).pop() : controller.toSelectSoundPage())
                         ),
                       ),//called when any segment changes
                     ),
