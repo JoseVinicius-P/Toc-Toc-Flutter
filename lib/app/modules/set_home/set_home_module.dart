@@ -1,4 +1,4 @@
-import 'package:toctoc/app/modules/set_home/gps_service.dart';
+import 'package:toctoc/app/modules/set_home/services/gps_service.dart';
 import 'package:toctoc/app/modules/set_home/set_home_page.dart';
 import 'package:toctoc/app/modules/set_home/set_home_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
