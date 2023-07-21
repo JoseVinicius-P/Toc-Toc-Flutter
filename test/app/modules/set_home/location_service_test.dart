@@ -1,10 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:toctoc/app/modules/set_home/position_service.dart';
+import 'package:toctoc/app/modules/set_home/gps_service.dart';
  
 void main() {
-  late PositionService service;
+  late GpsService service;
 
   setUpAll(() {
-    service = PositionService();
+    service = GpsService();
   });
 }

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:geolocator/geolocator.dart';
 
-class PositionService {
+class GpsService {
   Timer? locationTimer;
 
   Future<bool> isLocationEnabled(){
