@@ -20,6 +20,7 @@ class SelectSoundPageState extends State<SelectSoundPage> {
   final soundReproductionStore = Modular.get<SoundReproductionStore>();
   final controller = Modular.get<PerfilController>();
   late Future<List<String>> futureSounds;
+  final bool isForHome = Modular.to.path.contains('home');
 
   @override
   void initState() {
@@ -35,7 +36,13 @@ class SelectSoundPageState extends State<SelectSoundPage> {
         appBar: AppBar(
           centerTitle: true,
           leading: IconButton(
-              onPressed: () => Modular.to.pop(),
+              onPressed: (){
+                if(isForHome){
+                  Navigator.of(context).pop();
+                }else{
+                  Modular.to.pop();
+                }
+              },
               icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.black)
           ),
           forceMaterialTransparency: true,
@@ -149,7 +156,12 @@ class SelectSoundPageState extends State<SelectSoundPage> {
                     ),
                     Align(
                       alignment: Alignment.bottomRight,
-                      child: ButtonBlueRoundedWidget(title: 'Salvar', onPressed: () => selectSoundStore.saveSound()),
+                      child: ButtonBlueRoundedWidget(
+                        title: 'Salvar',
+                        onPressed: () => selectSoundStore.saveSound(
+                                ()=> isForHome ? Navigator.of(context).pop() : controller.toSetHomeModule()
+                        ),
+                      ),
                     ),
                   ],
                 ) ,

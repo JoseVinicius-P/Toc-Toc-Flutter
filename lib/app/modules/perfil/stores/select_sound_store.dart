@@ -9,11 +9,11 @@ class SelectSoundStore extends Store<String> {
 
   SelectSoundStore(this.service, this.controller) : super("");
 
-  void saveSound() async {
+  void saveSound(Function whenToComplete) async {
     setLoading(true);
     if(state.isNotEmpty){
       if(await service.saveSound(state)){
-        controller.toSetHomeModule();
+        whenToComplete();
       }else{
         setError("Algo deu errado, tente novamente!");
         setLoading(false);

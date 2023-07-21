@@ -125,7 +125,7 @@ class PerfilPageState extends State<PerfilPage> {
                         ],
                       ),
                       const Spacer(),
-                      const Icon(Icons.edit, color: MyColors.blue),
+                      IconButton(onPressed: () => Navigator.of(context).pushNamed('./select_sound'), icon: const Icon(Icons.edit, color: MyColors.blue)),
                       const SizedBox(width: 10,),
                     ],
                   ),
