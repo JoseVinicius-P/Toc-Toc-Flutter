@@ -37,19 +37,22 @@ class SetHomePageState extends State<SetHomePage> {
   6 - Se na caixa do sistema for negada o fluxo se repete
   */
   void getLocation() async {
-    store.setLoading(true);
-    if(await controller.locationIsAllowed()){
-      store.getPosition();
-    }else{
-      if(await _showMyDialog()){
-        if(await controller.requestLocationPermission()){
-          store.getPosition();
-        }else{
-          getLocation();
-        }
+    if(await store.isLocationEnabled()){
+      if(await store.permissionLocationIsAllowed()){
+        store.getPosition();
       }else{
-        SystemNavigator.pop();
+        if(await alertDialogPermissionLocationWidget()){
+          if(await store.requestLocationPermission()){
+            store.getPosition();
+          }else{
+            getLocation();
+          }
+        }else{
+          SystemNavigator.pop();
+        }
       }
+    }else{
+
     }
   }
 
@@ -178,7 +181,7 @@ class SetHomePageState extends State<SetHomePage> {
     );
   }
 
-  Future<bool> _showMyDialog() async {
+  Future<bool> alertDialogPermissionLocationWidget() async {
     return await showDialog(
       context: context,
       barrierColor: Colors.black.withOpacity(0.4),

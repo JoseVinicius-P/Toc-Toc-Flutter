@@ -33,4 +33,20 @@ class SetHomeStore extends Store<LatLng> {
     }
   }
 
+  Future<bool> permissionLocationIsAllowed() async{
+    setLoading(true);
+    return await positionService.permissionLocationIsAllowed();
+  }
+
+  Future<bool> requestLocationPermission() async {
+    setLoading(true);
+    return positionService.requestLocationPermission();
+  }
+
+  Future<bool> isLocationEnabled() async {
+    setLoading(true);
+    return positionService.isLocationEnabled();
+  }
+
+
 }
