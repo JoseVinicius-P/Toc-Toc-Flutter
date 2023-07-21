@@ -4,13 +4,13 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/perfil/widgets/select_avatar_widget.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 
-class SettingsPage extends StatefulWidget {
+class PerfilPage extends StatefulWidget {
   final String title;
-  const SettingsPage({Key? key, this.title = 'SettingsPage'}) : super(key: key);
+  const PerfilPage({Key? key, this.title = 'SettingsPage'}) : super(key: key);
   @override
-  SettingsPageState createState() => SettingsPageState();
+  PerfilPageState createState() => PerfilPageState();
 }
-class SettingsPageState extends State<SettingsPage> {
+class PerfilPageState extends State<PerfilPage> {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
