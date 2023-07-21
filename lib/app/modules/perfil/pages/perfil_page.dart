@@ -2,7 +2,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:toctoc/app/modules/perfil/widgets/select_avatar_widget.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 
 class PerfilPage extends StatefulWidget {
@@ -24,7 +23,7 @@ class PerfilPageState extends State<PerfilPage> {
           ),
           SafeArea(
             child: Padding(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 children: [
                   Row(
@@ -46,7 +45,7 @@ class PerfilPageState extends State<PerfilPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Icon(Icons.person_outline, color: Colors.grey),
+                      const Icon(Icons.person_outline, color: Colors.grey),
                       const SizedBox(width: 20,),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,8 +72,8 @@ class PerfilPageState extends State<PerfilPage> {
                         ],
                       ),
                       const Spacer(),
-                      Icon(Icons.edit, color: MyColors.blue),
-                      SizedBox(width: 10,),
+                      const Icon(Icons.edit, color: MyColors.blue),
+                      const SizedBox(width: 10,),
                     ],
                   ),
                   const SizedBox(height: 10,),
@@ -96,7 +95,7 @@ class PerfilPageState extends State<PerfilPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Icon(Icons.notifications_active_outlined, color: Colors.grey),
+                      const Icon(Icons.notifications_active_outlined, color: Colors.grey),
                       const SizedBox(width: 20,),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,8 +122,8 @@ class PerfilPageState extends State<PerfilPage> {
                         ],
                       ),
                       const Spacer(),
-                      Icon(Icons.edit, color: MyColors.blue),
-                      SizedBox(width: 10,),
+                      const Icon(Icons.edit, color: MyColors.blue),
+                      const SizedBox(width: 10,),
                     ],
                   ),
                   const SizedBox(height: 10,),
@@ -146,7 +145,7 @@ class PerfilPageState extends State<PerfilPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Icon(Icons.location_on_outlined, color: Colors.grey),
+                      const Icon(Icons.location_on_outlined, color: Colors.grey),
                       const SizedBox(width: 20,),
                       Expanded(
                         child: Column(
@@ -193,9 +192,9 @@ class PerfilPageState extends State<PerfilPage> {
                           ],
                         ),
                       ),
-                      SizedBox(width: 15,),
-                      Icon(Icons.edit, color: MyColors.blue),
-                      SizedBox(width: 10,),
+                      const SizedBox(width: 15,),
+                      const Icon(Icons.edit, color: MyColors.blue),
+                      const SizedBox(width: 10,),
                     ],
                   ),
                   const SizedBox(height: 10,),
@@ -217,7 +216,7 @@ class PerfilPageState extends State<PerfilPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Icon(Icons.exit_to_app, color: Colors.red, size: 20,),
+                      const Icon(Icons.exit_to_app, color: Colors.red, size: 20,),
                       const SizedBox(width: 20,),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
