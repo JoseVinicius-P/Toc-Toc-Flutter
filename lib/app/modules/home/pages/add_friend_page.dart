@@ -1,5 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 
@@ -69,15 +71,15 @@ class AddFriendPageState extends State<AddFriendPage> {
                                 color: Colors.grey,
                               ),
                             ),
-                            child: const ClipRRect(
-                              borderRadius: BorderRadius.all(
+                            child: ClipRRect(
+                              borderRadius: const BorderRadius.all(
                                 Radius.circular(15),
                               ),
-                              child: Image(
-                                width: double.infinity,
-                                image: AssetImage('assets/images/qr_code.png'),
-                                fit: BoxFit.cover,
-                              ),
+                              child: QrImageView(
+                                data: FirebaseAuth.instance.currentUser!.uid,
+                                version: 6,
+                                padding: const EdgeInsets.all(40.0),
+                              )
                             ),
                           ),
                         ),
