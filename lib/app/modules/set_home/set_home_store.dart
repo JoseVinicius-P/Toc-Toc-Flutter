@@ -3,19 +3,19 @@ import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:toctoc/app/modules/set_home/set_home_controller.dart';
 import 'package:toctoc/app/modules/set_home/services/gps_service.dart';
-import 'package:toctoc/app/modules/set_home/services/set_home_service.dart';
+import 'package:toctoc/app/modules/set_home/services/home_service.dart';
 
 class SetHomeStore extends Store<LatLng> {
   final SetHomeController controller;
   final GpsService gpsService;
-  final SetHomeService setHomeService;
+  final HomeService homeService;
 
-  SetHomeStore(this.controller, this.gpsService, this.setHomeService) : super(const LatLng(-10.2524869, -48.3256559));
+  SetHomeStore(this.controller, this.gpsService, this.homeService) : super(const LatLng(-10.2524869, -48.3256559));
 
   void saveLocation() async {
     setLoading(true);
     gpsService.stopLocationUpdates();
-    if(await setHomeService.saveLocation(state.latitude, state.longitude)){
+    if(await homeService.saveLocation(state.latitude, state.longitude)){
       controller.toHomeModule();
       setLoading(false);
     }else{

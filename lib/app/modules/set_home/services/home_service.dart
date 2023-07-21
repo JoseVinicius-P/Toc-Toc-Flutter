@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class SetHomeService {
+class HomeService {
   final db = FirebaseFirestore.instance;
 
   Future<bool> saveLocation(double latitude, double longitude) async {

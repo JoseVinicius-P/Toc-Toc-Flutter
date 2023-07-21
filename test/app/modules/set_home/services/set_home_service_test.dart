@@ -1,10 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:toctoc/app/modules/set_home/services/set_home_service.dart';
+import 'package:toctoc/app/modules/set_home/services/home_service.dart';
  
 void main() {
-  late SetHomeService service;
+  late HomeService service;
 
   setUpAll(() {
-    service = SetHomeService();
+    service = HomeService();
   });
 }
