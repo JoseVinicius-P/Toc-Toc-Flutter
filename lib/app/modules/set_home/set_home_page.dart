@@ -148,31 +148,44 @@ class SetHomePageState extends State<SetHomePage> {
                         const SizedBox(height: 70,),
                       ],
                     ),
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Expanded(
-                            child: TextButton(
-                              onPressed: () {},
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: AutoSizeText(
-                                  'Mais tarde',
-                                  style: theme.textTheme.titleSmall!.copyWith(color: MyColors.blue, fontSize: 20),
-                                  maxFontSize: 6.sw.roundToDouble(),
-                                  minFontSize: 3.sw.roundToDouble(),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  textAlign: TextAlign.left,
+                    TripleBuilder(
+                      store: store,
+                      builder: (context, triple) {
+                        return Align(
+                          alignment: Alignment.bottomRight,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Expanded(
+                                child: Opacity(
+                                  opacity: triple.isLoading ? 0.5 : 1,
+                                  child: TextButton(
+                                    onPressed: () {},
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: AutoSizeText(
+                                        'Mais tarde',
+                                        style: theme.textTheme.titleSmall!.copyWith(color: MyColors.blue, fontSize: 20),
+                                        maxFontSize: 6.sw.roundToDouble(),
+                                        minFontSize: 3.sw.roundToDouble(),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        textAlign: TextAlign.left,
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
+                              Expanded(
+                                child: ButtonBlueRoundedWidget(
+                                    title: 'Salvar',
+                                    onPressed: triple.isLoading ? null : () => store.saveLocation()
+                                )
+                              ),
+                            ],
                           ),
-                          Expanded(child: ButtonBlueRoundedWidget(title: 'Salvar', onPressed: () => controller.toHomeModule())),
-                        ],
-                      ),
+                        );
+                      }
                     ),
                   ],
                 ) ,
