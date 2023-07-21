@@ -4,7 +4,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:toctoc/app/modules/set_home/alert_dialog_location_widget.dart';
+import 'package:toctoc/app/modules/set_home/alert_dialog_permission_location_widget.dart';
 import 'package:toctoc/app/modules/set_home/setHome_store.dart';
 import 'package:flutter/material.dart';
 import 'package:toctoc/app/modules/set_home/set_home_controller.dart';
@@ -187,7 +187,7 @@ class SetHomePageState extends State<SetHomePage> {
       barrierColor: Colors.black.withOpacity(0.4),
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return const AlertDialogLocationWidget();
+        return const AlertDialogPermissionLocationWidget();
       },
     );
   }

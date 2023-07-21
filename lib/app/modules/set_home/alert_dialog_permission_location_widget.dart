@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 
-class AlertDialogLocationWidget extends StatelessWidget {
+class AlertDialogPermissionLocationWidget extends StatelessWidget {
   final String title;
-  const AlertDialogLocationWidget({Key? key, this.title = "AlertDialogLoactionWidget"}) : super(key: key);
+  const AlertDialogPermissionLocationWidget({Key? key, this.title = "AlertDialogLoactionWidget"}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
