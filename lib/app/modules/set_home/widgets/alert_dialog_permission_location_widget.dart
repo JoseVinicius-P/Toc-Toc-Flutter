@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 
 class AlertDialogPermissionLocationWidget extends StatelessWidget {
@@ -13,7 +12,7 @@ class AlertDialogPermissionLocationWidget extends StatelessWidget {
       backgroundColor: Colors.white,
       title: Column(
         children: [
-          Icon(Icons.location_on_outlined, color: MyColors.blue, size: 30,),
+          const Icon(Icons.location_on_outlined, color: MyColors.blue, size: 30,),
           Text(
             'Precisamos da sua localização',
             style: theme.textTheme.titleSmall!.copyWith(color: MyColors.blue),
