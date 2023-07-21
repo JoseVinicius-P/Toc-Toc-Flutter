@@ -1,6 +1,6 @@
 import 'package:toctoc/app/modules/set_home/position_service.dart';
-import 'package:toctoc/app/modules/set_home/setHome_page.dart';
-import 'package:toctoc/app/modules/set_home/setHome_store.dart';
+import 'package:toctoc/app/modules/set_home/set_home_page.dart';
+import 'package:toctoc/app/modules/set_home/set_home_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:toctoc/app/modules/set_home/set_home_controller.dart';
 

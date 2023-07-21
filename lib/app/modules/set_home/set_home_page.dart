@@ -6,7 +6,7 @@ import 'package:flutter_triple/flutter_triple.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/set_home/widgets/alert_dialog_enable_location_widget.dart';
 import 'package:toctoc/app/modules/set_home/widgets/alert_dialog_permission_location_widget.dart';
-import 'package:toctoc/app/modules/set_home/setHome_store.dart';
+import 'package:toctoc/app/modules/set_home/set_home_store.dart';
 import 'package:flutter/material.dart';
 import 'package:toctoc/app/modules/set_home/set_home_controller.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
