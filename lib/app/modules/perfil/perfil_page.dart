@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -38,7 +37,9 @@ class PerfilPageState extends State<PerfilPage> {
                         height: 40.sw.roundToDouble(),
                         child:  CircleAvatar(
                             backgroundImage: const AssetImage('assets/images/perfil.png'),
-                            foregroundImage: const CachedNetworkImageProvider("https://firebasestorage.googleapis.com/v0/b/toctoc-cfeaf.appspot.com/o/profile_pictures%2FLOcom3w8CXhimPWPuyJVFDE51S83.jpg?alt=media&token=f79a11e1-2bb2-4f9d-b0c9-f25d8603c26b"),
+                            foregroundImage: const NetworkImage(
+                              "https://firebasestorage.googleapis.com/v0/b/toctoc-cfeaf.appspot.com/o/profile_pictures%2FLOcom3w8CXhimPWPuyJVFDE51S83.jpg?alt=media&token=f79a11e1-2bb2-4f9d-b0c9-f25d8603c26b",
+                            ),
                             radius: 40.sw.roundToDouble(),
                           ),
                       ),
