@@ -9,7 +9,12 @@ class SetHomeGuardService extends RouteGuard{
 
   @override
   FutureOr<bool> canActivate(String path, ParallelRoute route) async {
-    bool isLocationExists = await Modular.get<HomeService>().isLocationExists();
+    bool isLocationExists = true;
+    if(path.contains('home')){
+      isLocationExists = true;
+    }else{
+      isLocationExists = await Modular.get<HomeService>().isLocationExists();
+    }
     return !isLocationExists;
   }
 
