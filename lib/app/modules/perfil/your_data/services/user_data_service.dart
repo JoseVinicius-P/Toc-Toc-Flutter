@@ -8,14 +8,16 @@ import 'package:toctoc/app/modules/perfil/user_model.dart';
 class UserDataService {
   final storage = FirebaseStorage.instance;
   final db = FirebaseFirestore.instance;
-  
-  void saveProfilePicture(String path) async {
+
+  Future<bool> saveProfilePicture(String path) async {
     final reference = storage.ref().child("profile_pictures/${FirebaseAuth.instance.currentUser!.uid}.jpg");
     try {
       File file = File(path);
       await reference.putFile(file);
+      return true;
     } on FirebaseException catch (e) {
       print(e);
+      return false;
     }
   }
 

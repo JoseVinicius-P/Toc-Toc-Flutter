@@ -19,7 +19,9 @@ class YourDataStore extends Store<void> {
     UserModel user = UserModel.onlyName(name: controller.textEditingController.text);
     setLoading(true);
     if(path.isNotEmpty){
-      userDataService.saveProfilePicture(path);
+      if(await userDataService.saveProfilePicture(path)){
+        user.profilePictureUrl = await userDataService.getUrlProfilePicture();
+      }
     }
     if(user.name.isNotEmpty){
       if(await userDataService.saveUserData(user)){

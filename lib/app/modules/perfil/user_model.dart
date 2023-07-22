@@ -25,12 +25,19 @@ class UserModel{
     }catch(e){
       print("ERRO: $e");
     }
+
+    try{
+      profilePictureUrl = snapshot.get('profilePictureUrl');
+    }catch(e){
+      print(e);
+    }
     return this;
   }
 
   Map<String, dynamic> toFirestore() {
     return {
       "name": name,
+      "profilePictureUrl": profilePictureUrl
     };
   }
 }
