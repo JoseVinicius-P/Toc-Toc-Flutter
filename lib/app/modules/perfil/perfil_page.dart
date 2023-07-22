@@ -196,7 +196,7 @@ class PerfilPageState extends State<PerfilPage> {
                         ),
                       ),
                       const SizedBox(width: 15,),
-                      const Icon(Icons.edit, color: MyColors.blue),
+                      IconButton(onPressed: (){}, icon: const Icon(Icons.edit, color: MyColors.blue)),
                       const SizedBox(width: 10,),
                     ],
                   ),

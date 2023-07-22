@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:toctoc/app/modules/perfil/stores/sound_reproduction_store.dart';
+import 'package:toctoc/app/modules/perfil/select_sound/stores/sound_reproduction_store.dart';
  
 void main() {
   late SoundReproductionStore store;

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:toctoc/app/modules/perfil/stores/select_avatar_store.dart';
+import 'package:toctoc/app/modules/perfil/your_data/stores/select_avatar_store.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 
 class SelectAvatarWidget extends StatefulWidget {

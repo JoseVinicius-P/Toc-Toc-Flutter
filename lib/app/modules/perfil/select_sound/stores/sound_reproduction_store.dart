@@ -1,5 +1,5 @@
 import 'package:flutter_triple/flutter_triple.dart';
-import 'package:toctoc/app/modules/perfil/services/local_sounds_service.dart';
+import 'package:toctoc/app/modules/perfil/select_sound/local_sounds_service.dart';
 import 'package:just_audio/just_audio.dart';
 
 class SoundReproductionStore extends Store<int> {

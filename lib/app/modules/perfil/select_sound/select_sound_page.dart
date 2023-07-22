@@ -4,8 +4,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/perfil/perfil_controller.dart';
-import 'package:toctoc/app/modules/perfil/stores/select_sound_store.dart';
-import 'package:toctoc/app/modules/perfil/stores/sound_reproduction_store.dart';
+import 'package:toctoc/app/modules/perfil/select_sound/stores/select_sound_store.dart';
+import 'package:toctoc/app/modules/perfil/select_sound/stores/sound_reproduction_store.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 import 'package:toctoc/app/shared/widgets/button_blue_rounded_widget.dart';
 

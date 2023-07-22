@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_triple/flutter_triple.dart';
-import 'package:toctoc/app/modules/perfil/models/user_model.dart';
-import 'package:toctoc/app/modules/perfil/services/user_data_service.dart';
+import 'package:toctoc/app/modules/perfil/user_model.dart';
+import 'package:toctoc/app/modules/perfil/your_data/services/user_data_service.dart';
 import 'package:toctoc/app/modules/perfil/perfil_controller.dart';
-import 'package:toctoc/app/modules/perfil/stores/select_avatar_store.dart';
+import 'package:toctoc/app/modules/perfil/your_data/stores/select_avatar_store.dart';
 
 class YourDataStore extends Store<void> {
   final SelectAvatarStore selectAvatarStore;

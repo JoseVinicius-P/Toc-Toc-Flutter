@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:toctoc/app/modules/perfil/models/user_model.dart';
+import 'package:toctoc/app/modules/perfil/user_model.dart';
 
 class UserDataService {
   final storage = FirebaseStorage.instance;

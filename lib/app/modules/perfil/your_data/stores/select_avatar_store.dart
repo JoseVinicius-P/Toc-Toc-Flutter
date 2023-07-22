@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_triple/flutter_triple.dart';
-import 'package:toctoc/app/modules/perfil/services/image_picker_service.dart';
+import 'package:toctoc/app/modules/perfil/your_data/services/image_picker_service.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 

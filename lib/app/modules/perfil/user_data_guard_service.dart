@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:toctoc/app/modules/perfil/services/user_data_service.dart';
+import 'package:toctoc/app/modules/perfil/your_data/services/user_data_service.dart';
 
 class UserDataGuardService extends RouteGuard{
 
