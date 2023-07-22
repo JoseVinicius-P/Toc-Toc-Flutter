@@ -14,7 +14,7 @@ class YourDataStore extends Store<void> {
 
   void saveUserData(Function whenToComplete) async {
     String path = selectAvatarStore.state;
-    UserModel user = UserModel(name: controller.textEditingController.text);
+    UserModel user = UserModel.onlyName(name: controller.textEditingController.text);
     setLoading(true);
     if(path.isNotEmpty){
       userDataService.saveProfilePicture(path);
