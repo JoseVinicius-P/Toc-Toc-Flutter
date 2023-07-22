@@ -26,6 +26,7 @@ class YourDataStore extends Store<void> {
     if(user.name.isNotEmpty){
       if(await userDataService.saveUserData(user)){
         perfilStore.setName(user.name);
+        perfilStore.setProfilePictureUrlString(user.profilePictureUrl);
         whenToComplete();
         setLoading(false);
       }else{

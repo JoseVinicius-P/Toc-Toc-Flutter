@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:toctoc/app/modules/perfil/user_model.dart';
 import 'package:toctoc/app/modules/perfil/perfil_controller.dart';
@@ -39,6 +38,12 @@ class PerfilStore extends Store<UserModel> {
   void setlocation(double latitude, double longitude){
     UserModel user = UserModel.copy(state);
     user.location = GeoPoint(latitude, longitude);
+    update(user);
+  }
+
+  void setProfilePictureUrlString(profilePictureUrl){
+    UserModel user = UserModel.copy(state);
+    user.profilePictureUrl = profilePictureUrl;
     update(user);
   }
 
