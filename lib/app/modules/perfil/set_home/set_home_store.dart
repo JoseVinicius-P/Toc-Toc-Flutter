@@ -1,9 +1,9 @@
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:toctoc/app/modules/set_home/set_home_controller.dart';
-import 'package:toctoc/app/modules/set_home/services/gps_service.dart';
-import 'package:toctoc/app/modules/set_home/services/home_service.dart';
+import 'package:toctoc/app/modules/perfil/set_home/set_home_controller.dart';
+import 'package:toctoc/app/modules/perfil/set_home/services/gps_service.dart';
+import 'package:toctoc/app/modules/perfil/set_home/services/home_service.dart';
 
 class SetHomeStore extends Store<LatLng> {
   final SetHomeController controller;

@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:toctoc/app/modules/set_home/set_home_store.dart';
+import 'package:toctoc/app/modules/perfil/set_home/set_home_store.dart';
  
 void main() {
   late SetHomeStore store;

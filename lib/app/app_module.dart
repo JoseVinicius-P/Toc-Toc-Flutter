@@ -1,6 +1,5 @@
 import 'package:toctoc/app/modules/perfil/your_data/services/user_data_service.dart';
-import 'package:toctoc/app/modules/set_home/services/home_service.dart';
-import 'package:toctoc/app/modules/set_home/set_home_module.dart';
+import 'package:toctoc/app/modules/perfil/set_home/services/home_service.dart';
 import 'package:toctoc/app/shared/services/auth_service.dart';
 import 'package:toctoc/app/shared/services/auth_guard_service.dart';
 
@@ -25,7 +24,6 @@ class AppModule extends Module {
     ModuleRoute('/login', module: LoginModule()),
     ModuleRoute('/home', module: HomeModule()),
     ModuleRoute('/perfil', module: PerfilModule()),
-    ModuleRoute('/set_home', module: SetHomeModule()),
   ];
 
 }

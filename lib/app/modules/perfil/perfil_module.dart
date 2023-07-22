@@ -1,4 +1,7 @@
 import 'package:toctoc/app/modules/perfil/perfil_page.dart';
+import 'package:toctoc/app/modules/perfil/set_home/services/gps_service.dart';
+import 'package:toctoc/app/modules/perfil/set_home/services/set_home_guard_service.dart';
+import 'package:toctoc/app/modules/perfil/set_home/set_home_page.dart';
 import 'package:toctoc/app/modules/perfil/user_data_guard_service.dart';
 import 'package:toctoc/app/modules/perfil/select_sound/stores/sound_reproduction_store.dart';
 import 'package:toctoc/app/modules/perfil/select_sound/local_sounds_service.dart';
@@ -11,11 +14,17 @@ import 'package:toctoc/app/modules/perfil/select_sound/stores/select_sound_store
 import 'package:toctoc/app/modules/perfil/your_data/your_data_page.dart';
 import 'package:toctoc/app/modules/perfil/your_data/stores/your_data_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:toctoc/app/modules/perfil/set_home/set_home_controller.dart';
+import 'package:toctoc/app/modules/perfil/set_home/set_home_store.dart';
 import 'package:toctoc/app/shared/services/auth_guard_service.dart';
 
 class PerfilModule extends Module {
   @override
   final List<Bind> binds = [
+    Bind.lazySingleton((i) => SetHomeGuardService()),
+    Bind.lazySingleton((i) => GpsService()),
+    Bind.lazySingleton((i) => SetHomeStore(i(), i(), i())),
+    Bind.lazySingleton((i) => SetHomeController()),
     Bind.lazySingleton((i) => UserDataGuardService()),
     Bind.lazySingleton((i) => SoundReproductionStore(i())),
     Bind.lazySingleton((i) => LoacalSoundsService()),
@@ -32,6 +41,7 @@ class PerfilModule extends Module {
     ChildRoute('/', child: (_, args) => const PerfilPage()),
     ChildRoute('/your_data', child: (_, args) => YourDataPage(), guards: [AuthGuardService(), UserDataGuardService()]),
     ChildRoute('/select_sound', child: (_, args) => const SelectSoundPage(), guards: [AuthGuardService(), UserDataGuardService()]),
+    ChildRoute('/set_home', child: (_, args) => const SetHomePage(), guards: [AuthGuardService(), SetHomeGuardService()]),
   ];
 
 }
