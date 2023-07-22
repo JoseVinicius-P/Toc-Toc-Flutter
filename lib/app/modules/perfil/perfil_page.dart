@@ -56,8 +56,8 @@ class PerfilPageState extends State<PerfilPage> {
                                 height: 40.sw.roundToDouble(),
                                 child:  CircleAvatar(
                                   backgroundImage: const AssetImage('assets/images/perfil.png'),
-                                  foregroundImage: const NetworkImage(
-                                    "https://firebasestorage.googleapis.com/v0/b/toctoc-cfeaf.appspot.com/o/profile_pictures%2FLOcom3w8CXhimPWPuyJVFDE51S83.jpg?alt=media&token=f79a11e1-2bb2-4f9d-b0c9-f25d8603c26b",
+                                  foregroundImage: NetworkImage(
+                                    user.profilePictureUrl
                                   ),
                                   radius: 40.sw.roundToDouble(),
                                 ),

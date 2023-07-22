@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class UserModel{
   String name = "";
   String sound = "";
+  String profilePictureUrl = "";
   GeoPoint location = const GeoPoint(-10.2524869, -48.3256559);
 
   UserModel.empty();
@@ -11,6 +12,7 @@ class UserModel{
     name = oldUserModel.name;
     sound = oldUserModel.sound;
     location = oldUserModel.location;
+    profilePictureUrl = oldUserModel.profilePictureUrl;
   }
 
   UserModel.onlyName({required this.name});
