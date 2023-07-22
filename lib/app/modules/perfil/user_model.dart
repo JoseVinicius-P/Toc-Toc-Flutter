@@ -7,6 +7,12 @@ class UserModel{
 
   UserModel.empty();
 
+  UserModel.copy(UserModel oldUserModel) {
+    name = oldUserModel.name;
+    sound = oldUserModel.sound;
+    location = oldUserModel.location;
+  }
+
   UserModel.onlyName({required this.name});
 
   UserModel(this.sound, this.location, {required this.name});

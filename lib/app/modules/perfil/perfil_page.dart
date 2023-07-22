@@ -41,30 +41,30 @@ class PerfilPageState extends State<PerfilPage> {
               padding: const EdgeInsets.all(20),
               child: Column(
                 children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 40.sw.roundToDouble(),
-                        height: 40.sw.roundToDouble(),
-                        child:  CircleAvatar(
-                            backgroundImage: const AssetImage('assets/images/perfil.png'),
-                            foregroundImage: const NetworkImage(
-                              "https://firebasestorage.googleapis.com/v0/b/toctoc-cfeaf.appspot.com/o/profile_pictures%2FLOcom3w8CXhimPWPuyJVFDE51S83.jpg?alt=media&token=f79a11e1-2bb2-4f9d-b0c9-f25d8603c26b",
-                            ),
-                            radius: 40.sw.roundToDouble(),
-                          ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 30,),
                   TripleBuilder(
                     store: store,
                     builder: (context, triple){
                       UserModel user = triple.state as UserModel;
                       return Column(
                         children: [
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: 40.sw.roundToDouble(),
+                                height: 40.sw.roundToDouble(),
+                                child:  CircleAvatar(
+                                  backgroundImage: const AssetImage('assets/images/perfil.png'),
+                                  foregroundImage: const NetworkImage(
+                                    "https://firebasestorage.googleapis.com/v0/b/toctoc-cfeaf.appspot.com/o/profile_pictures%2FLOcom3w8CXhimPWPuyJVFDE51S83.jpg?alt=media&token=f79a11e1-2bb2-4f9d-b0c9-f25d8603c26b",
+                                  ),
+                                  radius: 40.sw.roundToDouble(),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 30,),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
