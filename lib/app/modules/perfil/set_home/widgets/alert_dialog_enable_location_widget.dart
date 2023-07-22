@@ -31,21 +31,20 @@ class AlertDialogEnableLocationWidget extends StatelessWidget {
         ],
       ),
       actions: <Widget>[
-        Expanded(
-          child: TextButton(
-            child: const Text(
-              'Continuar',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: MyColors.textColor,
-              ),
+        TextButton(
+          child: const Text(
+            'Continuar',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: MyColors.blue,
+              fontSize: 18
             ),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
           ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
         ),
-              ],
+      ],
     );
   }
 }
