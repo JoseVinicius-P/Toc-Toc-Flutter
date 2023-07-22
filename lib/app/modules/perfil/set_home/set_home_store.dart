@@ -12,11 +12,11 @@ class SetHomeStore extends Store<LatLng> {
 
   SetHomeStore(this.controller, this.gpsService, this.homeService) : super(const LatLng(-10.2524869, -48.3256559));
 
-  void saveLocation() async {
+  void saveLocation(Function whenToComplete) async {
     setLoading(true);
     gpsService.stopLocationUpdates();
     if(await homeService.saveLocation(state.latitude, state.longitude)){
-      controller.toHomeModule();
+      whenToComplete();
       setLoading(false);
     }else{
       setLoading(false);

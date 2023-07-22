@@ -22,6 +22,7 @@ class SetHomePage extends StatefulWidget {
 class SetHomePageState extends State<SetHomePage> {
   final store = Modular.get<SetHomeStore>();
   final controller = Modular.get<SetHomeController>();
+  final bool isForHome = Modular.to.path.contains('/home');
 
   @override
   void initState() {
@@ -72,7 +73,11 @@ class SetHomePageState extends State<SetHomePage> {
           centerTitle: true,
           leading: IconButton(
               onPressed: () {
-                SystemNavigator.pop();
+                if(isForHome){
+                  Navigator.of(context).pop();
+                }else{
+                  SystemNavigator.pop();
+                }
               },
               icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.black)
           ),
@@ -142,12 +147,6 @@ class SetHomePageState extends State<SetHomePage> {
                                 Radius.circular(15),
                               ),
                               child: _buildMap(),
-                              /*Image(
-                                height: 60.sh,
-                                width: double.infinity,
-                                image: const AssetImage('assets/images/map.jpg'),
-                                fit: BoxFit.cover,
-                              ),*/
                             ),
                           ),
                         ),
@@ -162,21 +161,24 @@ class SetHomePageState extends State<SetHomePage> {
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
-                              Expanded(
-                                child: Opacity(
-                                  opacity: triple.isLoading ? 0.5 : 1,
-                                  child: TextButton(
-                                    onPressed: () {},
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: AutoSizeText(
-                                        'Mais tarde',
-                                        style: theme.textTheme.titleSmall!.copyWith(color: MyColors.blue, fontSize: 20),
-                                        maxFontSize: 6.sw.roundToDouble(),
-                                        minFontSize: 3.sw.roundToDouble(),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        textAlign: TextAlign.left,
+                              Visibility(
+                                visible: isForHome ? false : true,
+                                child: Expanded(
+                                  child: Opacity(
+                                    opacity: triple.isLoading ? 0.5 : 1,
+                                    child: TextButton(
+                                      onPressed: () {},
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: AutoSizeText(
+                                          'Mais tarde',
+                                          style: theme.textTheme.titleSmall!.copyWith(color: MyColors.blue, fontSize: 20),
+                                          maxFontSize: 6.sw.roundToDouble(),
+                                          minFontSize: 3.sw.roundToDouble(),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          textAlign: TextAlign.left,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -185,7 +187,7 @@ class SetHomePageState extends State<SetHomePage> {
                               Expanded(
                                 child: ButtonBlueRoundedWidget(
                                     title: 'Salvar',
-                                    onPressed: triple.isLoading ? null : () => store.saveLocation()
+                                    onPressed: triple.isLoading ? null : () => store.saveLocation(() => isForHome ? Navigator.of(context).pop() : controller.toHomeModule())
                                 )
                               ),
                             ],
