@@ -5,7 +5,7 @@ import 'package:toctoc/app/modules/perfil/your_data/services/user_data_service.d
 
 class UserDataGuardService extends RouteGuard{
 
-  UserDataGuardService() : super(redirectTo: '/set_home/');
+  UserDataGuardService() : super(redirectTo: './set_home');
 
   @override
   FutureOr<bool> canActivate(String path, ParallelRoute route) async {

@@ -29,6 +29,12 @@ class SetHomePageState extends State<SetHomePage> {
     getLocation();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    store.gpsService.stopLocationUpdates();
+  }
+
   /*O fluxo é o seguinte:
   1 - Verifica se a Localização já foi permitida
   2 - Se sim consulta se não
