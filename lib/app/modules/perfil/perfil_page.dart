@@ -45,6 +45,7 @@ class PerfilPageState extends State<PerfilPage> {
                     store: store,
                     builder: (context, triple){
                       UserModel user = triple.state as UserModel;
+                      print("URL: ${user.profilePictureUrl}");
                       return Column(
                         children: [
                           Row(

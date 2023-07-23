@@ -21,6 +21,8 @@ class YourDataStore extends Store<void> {
     if(path.isNotEmpty){
       if(await userDataService.saveProfilePicture(path)){
         user.profilePictureUrl = await userDataService.getUrlProfilePicture();
+      }else{
+        user.profilePictureUrl = await userDataService.getUrlProfilePicture();
       }
     }
     if(user.name.isNotEmpty){

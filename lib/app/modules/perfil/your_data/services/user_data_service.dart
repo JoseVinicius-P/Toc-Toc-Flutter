@@ -10,13 +10,17 @@ class UserDataService {
   final db = FirebaseFirestore.instance;
 
   Future<bool> saveProfilePicture(String path) async {
-    final reference = storage.ref().child("profile_pictures/${FirebaseAuth.instance.currentUser!.uid}.jpg");
-    try {
-      File file = File(path);
-      await reference.putFile(file);
-      return true;
-    } on FirebaseException catch (e) {
-      print(e);
+    if(!path.contains('http')){
+      final reference = storage.ref().child("profile_pictures/${FirebaseAuth.instance.currentUser!.uid}.jpg");
+      try {
+        File file = File(path);
+        await reference.putFile(file);
+        return true;
+      } on FirebaseException catch (e) {
+        print(e);
+        return false;
+      }
+    }else{
       return false;
     }
   }
@@ -67,7 +71,11 @@ class UserDataService {
   }
 
   Future<String> getUrlProfilePicture() async {
-    return await storage.ref().child("profile_pictures/${FirebaseAuth.instance.currentUser!.uid}.jpg").getDownloadURL();
+    try{
+      return await storage.ref().child("profile_pictures/${FirebaseAuth.instance.currentUser!.uid}.jpg").getDownloadURL();
+    }catch(e){
+      return '';
+    }
   }
 
 
