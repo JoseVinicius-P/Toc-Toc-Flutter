@@ -14,7 +14,7 @@ class AddFriendStore extends Store<String> {
   void onQRViewCreated(QRViewController controller) {
     try{
       homeController.qrViewController = controller;
-      controller.scannedDataStream.listen((scanData) {
+      homeController.qrViewController!.scannedDataStream.listen((scanData) {
         if(scanData.code != null){
           update(scanData.code!);
           enableQrCodeScan(false);

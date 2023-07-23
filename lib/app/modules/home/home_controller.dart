@@ -9,7 +9,7 @@ class HomeController implements Disposable{
 
   //Usando para controlar o PageView da HomePage
   final pageViewController = PageController();
-  late final QRViewController? qrViewController;
+  QRViewController? qrViewController;
   Barcode? result;
 
   @override
