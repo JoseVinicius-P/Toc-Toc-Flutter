@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -33,6 +34,11 @@ class PerfilController implements Disposable{
 
   Future<List<String>> findSounds(BuildContext context) async {
     return await soundsService.findSounds(context);
+  }
+
+  void signOut() async {
+    await FirebaseAuth.instance.signOut().then((value) => Modular.to.navigate('/login/'));
+
   }
 
 }

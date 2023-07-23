@@ -270,26 +270,29 @@ class PerfilPageState extends State<PerfilPage> {
                     },
                   ),
                   const SizedBox(height: 10,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const Icon(Icons.exit_to_app, color: Colors.red, size: 20,),
-                      const SizedBox(width: 20,),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          AutoSizeText(
-                            'Sair do app',
-                            style: theme.textTheme.titleSmall!.copyWith(fontSize: 15, color: Colors.redAccent),
-                            maxFontSize: 6.sw.roundToDouble(),
-                            minFontSize: 3.sw.roundToDouble(),
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
-                      ),
-                    ],
+                  InkWell(
+                    onTap: () => controller.signOut(),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const Icon(Icons.exit_to_app, color: Colors.red, size: 20,),
+                        const SizedBox(width: 20,),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AutoSizeText(
+                              'Sair do app',
+                              style: theme.textTheme.titleSmall!.copyWith(fontSize: 15, color: Colors.redAccent),
+                              maxFontSize: 6.sw.roundToDouble(),
+                              minFontSize: 3.sw.roundToDouble(),
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
