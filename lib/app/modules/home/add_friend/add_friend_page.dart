@@ -2,9 +2,11 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_triple/flutter_triple.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:toctoc/app/modules/home/add_friend/add_friend_store.dart';
 import 'package:toctoc/app/modules/home/home_controller.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 
@@ -15,8 +17,8 @@ class AddFriendPage extends StatefulWidget {
   AddFriendPageState createState() => AddFriendPageState();
 }
 class AddFriendPageState extends State<AddFriendPage> {
-  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   final homeController = Modular.get<HomeController>();
+  final store = Modular.get<AddFriendStore>();
 
   @override
   void reassemble() {
@@ -87,25 +89,27 @@ class AddFriendPageState extends State<AddFriendPage> {
                               borderRadius: const BorderRadius.all(
                                 Radius.circular(15),
                               ),
-                              child: Builder(
-                                  builder: (context) {
-                                    if(false){
-                                      return QrImageView(
-                                        data: FirebaseAuth.instance.currentUser!.uid,
-                                        version: 6,
-                                        padding: const EdgeInsets.all(40.0),
-                                      );
-                                    }else{
-                                      return AspectRatio(
-                                        aspectRatio: 1/1,
-                                        child: QRView(
-                                            key: qrKey,
-                                            onQRViewCreated: _onQRViewCreated
-                                        ),
-                                      );
-                                    }
+                              child: TripleBuilder(
+                                store: store,
+                                builder: (context, triple) {
+                                  if(!triple.isLoading){
+                                    return QrImageView(
+                                      data: FirebaseAuth.instance.currentUser!.uid,
+                                      version: 6,
+                                      padding: const EdgeInsets.all(40.0),
+                                    );
+                                  }else{
+                                    final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+                                    return AspectRatio(
+                                      aspectRatio: 1/1,
+                                      child: QRView(
+                                        key: qrKey,
+                                        onQRViewCreated: store.onQRViewCreated,
+                                      ),
+                                    );
                                   }
-                                ),
+                                }
+                              ),
                             ),
                           ),
                         ),
@@ -113,25 +117,30 @@ class AddFriendPageState extends State<AddFriendPage> {
                     ),
                     Align(
                       alignment: Alignment.bottomCenter,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: MyColors.blue, // Altera a cor de fundo
-                              shape: const CircleBorder(),
-                            ),
-                            onPressed: (){},
-                            child: const Padding(
-                              padding: EdgeInsets.all(13.0),
-                              child: Icon(Icons.qr_code_scanner_rounded, color: Colors.white,),
-                            ),
-                          ),
-                          Text(
-                            "Escanear",
-                            style: theme.textTheme.labelSmall!.copyWith(fontWeight: FontWeight.bold),
-                          ),
-                        ],
+                      child: TripleBuilder(
+                        store: store,
+                        builder: (context, triple) {
+                          return Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: MyColors.blue, // Altera a cor de fundo
+                                  shape: const CircleBorder(),
+                                ),
+                                onPressed: () => triple.isLoading ? store.enableQrCodeScan(false) : store.enableQrCodeScan(true),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(13.0),
+                                  child: Icon(triple.isLoading ? Icons.close_rounded : Icons.qr_code_scanner_rounded, color: Colors.white,),
+                                ),
+                              ),
+                              Text(
+                                triple.isLoading ? "Fechar scan" : "Escanear",
+                                style: theme.textTheme.labelSmall!.copyWith(fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          );
+                        }
                       ),
                     ),
                   ],
@@ -142,12 +151,4 @@ class AddFriendPageState extends State<AddFriendPage> {
         )
     );
   }
-
-  void _onQRViewCreated(QRViewController controller) {
-    homeController.qrViewController = controller;
-    controller.scannedDataStream.listen((scanData) {
-      print("ESCANEOU: ${scanData.code}");
-    });
-  }
-
 }
