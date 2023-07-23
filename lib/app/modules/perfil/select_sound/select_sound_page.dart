@@ -27,6 +27,7 @@ class SelectSoundPageState extends State<SelectSoundPage> {
     // TODO: implement initState
     super.initState();
     futureSounds = controller.findSounds(context);
+    selectSoundStore.getSoundSelected();
   }
 
   @override

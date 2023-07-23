@@ -1,4 +1,5 @@
 import 'package:flutter_triple/flutter_triple.dart';
+import 'package:toctoc/app/modules/perfil/user_model.dart';
 import 'package:toctoc/app/modules/perfil/your_data/services/user_data_service.dart';
 import 'package:toctoc/app/modules/perfil/perfil_controller.dart';
 import 'package:toctoc/app/modules/perfil/perfil_store.dart';
@@ -24,6 +25,14 @@ class SelectSoundStore extends Store<String> {
     }else{
       setError("Selecione um som");
       setLoading(false);
+    }
+  }
+
+  void getSoundSelected() async {
+    UserModel user = UserModel.empty();
+    user.fromDocumentSnapshot(await service.getUserData());
+    if(user.sound.isNotEmpty){
+      selectSound(user.sound);
     }
   }
 
