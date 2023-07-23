@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:toctoc/app/modules/home/pages/friend_list_page.dart';
+import 'package:toctoc/app/modules/home/friend_list/friend_list_page.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 // Função auxiliar para envolver os widgets a serem testados.
