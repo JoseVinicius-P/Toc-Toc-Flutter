@@ -1,8 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:toctoc/app/modules/home/home_controller.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 
 class AddFriendPage extends StatefulWidget {
@@ -12,6 +15,15 @@ class AddFriendPage extends StatefulWidget {
   AddFriendPageState createState() => AddFriendPageState();
 }
 class AddFriendPageState extends State<AddFriendPage> {
+  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+  final homeController = Modular.get<HomeController>();
+
+  @override
+  void reassemble() {
+    super.reassemble();
+    homeController.qrViewController!.pauseCamera();
+  }
+
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -75,11 +87,25 @@ class AddFriendPageState extends State<AddFriendPage> {
                               borderRadius: const BorderRadius.all(
                                 Radius.circular(15),
                               ),
-                              child: QrImageView(
-                                data: FirebaseAuth.instance.currentUser!.uid,
-                                version: 6,
-                                padding: const EdgeInsets.all(40.0),
-                              )
+                              child: Builder(
+                                  builder: (context) {
+                                    if(false){
+                                      return QrImageView(
+                                        data: FirebaseAuth.instance.currentUser!.uid,
+                                        version: 6,
+                                        padding: const EdgeInsets.all(40.0),
+                                      );
+                                    }else{
+                                      return AspectRatio(
+                                        aspectRatio: 1/1,
+                                        child: QRView(
+                                            key: qrKey,
+                                            onQRViewCreated: _onQRViewCreated
+                                        ),
+                                      );
+                                    }
+                                  }
+                                ),
                             ),
                           ),
                         ),
@@ -116,4 +142,12 @@ class AddFriendPageState extends State<AddFriendPage> {
         )
     );
   }
+
+  void _onQRViewCreated(QRViewController controller) {
+    homeController.qrViewController = controller;
+    controller.scannedDataStream.listen((scanData) {
+      print("ESCANEOU: ${scanData.code}");
+    });
+  }
+
 }
