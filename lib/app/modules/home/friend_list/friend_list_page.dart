@@ -94,7 +94,7 @@ class FriendListPageState extends State<FriendListPage> {
                                   ),
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsets.all(5.0),
+                                  padding: const EdgeInsets.all(12.0),
                                   child: Row(
                                     children: [
                                       SizedBox(
