@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:toctoc/app/modules/home/home_controller.dart';
@@ -30,7 +31,10 @@ class AddFriendStore extends Store<String> {
 
   void addFriend() async {
     if(await friendService.addFriend(state)){
-      print("Adicionado");
+      homeController.pageViewController.animateToPage(0, // Índice da página para animar
+        duration: const Duration(milliseconds: 800), // Duração da animação
+        curve: Curves.easeInOutCubicEmphasized, // Curva de animação
+      );
     }
   }
 
