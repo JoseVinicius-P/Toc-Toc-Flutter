@@ -1,3 +1,5 @@
+import 'package:toctoc/app/modules/home/friend_list/friend_list_service.dart';
+import 'package:toctoc/app/modules/home/friend_list/friend_list_store.dart';
 import 'package:toctoc/app/modules/home/add_friend/friend_service.dart';
 import 'package:toctoc/app/modules/home/add_friend/add_friend_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -9,7 +11,9 @@ import 'home_page.dart';
  
 class HomeModule extends Module {
   @override
-  final List<Bind> binds = [Bind.lazySingleton((i) => FriendService()),
+  final List<Bind> binds = [Bind.lazySingleton((i) => FriendListService()),
+    Bind.lazySingleton((i) => FriendListStore(i())),
+    Bind.lazySingleton((i) => FriendService()),
     Bind.lazySingleton((i) => AddFriendStore(i(), i())),
     Bind.lazySingleton((i) => HomeStore()),
     Bind.lazySingleton((i) => HomeController()),

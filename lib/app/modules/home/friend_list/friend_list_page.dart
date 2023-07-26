@@ -1,6 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_triple/flutter_triple.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:toctoc/app/modules/home/friend_list/friend_item_widget.dart';
+import 'package:toctoc/app/modules/home/friend_list/friend_list_store.dart';
+import 'package:toctoc/app/modules/home/friend_model.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 
 class FriendListPage extends StatefulWidget {
@@ -10,6 +15,14 @@ class FriendListPage extends StatefulWidget {
   FriendListPageState createState() => FriendListPageState();
 }
 class FriendListPageState extends State<FriendListPage> {
+  final store = Modular.get<FriendListStore>();
+
+  @override
+  void initState() {
+    super.initState();
+    store.loadFriends();
+  }
+
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -59,14 +72,14 @@ class FriendListPageState extends State<FriendListPage> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  const SizedBox(height: 10,),
                   Expanded(
                     child: SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          SizedBox(height: 15,),
+                          const SizedBox(height: 15,),
                           AutoSizeText(
                             'Amigos',
                             style: theme.textTheme.titleSmall,
@@ -76,63 +89,25 @@ class FriendListPageState extends State<FriendListPage> {
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.left,
                           ),
-                          SizedBox(height: 15,),
-                          ListView.separated(
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: 10,
-                            shrinkWrap: true,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(15),
-                                  ),
-                                  border: Border.all(
-                                    width: 1,
-                                    style: BorderStyle.solid,
-                                    color: MyColors.lightGray,
-                                  ),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(12.0),
-                                  child: Row(
-                                    children: [
-                                      SizedBox(
-                                        width: 45,
-                                        height: 45,
-                                        child: CircleAvatar(
-                                          backgroundImage: const AssetImage('assets/images/perfil.png'),
-                                          radius: 40.sw.roundToDouble(),
-                                        ),
-                                      ),
-                                      SizedBox(width: 10,),
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "José Vinícius",
-                                            style: theme.textTheme.labelSmall!.copyWith(fontWeight: FontWeight.bold),
-                                          ),
-                                          SizedBox(height: 5,),
-                                          Text(
-                                            "Última visita a 2 dias",
-                                            style: theme.textTheme.labelMedium!.copyWith(fontSize: 12, color: MyColors.textColor.withOpacity(0.5)),
-                                          ),
-                                        ],
-                                      ),
-                                      const Spacer(),
-                                      Icon(Icons.notifications_active_outlined, color: MyColors.blue.withOpacity(0.5), size: 27,),
-                                      SizedBox(width: 10,),
-                                    ],
-                                  ),
-                                ),
+                          const SizedBox(height: 15,),
+                          TripleBuilder(
+                            store: store,
+                            builder: (context, triple) {
+                              List<FriendModel> friends = triple.state as List<FriendModel>;
+                              return ListView.separated(
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: friends.length,
+                                shrinkWrap: true,
+                                itemBuilder: (context, index) {
+                                  return FriendItem(friend: friends[index],);
+                                },
+                                separatorBuilder: (BuildContext context, int index) {
+                                  return const SizedBox(height: 15);
+                                },
                               );
-                            },
-                            separatorBuilder: (BuildContext context, int index) {
-                              return const SizedBox(height: 15);
-                            },
+                            }
                           ),
-                          SizedBox(height: 15,),
+                          const SizedBox(height: 15,),
                         ],
                       ),
                     ),
