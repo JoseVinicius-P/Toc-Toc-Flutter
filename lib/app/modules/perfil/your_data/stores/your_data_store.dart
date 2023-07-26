@@ -24,7 +24,10 @@ class YourDataStore extends Store<void> {
       }else{
         user.profilePictureUrl = await userDataService.getUrlProfilePicture();
       }
+    }else{
+      user.profilePictureUrl = '';
     }
+
     if(user.name.isNotEmpty){
       if(await userDataService.saveUserData(user)){
         perfilStore.setName(user.name);
@@ -44,7 +47,7 @@ class YourDataStore extends Store<void> {
     setLoading(true);
     DocumentSnapshot snapshot = await userDataService.getUserData();
     if(snapshot.exists){
-      selectAvatarStore.update(await userDataService.getUrlProfilePicture());
+      selectAvatarStore.update(snapshot.get('profilePictureUrl'));
       controller.textEditingController.text = snapshot.get('name');
       setLoading(false);
     }else{
