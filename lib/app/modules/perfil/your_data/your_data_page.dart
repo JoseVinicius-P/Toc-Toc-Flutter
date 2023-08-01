@@ -89,9 +89,10 @@ class YourDataPageState extends State<YourDataPage> {
                       TripleBuilder(
                           store: store,
                           builder: (context, triple) => TextFieldWidget(
+                            error: triple.error,
                             hint: 'Nome de usuário',
                             enable: !triple.isLoading,
-                            icon: const Icon(Icons.person_outline, color: MyColors.textColor),
+                            icon: Icons.person_outline,
                             keyboardType: TextInputType.text,
                             maxLength: 30,
                             controller: controller.textEditingController,

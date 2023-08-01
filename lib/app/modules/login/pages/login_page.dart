@@ -80,7 +80,7 @@ class LoginPageState extends State<LoginPage> {
                           hint: 'Telefone',
                           maskFormatter: controller.phoneMaskFormatter,
                           enable: !triple.isLoading,
-                          icon: const Icon(Icons.phone_rounded, color: MyColors.textColor,),
+                          icon: Icons.phone_rounded,
                           keyboardType: TextInputType.number,
                         )
                       ),

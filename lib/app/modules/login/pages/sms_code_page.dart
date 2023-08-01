@@ -71,7 +71,7 @@ class SmsCodePageState extends State<SmsCodePage> {
                           builder: (context, triple) => TextFieldWidget(
                             enable: !triple.isLoading,
                             hint: 'Código sms',
-                            icon: const Icon(Icons.sms_outlined, color: MyColors.textColor,),
+                            icon: Icons.phone_rounded,
                             keyboardType: TextInputType.number,
                             maskFormatter: controller.smsCodeMaskFormatter,
                           ),

@@ -14,31 +14,35 @@ class YourDataStore extends Store<void> {
 
   YourDataStore(this.userDataService, this.controller, this.selectAvatarStore, this.perfilStore) : super(null);
 
-  void saveUserData(Function whenToComplete) async {
-    String path = selectAvatarStore.state;
-    UserModel user = UserModel.onlyName(name: controller.textEditingController.text);
-    setLoading(true);
-    if(path.isNotEmpty){
-      if(await userDataService.saveProfilePicture(path)){
-        user.profilePictureUrl = await userDataService.getUrlProfilePicture();
-      }else{
-        user.profilePictureUrl = await userDataService.getUrlProfilePicture();
-      }
-    }else{
-      user.profilePictureUrl = '';
-    }
+  bool isFilledName(){
+    return controller.textEditingController.text.isNotEmpty;
+  }
 
-    if(user.name.isNotEmpty){
+  void saveUserData(Function whenToComplete) async {
+    setError(null);
+    if(isFilledName()){
+      String path = selectAvatarStore.state;
+      UserModel user = UserModel.onlyName(name: controller.textEditingController.text);
+      setLoading(true);
+      if(path.isNotEmpty){
+        if(await userDataService.saveProfilePicture(path)){
+          user.profilePictureUrl = await userDataService.getUrlProfilePicture();
+        }else{
+          user.profilePictureUrl = await userDataService.getUrlProfilePicture();
+        }
+      }else{
+        user.profilePictureUrl = '';
+      }
+
       if(await userDataService.saveUserData(user)){
         perfilStore.setName(user.name);
         perfilStore.setProfilePictureUrlString(user.profilePictureUrl);
         whenToComplete();
-        setLoading(false);
       }else{
         setError("Não foi possível salvar os dados, tente novamente!");
       }
     }else{
-      setError("Digite um nome de usuário");
+      setError("Digite o seu nome");
     }
     setLoading(false);
   }
