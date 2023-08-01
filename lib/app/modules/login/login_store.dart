@@ -8,6 +8,7 @@ import 'package:toctoc/app/modules/login/login_controller.dart';
 class LoginStore extends Store<String> {
   static const String GOOGLE_METHOD = 'GOOGLE_METHOD';
   static const String PHONE_NUMBER_METHOD = 'PHONENUMBER_METHOD';
+
   final AuthService authService;
   final LoginController controller;
 
@@ -33,7 +34,7 @@ class LoginStore extends Store<String> {
         }
       );
     }catch(e){
-      print("ERRO: $e");
+      setLoading(false);
     }
   }
 
