@@ -82,10 +82,7 @@ class YourDataPageState extends State<YourDataPage> {
                       Center(
                         child: TripleBuilder(
                           store: store,
-                          builder: (context, triple) => Opacity(
-                              opacity: triple.isLoading ? 0.5 : 1,
-                              child: SelectAvatarWidget(enable: !triple.isLoading)
-                          ),
+                          builder: (context, triple) => SelectAvatarWidget(enable: !triple.isLoading),
                         ),
                       ),
                       const SizedBox(height: 30,),

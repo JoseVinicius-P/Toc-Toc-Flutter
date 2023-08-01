@@ -11,6 +11,7 @@ class SelectAvatarStore extends Store<String> {
   SelectAvatarStore(this.imagePickerService) : super("");
 
   void pickImage() async{
+    setLoading(true);
     String path = await imagePickerService.pickImage();
     CroppedFile? croppedFile = await ImageCropper().cropImage(
       sourcePath: path,
@@ -37,6 +38,7 @@ class SelectAvatarStore extends Store<String> {
     );
 
     update(croppedFile?.path ?? "");
+    setLoading(false);
   }
 
 }

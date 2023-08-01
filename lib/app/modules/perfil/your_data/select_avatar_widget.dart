@@ -19,43 +19,58 @@ class SelectAvatarWidget extends StatefulWidget {
 
 class _SelectAvatarWidgetState extends State<SelectAvatarWidget> {
   final store = Modular.get<SelectAvatarStore>();
+  bool enable = true;
+
+  @override
+  void initState() {
+    super.initState();
+    enable = widget.enable;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Stack(
-          children: [
-            SizedBox(
-              width: 40.sw.roundToDouble(),
-              height: 40.sw.roundToDouble(),
-              child: TripleBuilder(
-                store: store,
-                builder: (context, triple) => CircleAvatar(
-                  backgroundImage: const AssetImage('assets/images/perfil.png'),
-                  foregroundImage: triple.state.toString().startsWith('http') ? CachedNetworkImageProvider(triple.state.toString()) as ImageProvider : FileImage(File(triple.state.toString())),
-                  radius: 40.sw.roundToDouble(),
-                ),
+    return TripleBuilder(
+      store: store,
+      builder: (context, triple) {
+        enable = !triple.isLoading;
+        return Opacity(
+          opacity: enable ? 1 : 0.5,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Stack(
+                children: [
+                  SizedBox(
+                    width: 40.sw.roundToDouble(),
+                    height: 40.sw.roundToDouble(),
+                    child: CircleAvatar(
+                      backgroundImage: const AssetImage('assets/images/perfil.png'),
+                      foregroundImage: triple.state.toString().startsWith('http') ? CachedNetworkImageProvider(triple.state.toString()) as ImageProvider : FileImage(File(triple.state.toString())),
+                      radius: 40.sw.roundToDouble(),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 5,
+                    right: -15,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: MyColors.blue, // Altera a cor de fundo
+                        shape: const CircleBorder(),
+                        disabledBackgroundColor: MyColors.blue,
+                      ),
+                      onPressed: enable ? () => store.pickImage() : null,
+                      child: const Padding(
+                        padding: EdgeInsets.all(13.0),
+                        child: Icon(Icons.camera_alt_outlined, color: Colors.white70,),
+                      ),
+                    ),
+                  )
+                ],
               ),
-            ),
-            Positioned(
-              bottom: 5,
-              right: -15,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: MyColors.blue, // Altera a cor de fundo
-                  shape: const CircleBorder(),
-                ),
-                onPressed: () => store.pickImage(),
-                child: const Padding(
-                  padding: EdgeInsets.all(13.0),
-                  child: Icon(Icons.camera_alt_outlined, color: Colors.white70,),
-                ),
-              ),
-            )
-          ],
-        ),
-      ],
+            ],
+          ),
+        );
+      }
     );
   }
 }
