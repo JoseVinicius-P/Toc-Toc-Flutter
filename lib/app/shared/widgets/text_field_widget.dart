@@ -88,13 +88,10 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           ),
         ),
         const SizedBox(height: 5,),
-        Visibility(
-          visible: widget.error != null && widget.error != "",
-          child: Text(
-            "     *${widget.error}",
-            style: const TextStyle(
-              color: MyColors.errorRed
-            ),
+        Text(
+        widget.error != null && widget.error != "" ? "     *${widget.error}" : "",
+          style: const TextStyle(
+            color: MyColors.errorRed
           ),
         )
       ],
