@@ -26,7 +26,7 @@ class AuthService {
     }
   }
 
-  Future<void> verifyPhoneNumber(String phoneNumber, Function(String) codeSent) async {
+  Future<void> verifyPhoneNumber(String phoneNumber, Function(String) codeSent, Function verificationFailed) async {
     FirebaseAuth auth = FirebaseAuth.instance;
 
     await auth.verifyPhoneNumber(
@@ -34,9 +34,10 @@ class AuthService {
       verificationCompleted: (PhoneAuthCredential credential) async {
         await auth.signInWithCredential(credential);
       },
-      verificationFailed: (FirebaseAuthException error) {  },
+      verificationFailed: (FirebaseAuthException error) {
+        verificationFailed();
+      },
       codeSent: (String verificationId, int? forceResendingToken) {
-        print('Verification 2: $verificationId');
         codeSent(verificationId);
       },
       codeAutoRetrievalTimeout: (String verificationId) {  },

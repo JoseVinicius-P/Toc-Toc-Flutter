@@ -77,6 +77,7 @@ class LoginPageState extends State<LoginPage> {
                       TripleBuilder(
                         store: store,
                         builder: (context, triple) => TextFieldWidget(
+                          error: triple.error,
                           hint: 'Telefone',
                           maskFormatter: controller.phoneMaskFormatter,
                           enable: !triple.isLoading,

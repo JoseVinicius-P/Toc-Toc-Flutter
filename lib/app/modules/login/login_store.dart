@@ -1,5 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
+import 'dart:async';
+
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:toctoc/app/modules/login/auth_service.dart';
 import 'package:toctoc/app/modules/login/login_controller.dart';
@@ -11,8 +13,22 @@ class LoginStore extends Store<String> {
 
   final AuthService authService;
   final LoginController controller;
+  Timer? timer;
 
   LoginStore(this.authService, this.controller) : super(GOOGLE_METHOD);
+
+  @override
+  void setError(newError, {bool force = false}) {
+    super.setError(newError);
+    if(newError != null){
+      if(timer != null) {
+        timer!.cancel();
+      }
+      timer = Timer(const Duration(seconds: 3), () {
+        setError("");
+      });
+    }
+  }
 
   void signInWithGoogle() async {
     update(GOOGLE_METHOD);
@@ -24,16 +40,34 @@ class LoginStore extends Store<String> {
     }
   }
 
+
   void verifyPhoneNumber(String phoneNumber) async {
-    update(PHONE_NUMBER_METHOD);
-    setLoading(true);
-    try{
-      await authService.verifyPhoneNumber(phoneNumber, (String verificationId){
-          controller.toSmsCodePage(verificationId);
+    if(phoneNumber.isNotEmpty){
+      if(phoneNumber.length == 11){
+        update(PHONE_NUMBER_METHOD);
+        setLoading(true);
+        try{
+          await authService.verifyPhoneNumber(
+              phoneNumber,
+                  (String verificationId){
+                controller.toSmsCodePage(verificationId);
+                setLoading(false);
+              },
+                  () {
+                setError("Talvez este número não esteja correto");
+                setLoading(false);
+              }
+          );
+        }catch(e){
+          setError("Talvez este número não esteja correto");
           setLoading(false);
         }
-      );
-    }catch(e){
+      }else{
+        setError("Talvez este número não esteja correto");
+        setLoading(false);
+      }
+    }else{
+      setError("Digite o número de telefone");
       setLoading(false);
     }
   }
