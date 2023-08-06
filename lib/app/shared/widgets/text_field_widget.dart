@@ -46,7 +46,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
             border: Border.all(
               width: 1,
               style: BorderStyle.solid,
-              color: widget.error == null ? Colors.grey : MyColors.errorRed,
+              color: widget.error == null || widget.error == "" ? Colors.grey : MyColors.errorRed,
             ),
           ),
           child: TextFormField(
@@ -81,15 +81,15 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
               ),
               //Definindo hint usando varivel da classe personalizada MyStrings
               hintText: widget.hint,
-              hintStyle: theme.textTheme.labelMedium!.copyWith(color: widget.error == null ? MyColors.textColor : MyColors.errorRed),
-              prefixIcon: Icon(widget.icon, color: widget.error == null ? MyColors.textColor : MyColors.errorRed),
+              hintStyle: theme.textTheme.labelMedium!.copyWith(color: widget.error == null || widget.error == "" ? MyColors.textColor : MyColors.errorRed),
+              prefixIcon: Icon(widget.icon, color: widget.error == null || widget.error == "" ? MyColors.textColor : MyColors.errorRed),
               filled: false,
             ),
           ),
         ),
         const SizedBox(height: 5,),
         Visibility(
-          visible: widget.error != null,
+          visible: widget.error != null && widget.error != "",
           child: Text(
             "     *${widget.error}",
             style: const TextStyle(

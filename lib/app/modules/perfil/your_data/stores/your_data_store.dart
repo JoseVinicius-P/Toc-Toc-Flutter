@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:toctoc/app/modules/perfil/user_model.dart';
@@ -11,15 +13,29 @@ class YourDataStore extends Store<void> {
   final UserDataService userDataService;
   final PerfilController controller;
   final PerfilStore perfilStore;
+  Timer? timer;
 
   YourDataStore(this.userDataService, this.controller, this.selectAvatarStore, this.perfilStore) : super(null);
+
+  @override
+  void setError(newError, {bool force = false}) {
+    super.setError(newError);
+    if(newError != null){
+      if(timer != null) {
+        timer!.cancel();
+      }
+      timer = Timer(const Duration(seconds: 3), () {
+        setError("");
+      });
+    }
+  }
 
   bool isFilledName(){
     return controller.textEditingController.text.isNotEmpty;
   }
 
   void saveUserData(Function whenToComplete) async {
-    setError(null);
+    setError("");
     if(isFilledName()){
       String path = selectAvatarStore.state;
       UserModel user = UserModel.onlyName(name: controller.textEditingController.text);

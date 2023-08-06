@@ -88,15 +88,17 @@ class YourDataPageState extends State<YourDataPage> {
                       const SizedBox(height: 30,),
                       TripleBuilder(
                           store: store,
-                          builder: (context, triple) => TextFieldWidget(
-                            error: triple.error,
-                            hint: 'Nome de usuário',
-                            enable: !triple.isLoading,
-                            icon: Icons.person_outline,
-                            keyboardType: TextInputType.text,
-                            maxLength: 30,
-                            controller: controller.textEditingController,
-                          ),
+                          builder: (context, triple) {
+                            return TextFieldWidget(
+                              error: triple.error,
+                              hint: 'Nome de usuário',
+                              enable: !triple.isLoading,
+                              icon: Icons.person_outline,
+                              keyboardType: TextInputType.text,
+                              maxLength: 30,
+                              controller: controller.textEditingController,
+                            );
+                          },
                       ),
 
                     ],
