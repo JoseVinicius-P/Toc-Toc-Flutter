@@ -108,7 +108,7 @@ class YourDataPageState extends State<YourDataPage> {
                     child: TripleBuilder(
                       store: store,//the store to be observed
                       builder: (context, triple) => ButtonBlueRoundedWidget(
-                        title: 'Salvar',
+                        title: triple.isLoading ? 'Salvando' : 'Salvar',
                         onPressed: triple.isLoading ? null : () => store.saveUserData(() => isForHome ? Navigator.of(context).pop() : controller.toSelectSoundPage())
                         ),
                       ),//called when any segment changes
