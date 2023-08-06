@@ -59,7 +59,7 @@ class SelectSoundPageState extends State<SelectSoundPage> {
               color: Colors.white,
             ),
             Padding(
-              padding: EdgeInsets.all(30.0),
+              padding: const EdgeInsets.all(30.0),
               child: SafeArea(
                 child: Stack(
                   children: [
@@ -80,6 +80,23 @@ class SelectSoundPageState extends State<SelectSoundPage> {
                               textAlign: TextAlign.center,
                             ),
                           ),
+                          const SizedBox(height: 10,),
+                          Center(
+                            child: TripleBuilder(
+                              store: selectSoundStore,
+                              builder: (context, triple) {
+                                return AutoSizeText(
+                                  triple.error != null && triple.error !=  "" ? "*${triple.error}" : "",
+                                  style: theme.textTheme.titleSmall!.copyWith(fontSize: 13, color: Colors.red),
+                                  maxFontSize: 6.sw.roundToDouble(),
+                                  minFontSize: 3.sw.roundToDouble(),
+                                  maxLines: 3,
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.center,
+                                );
+                              }
+                            ),
+                          ),
                           const SizedBox(height: 35,),
                           FutureBuilder<List<String>>(
                             future: futureSounds,
@@ -93,7 +110,7 @@ class SelectSoundPageState extends State<SelectSoundPage> {
                                   store: selectSoundStore,
                                   builder: (context, selectSoundTriple) {
                                     return InkWell(
-                                      onTap: () => selectSoundStore.selectSound(snapshot.data![index].replaceAll('assets/sounds/', '')),
+                                      onTap: selectSoundTriple.isLoading ? null : () => selectSoundStore.selectSound(snapshot.data![index].replaceAll('assets/sounds/', '')),
                                       child: Container(
                                         decoration: BoxDecoration(
                                           borderRadius: const BorderRadius.all(
@@ -151,17 +168,22 @@ class SelectSoundPageState extends State<SelectSoundPage> {
                                 );
                             },
                           ),
-                          SizedBox(height: 60,)
+                          const SizedBox(height: 60,)
                         ],
                       ),
                     ),
                     Align(
                       alignment: Alignment.bottomRight,
-                      child: ButtonBlueRoundedWidget(
-                        title: 'Salvar',
-                        onPressed: () => selectSoundStore.saveSound(
-                                ()=> isForHome ? Navigator.of(context).pop() : controller.toSetHomeModule()
-                        ),
+                      child: TripleBuilder(
+                        store: selectSoundStore,
+                        builder: (context, triple) {
+                          return ButtonBlueRoundedWidget(
+                            title: triple.isLoading ? 'Salvando' : 'Salvar',
+                            onPressed: triple.isLoading ? null : () => selectSoundStore.saveSound(
+                                    ()=> isForHome ? Navigator.of(context).pop() : controller.toSetHomeModule()
+                            ),
+                          );
+                        }
                       ),
                     ),
                   ],
