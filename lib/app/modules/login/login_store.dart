@@ -73,15 +73,20 @@ class LoginStore extends Store<String> {
   }
 
   void signInWithPhoneNumber(String smsCode, String verificationId) async {
-    update(PHONE_NUMBER_METHOD);
-    setLoading(true);
-    if(await authService.signInWithPhoneNumber(smsCode, verificationId)){
-      controller.toPerfilModule();
-      setLoading(false);
+    if(smsCode.isNotEmpty && smsCode.length == 6){
+      update(PHONE_NUMBER_METHOD);
+      setLoading(true);
+      if(await authService.signInWithPhoneNumber(smsCode, verificationId)){
+        controller.toPerfilModule();
+        setLoading(false);
+      }else{
+        setError("Código inválido!");
+        setLoading(false);
+      }
     }else{
+      setError("Código inválido!");
       setLoading(false);
     }
-
   }
 
 

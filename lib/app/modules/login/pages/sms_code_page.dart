@@ -69,6 +69,7 @@ class SmsCodePageState extends State<SmsCodePage> {
                         TripleBuilder(
                           store: store,
                           builder: (context, triple) => TextFieldWidget(
+                            error: triple.error,
                             enable: !triple.isLoading,
                             hint: 'Código sms',
                             icon: Icons.phone_rounded,
