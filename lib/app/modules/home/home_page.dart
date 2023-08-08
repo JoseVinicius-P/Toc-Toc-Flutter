@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     Modular.to.navigate('./perfil');
-    //controller.addPageListener();
+    controller.saveToken();
   }
 
   @override
@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
       body: PageView(
         //Controller
         controller: controller.pageViewController,
-        children: [
+        children: const [
           FriendListPage(),
           AddFriendPage(),
           RouterOutlet(),
