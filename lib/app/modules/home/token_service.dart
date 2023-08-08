@@ -37,8 +37,7 @@ class TokenService {
     if(!await tokenExists(token)){
       await db.collection("Users")
         .doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection("Tokens")
-        .add({"token" : token})
+        .set({"token" : token},  SetOptions(merge: true))
         .then((value){
           prefs.setString("token", token);
         });
