@@ -13,7 +13,7 @@ import 'home_page.dart';
 class HomeModule extends Module {
   @override
   final List<Bind> binds = [
-    Bind.lazySingleton((i) => SelectFriendStore()),
+    Bind.lazySingleton((i) => SelectFriendStore(i())),
     Bind.lazySingleton((i) => TokenService()),
     Bind.lazySingleton((i) => FriendListStore(i())),
     Bind.lazySingleton((i) => FriendService()),

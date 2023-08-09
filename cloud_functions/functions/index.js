@@ -3,8 +3,9 @@ const admin = require("firebase-admin");
 admin.initializeApp();
 
 exports.sendNotificationOnCallCreation = functions.firestore
-    .document("Users/{userId}/Chamadas/{chamadaId}")
+    .document("Users/{userId}/Calls/{callId}")
     .onCreate(async (snapshot, context) => {
+      const callData = snapshot.data();
       const userId = context.params.userId;
 
       const userDocRef = admin.firestore().doc("Users/"+userId);
@@ -14,8 +15,8 @@ exports.sendNotificationOnCallCreation = functions.firestore
 
       const message = {
         notification: {
-          title: "Nova Chamada",
-          body: "Uma nova chamada foi criada.",
+          title: "Toc Toc!",
+          body: callData.name + " está te visitando",
         },
         token: userToken,
       };

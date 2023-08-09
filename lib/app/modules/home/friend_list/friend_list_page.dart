@@ -5,6 +5,7 @@ import 'package:flutter_triple/flutter_triple.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/home/friend_list/friend_item_widget.dart';
 import 'package:toctoc/app/modules/home/friend_list/stores/friend_list_store.dart';
+import 'package:toctoc/app/modules/home/friend_list/stores/select_friend_store.dart';
 import 'package:toctoc/app/modules/home/friend_model.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 
@@ -15,12 +16,13 @@ class FriendListPage extends StatefulWidget {
   FriendListPageState createState() => FriendListPageState();
 }
 class FriendListPageState extends State<FriendListPage> {
-  final store = Modular.get<FriendListStore>();
+  final friendListStore = Modular.get<FriendListStore>();
+  final selectFriendStore = Modular.get<SelectFriendStore>();
 
   @override
   void initState() {
     super.initState();
-    store.loadFriends();
+    friendListStore.loadFriends();
   }
 
   @override
@@ -91,7 +93,7 @@ class FriendListPageState extends State<FriendListPage> {
                           ),
                           const SizedBox(height: 15,),
                           TripleBuilder(
-                            store: store,
+                            store: friendListStore,
                             builder: (context, triple) {
                               List<FriendModel> friends = triple.state as List<FriendModel>;
                               return ListView.separated(
@@ -99,7 +101,10 @@ class FriendListPageState extends State<FriendListPage> {
                                 itemCount: friends.length,
                                 shrinkWrap: true,
                                 itemBuilder: (context, index) {
-                                  return FriendItem(friend: friends[index],);
+                                  return InkWell(
+                                    onTap: () => selectFriendStore.callFriend(friends[index]),
+                                    child: FriendItem(friend: friends[index],)
+                                  );
                                 },
                                 separatorBuilder: (BuildContext context, int index) {
                                   return const SizedBox(height: 15);
