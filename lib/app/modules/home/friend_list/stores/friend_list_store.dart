@@ -1,9 +1,9 @@
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:toctoc/app/modules/home/friend_model.dart';
-import 'package:toctoc/app/modules/home/friend_list/friend_list_service.dart';
+import 'package:toctoc/app/modules/home/services/friend_service.dart';
 
 class FriendListStore extends Store<List<FriendModel>> {
-  final FriendListService service;
+  final FriendService service;
 
   FriendListStore(this.service) : super([]);
 

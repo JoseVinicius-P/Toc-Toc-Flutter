@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:toctoc/app/modules/home/token_service.dart';
+import 'package:toctoc/app/modules/home/services/token_service.dart';
 
 //Classe responsavel por controladores e regras de negocio do modulo home
 //Implementa o Disposable para o Flutter modular entender que pode

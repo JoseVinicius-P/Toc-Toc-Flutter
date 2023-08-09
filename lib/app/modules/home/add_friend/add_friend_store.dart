@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:toctoc/app/modules/home/home_controller.dart';
-import 'package:toctoc/app/modules/home/add_friend/friend_service.dart';
+import 'package:toctoc/app/modules/home/services/friend_service.dart';
 
 class AddFriendStore extends Store<String> {
   final HomeController homeController;
