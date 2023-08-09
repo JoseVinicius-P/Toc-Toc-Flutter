@@ -12,5 +12,4 @@ class FriendListStore extends Store<List<FriendModel>> {
     update(await service.getFriends());
     setLoading(false);
   }
-
 }

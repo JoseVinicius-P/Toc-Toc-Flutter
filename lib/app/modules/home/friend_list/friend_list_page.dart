@@ -4,7 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/home/friend_list/friend_item_widget.dart';
-import 'package:toctoc/app/modules/home/friend_list/friend_list_store.dart';
+import 'package:toctoc/app/modules/home/friend_list/stores/friend_list_store.dart';
 import 'package:toctoc/app/modules/home/friend_model.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 
