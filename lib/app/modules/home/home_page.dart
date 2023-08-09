@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    Modular.to.navigate('./perfil');
+    Modular.to.navigate('./perfil/');
     controller.saveToken();
   }
 
