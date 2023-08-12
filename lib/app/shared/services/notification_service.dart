@@ -1,44 +1,55 @@
+import 'dart:async';
+import 'dart:typed_data';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:timezone/data/latest_all.dart' as timezone;
 import 'package:timezone/timezone.dart' as timezone;
 
 class NotificationService{
   static final _notification = FlutterLocalNotificationsPlugin();
 
-  static void init() {
+  static void init(){
+    initLocalNotifications();
+    initMessagingListeners();
+  }
+
+  static void initLocalNotifications() {
     _notification.initialize(
       const InitializationSettings(
         android: AndroidInitializationSettings('@mipmap/ic_launcher'),
       ),
-      onDidReceiveBackgroundNotificationResponse: notificationTapBackground,
-      onDidReceiveNotificationResponse: notificationTapBackground
     );
   }
 
-  @pragma('vm:entry-point')
-  static void notificationTapBackground(NotificationResponse notificationResponse) {
-    // ignore: avoid_print
-    print('notification(${notificationResponse.id}) action tapped: '
-        '${notificationResponse.actionId} with'
-        ' payload: ${notificationResponse.payload}');
-    if (notificationResponse.input?.isNotEmpty ?? false) {
-      // ignore: avoid_print
-      print(
-          'notification action tapped with input: ${notificationResponse.input}');
-    }
+  static void initMessagingListeners(){
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      Modular.to.navigate('/call/');
+    });
+
+    FirebaseMessaging.onMessage.listen((event) async {
+      await NotificationService.pushNotification(event);
+    });
+
+    FirebaseMessaging.onBackgroundMessage(backgroundMessageHandler);
   }
 
-
+  static Future<void> backgroundMessageHandler(RemoteMessage message) async {
+    print("Handling a background message: ${message.messageId}");
+  }
 
   static pushNotification(RemoteMessage message) async {
-    var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
+    const int publicFlag = 1;
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
       'Visitas',
       'Visitas',
       channelDescription: 'Notificação para visitas dos seus amigos',
       priority: Priority.high,
-      importance: Importance.high,
-      fullScreenIntent: true,
+      importance: Importance.max,
+      sound: RawResourceAndroidNotificationSound('dingdong'),
     );
 
     var platformChannelSpecifics = NotificationDetails(
@@ -51,6 +62,7 @@ class NotificationService{
         message.notification!.body,
         platformChannelSpecifics
     );
+
   }
 
   static Future<bool> didNotificationLaunchApp() async {

@@ -11,13 +11,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 
-void onMessage() {
-    FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
-    FirebaseMessaging.onMessage.listen((event) async {
-        await NotificationService.pushNotification(event);
-    });
-}
-
 void main() async {
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp(
@@ -25,7 +18,6 @@ void main() async {
     );
 
     NotificationService.init();
-    onMessage();
 
     runApp(
         ResponsiveApp(builder: (context) => ModularApp(module: AppModule(), child: AppWidget())),
