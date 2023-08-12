@@ -33,34 +33,13 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     Modular.to.navigate('./perfil/');
     controller.saveToken();
-    initFirebaseMessagingListener();
-    notificationHandler();
   }
-
-  void notificationHandler() {
-    FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
-    FirebaseMessaging.onMessage.listen((event) async {
-      await NotificationService.pushNotification(event);
-    });
-  }
-
 
   void _requestNotificationPermission(){
     FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
     flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
         AndroidFlutterLocalNotificationsPlugin>()?.requestPermission();
-  }
-
-  void initFirebaseMessagingListener(){
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      print('Got a message whilst in the foreground!');
-      print('Message data: ${message.data}');
-
-      if (message.notification != null) {
-        print('Message also contained a notification: ${message.notification}');
-      }
-    });
   }
 
 

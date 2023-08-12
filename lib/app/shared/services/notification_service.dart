@@ -11,8 +11,25 @@ class NotificationService{
       const InitializationSettings(
         android: AndroidInitializationSettings('@mipmap/ic_launcher'),
       ),
+      onDidReceiveBackgroundNotificationResponse: notificationTapBackground,
+      onDidReceiveNotificationResponse: notificationTapBackground
     );
   }
+
+  @pragma('vm:entry-point')
+  static void notificationTapBackground(NotificationResponse notificationResponse) {
+    // ignore: avoid_print
+    print('notification(${notificationResponse.id}) action tapped: '
+        '${notificationResponse.actionId} with'
+        ' payload: ${notificationResponse.payload}');
+    if (notificationResponse.input?.isNotEmpty ?? false) {
+      // ignore: avoid_print
+      print(
+          'notification action tapped with input: ${notificationResponse.input}');
+    }
+  }
+
+
 
   static pushNotification(RemoteMessage message) async {
     var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
@@ -20,7 +37,7 @@ class NotificationService{
       'Visitas',
       channelDescription: 'Notificação para visitas dos seus amigos',
       priority: Priority.high,
-      importance: Importance.max,
+      importance: Importance.high,
       fullScreenIntent: true,
     );
 
