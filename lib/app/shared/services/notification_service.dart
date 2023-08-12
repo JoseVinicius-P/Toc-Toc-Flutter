@@ -14,45 +14,30 @@ class NotificationService{
     );
   }
 
-  static scheduleNotification() async {
-    timezone.initializeTimeZones();
-    var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
-      'channel id',
-      'channel name',
-      channelDescription: 'channel description',
-      importance: Importance.max, // set the importance of the notification
-      priority: Priority.high, // set prority
-    );
-    var platformChannelSpecifics = NotificationDetails(
-      android: androidPlatformChannelSpecifics,
-    );
-    await _notification.zonedSchedule(
-        0,
-        "notification title",
-        'Message goes here',
-        timezone.TZDateTime.now(timezone.local).add(const Duration(seconds: 5)),
-        platformChannelSpecifics,
-        uiLocalNotificationDateInterpretation:
-        UILocalNotificationDateInterpretation.absoluteTime);
-  }
-
   static pushNotification(RemoteMessage message) async {
     var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
-      'channed id',
-      'channel name',
-      channelDescription: 'channel description',
-      importance: Importance.max,
+      'Visitas',
+      'Visitas',
+      channelDescription: 'Notificação para visitas dos seus amigos',
       priority: Priority.high,
-      sound: RawResourceAndroidNotificationSound('toctoc'),
-      fullScreenIntent: true
+      importance: Importance.max,
+      fullScreenIntent: true,
     );
+
     var platformChannelSpecifics = NotificationDetails(
       android: androidPlatformChannelSpecifics,
     );
+
     await _notification.show(
-        0,
+        1253,
         message.notification!.title,
         message.notification!.body,
-        platformChannelSpecifics);
+        platformChannelSpecifics
+    );
+  }
+
+  static Future<bool> didNotificationLaunchApp() async {
+    final NotificationAppLaunchDetails? notificationAppLaunchDetails = await _notification.getNotificationAppLaunchDetails();
+    return notificationAppLaunchDetails?.didNotificationLaunchApp ?? false;
   }
 }
