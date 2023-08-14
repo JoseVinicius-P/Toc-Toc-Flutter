@@ -27,7 +27,6 @@ class NotificationService{
       const InitializationSettings(
         android: AndroidInitializationSettings('@mipmap/ic_launcher'),
       ),
-      onDidReceiveBackgroundNotificationResponse: (details) => Modular.to.navigate("/call/"),
       onDidReceiveNotificationResponse: (details) => Modular.to.navigate("/call/"),
     );
   }
@@ -38,6 +37,7 @@ class NotificationService{
     });
 
     FirebaseMessaging.onMessage.listen((event) async {
+      debugPrint("Entrada: onMessage");
       initTimezone();
       await NotificationService.fullScreenNotification(event, 'onMessage');
     });
@@ -46,8 +46,9 @@ class NotificationService{
   }
 
   static Future<void> backgroundMessageHandler(RemoteMessage message) async {
+    debugPrint("Entrada: backgroundMessageHandler");
     initTimezone();
-    await NotificationService.fullScreenNotification(message, 'backgroundMessageHandler');
+    NotificationService.fullScreenNotification(message, 'backgroundMessageHandler');
   }
 
    static fullScreenNotification(RemoteMessage message, String origem) async {
@@ -57,7 +58,7 @@ class NotificationService{
           0,
           message.notification!.title,
           message.notification!.body,
-          timezone.TZDateTime.now(timezone.local).add(const Duration(seconds: 5)),
+          timezone.TZDateTime.now(timezone.local).add(const Duration(milliseconds: 50)),
           const NotificationDetails(
               android: AndroidNotificationDetails(
                   'Visitas',
