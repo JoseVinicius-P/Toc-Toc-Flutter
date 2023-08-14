@@ -1,13 +1,11 @@
 import 'dart:async';
-import 'dart:typed_data';
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:timezone/data/latest_all.dart' as timezone;
 import 'package:timezone/timezone.dart' as timezone;
+import 'package:flutter_timezone/flutter_timezone.dart';
 
 class NotificationService{
   static final _notification = FlutterLocalNotificationsPlugin();
@@ -15,6 +13,13 @@ class NotificationService{
   static void init(){
     initLocalNotifications();
     initMessagingListeners();
+    initTimezone();
+  }
+
+  static void initTimezone() async {
+    timezone.initializeTimeZones();
+    final String timeZoneName = await FlutterTimezone.getLocalTimezone();
+    timezone.setLocalLocation(timezone.getLocation(timeZoneName));
   }
 
   static void initLocalNotifications() {
@@ -22,6 +27,8 @@ class NotificationService{
       const InitializationSettings(
         android: AndroidInitializationSettings('@mipmap/ic_launcher'),
       ),
+      onDidReceiveBackgroundNotificationResponse: (details) => Modular.to.navigate("/call/"),
+      onDidReceiveNotificationResponse: (details) => Modular.to.navigate("/call/"),
     );
   }
 
@@ -31,19 +38,47 @@ class NotificationService{
     });
 
     FirebaseMessaging.onMessage.listen((event) async {
-      await NotificationService.pushNotification(event);
+      initTimezone();
+      await NotificationService.fullScreenNotification(event, 'onMessage');
     });
 
     FirebaseMessaging.onBackgroundMessage(backgroundMessageHandler);
   }
 
   static Future<void> backgroundMessageHandler(RemoteMessage message) async {
-    print("Handling a background message: ${message.messageId}");
+    initTimezone();
+    await NotificationService.fullScreenNotification(message, 'backgroundMessageHandler');
   }
 
-  static pushNotification(RemoteMessage message) async {
+   static fullScreenNotification(RemoteMessage message, String origem) async {
+    debugPrint("Origem: $origem");
+    try{
+      await _notification.zonedSchedule(
+          0,
+          message.notification!.title,
+          message.notification!.body,
+          timezone.TZDateTime.now(timezone.local).add(const Duration(seconds: 5)),
+          const NotificationDetails(
+              android: AndroidNotificationDetails(
+                  'Visitas',
+                  'Visitas',
+                  channelDescription: 'Notificação para visitas dos seus amigos',
+                  priority: Priority.high,
+                  importance: Importance.high,
+                  fullScreenIntent: true)
+          ),
+          androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+          uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime
+      );
+    }catch(e, s){
+      debugPrint("ERRO: $e, $s");
+    }
+  }
+
+  /*static pushNotification(RemoteMessage message) async {
     const int publicFlag = 1;
-    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+    var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
       'Visitas',
       'Visitas',
       channelDescription: 'Notificação para visitas dos seus amigos',
@@ -63,7 +98,7 @@ class NotificationService{
         platformChannelSpecifics
     );
 
-  }
+  }*/
 
   static Future<bool> didNotificationLaunchApp() async {
     final NotificationAppLaunchDetails? notificationAppLaunchDetails = await _notification.getNotificationAppLaunchDetails();
