@@ -4,12 +4,18 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/home/friend_model.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 
-class FriendItem extends StatelessWidget {
+class FriendItem extends StatefulWidget {
   final FriendModel friend;
+  final bool inCall;
   const FriendItem({
-    super.key, required this.friend,
+    super.key, required this.friend, required this.inCall,
   });
 
+  @override
+  State<FriendItem> createState() => _FriendItemState();
+}
+
+class _FriendItemState extends State<FriendItem> {
   @override
   Widget build(BuildContext context) {
     var theme =  Theme.of(context);
@@ -34,7 +40,7 @@ class FriendItem extends StatelessWidget {
               height: 45,
               child: CircleAvatar(
                 backgroundImage: const AssetImage('assets/images/perfil.png'),
-                foregroundImage: CachedNetworkImageProvider(friend.profilePictureUrl),
+                foregroundImage: CachedNetworkImageProvider(widget.friend.profilePictureUrl),
                 radius: 40.sw.roundToDouble(),
               ),
             ),
@@ -43,7 +49,7 @@ class FriendItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  friend.name,
+                  widget.friend.name,
                   style: theme.textTheme.labelSmall!.copyWith(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 5,),
@@ -54,7 +60,14 @@ class FriendItem extends StatelessWidget {
               ],
             ),
             const Spacer(),
-            Icon(Icons.notifications_active_outlined, color: MyColors.blue.withOpacity(0.5), size: 27,),
+            Visibility(
+              visible: widget.inCall,
+              child: Icon(
+                Icons.notifications_active_outlined,
+                color: MyColors.blue.withOpacity(0.8),
+                size: 27,
+              ),
+            ),
             const SizedBox(width: 10,),
           ],
         ),

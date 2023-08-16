@@ -94,16 +94,24 @@ class FriendListPageState extends State<FriendListPage> {
                           const SizedBox(height: 15,),
                           TripleBuilder(
                             store: friendListStore,
-                            builder: (context, triple) {
-                              List<FriendModel> friends = triple.state as List<FriendModel>;
+                            builder: (context, tripleFriendList) {
+                              List<FriendModel> friends = tripleFriendList.state as List<FriendModel>;
                               return ListView.separated(
                                 physics: const NeverScrollableScrollPhysics(),
                                 itemCount: friends.length,
                                 shrinkWrap: true,
                                 itemBuilder: (context, index) {
-                                  return InkWell(
-                                    onTap: () => selectFriendStore.callFriend(friends[index]),
-                                    child: FriendItem(friend: friends[index],)
+                                  return TripleBuilder(
+                                    store: selectFriendStore,
+                                    builder: (context, tripleSelectFriend) {
+                                      return InkWell(
+                                        onTap: () => selectFriendStore.callFriend(friends[index]),
+                                        child: FriendItem(
+                                          friend: friends[index],
+                                          inCall: tripleSelectFriend.state as FriendModel == friends[index],
+                                        )
+                                      );
+                                    }
                                   );
                                 },
                                 separatorBuilder: (BuildContext context, int index) {
