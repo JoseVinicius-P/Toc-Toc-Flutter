@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -27,17 +28,22 @@ class NotificationService{
       const InitializationSettings(
         android: AndroidInitializationSettings('@mipmap/ic_launcher'),
       ),
-      onDidReceiveNotificationResponse: (details) => Modular.to.navigate("/call/"),
+      onDidReceiveNotificationResponse: (details){
+        Modular.to.navigate("/call/", arguments: {
+          'data': details.payload
+        });
+      },
     );
   }
 
   static void initMessagingListeners(){
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      Modular.to.navigate('/call/');
+      Modular.to.navigate('/call/', arguments: {
+      'data': jsonEncode(message.data),
+      });
     });
 
     FirebaseMessaging.onMessage.listen((event) async {
-      debugPrint("Entrada: onMessage");
       initTimezone();
       await NotificationService.fullScreenNotification(event, 'onMessage');
     });
@@ -52,7 +58,6 @@ class NotificationService{
   }
 
    static fullScreenNotification(RemoteMessage message, String origem) async {
-    debugPrint("Origem: $origem");
     try{
       await _notification.zonedSchedule(
           0,
@@ -70,7 +75,8 @@ class NotificationService{
           ),
           androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
           uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime
+          UILocalNotificationDateInterpretation.absoluteTime,
+          payload: jsonEncode(message.data),
       );
     }catch(e, s){
       debugPrint("ERRO: $e, $s");

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -7,12 +9,20 @@ import 'package:toctoc/app/shared/my_colors.dart';
 
 class CallPage extends StatefulWidget {
   final String title;
-  const CallPage({Key? key, this.title = 'CallPage'}) : super(key: key);
+  final String data;
+  const CallPage({Key? key, this.title = 'CallPage', required this.data}) : super(key: key);
   @override
   CallPageState createState() => CallPageState();
 }
 class CallPageState extends State<CallPage> {
   final CallStore store = Modular.get();
+  late final data;
+
+  @override
+  void initState() {
+    super.initState();
+    data = jsonDecode(widget.data);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +53,9 @@ class CallPageState extends State<CallPage> {
                               height: 40.sw.roundToDouble(),
                               child:  CircleAvatar(
                                 backgroundImage: const AssetImage('assets/images/perfil.png'),
-                                /*foregroundImage: NetworkImage(
-                                    user.profilePictureUrl
-                                ),*/
+                                foregroundImage: NetworkImage(
+                                    data['profilePictureUrl']
+                                ),
                                 radius: 40.sw.roundToDouble(),
                               ),
                             ),
@@ -53,7 +63,7 @@ class CallPageState extends State<CallPage> {
                         ),
                         const SizedBox(height: 10,),
                         AutoSizeText(
-                          'Rodrigo',
+                          data['name'],
                           style: theme.textTheme.titleSmall!.copyWith(fontSize: 25),
                           maxFontSize: 6.sw.roundToDouble(),
                           minFontSize: 3.sw.roundToDouble(),

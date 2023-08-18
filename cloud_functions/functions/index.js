@@ -14,13 +14,13 @@ exports.sendNotificationOnCallCreation = functions.firestore
       const userToken = userData.token;
 
       const message = {
-        notification: {
-          title: "Toc Toc!",
-          body: callData.name + " está te visitando",
-        },
         data: {
           name: callData.name,
           profilePictureUrl: callData.profilePictureUrl,
+        },
+        notification: {
+          title: "Toc Toc!",
+          body: callData.name + " está te visitando",
         },
         token: userToken,
       };

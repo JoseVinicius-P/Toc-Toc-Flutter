@@ -7,6 +7,8 @@ class CallModule extends Module {
   final List<Bind> binds = [Bind.lazySingleton((i) => CallStore()),];
 
   @override
-  final List<ModularRoute> routes = [ChildRoute('/', child: (_, args) => CallPage()),];
+  final List<ModularRoute> routes = [
+    ChildRoute('/', child: (_, args) => CallPage(data: args.data['data'],)),
+  ];
 
 }
