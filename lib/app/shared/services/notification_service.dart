@@ -67,12 +67,14 @@ class NotificationService{
           timezone.TZDateTime.now(timezone.local).add(const Duration(milliseconds: 50)),
           const NotificationDetails(
               android: AndroidNotificationDetails(
-                  'Visitas',
-                  'Visitas',
-                  channelDescription: 'Notificação para visitas dos seus amigos',
-                  priority: Priority.high,
-                  importance: Importance.high,
-                  fullScreenIntent: true)
+                'Visitas',
+                'Visitas',
+                channelDescription: 'Notificação para visitas dos seus amigos',
+                priority: Priority.high,
+                importance: Importance.high,
+                fullScreenIntent: true,
+                sound: RawResourceAndroidNotificationSound('toctoc')
+              )
           ),
           androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
           uiLocalNotificationDateInterpretation:
@@ -82,30 +84,6 @@ class NotificationService{
     }catch(e, s){
       debugPrint("ERRO: $e, $s");
     }
-  }
-
-  static pushNotification(RemoteMessage message) async {
-    const int publicFlag = 1;
-    var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
-      'Configuração',
-      'Configuração',
-      channelDescription: 'Usado para configurações internas do app (Pode ser desativado)',
-      priority: Priority.low,
-      importance: Importance.low,
-      playSound: false,
-    );
-
-    var platformChannelSpecifics = NotificationDetails(
-      android: androidPlatformChannelSpecifics,
-    );
-
-    await _notification.show(
-        1253,
-        message.notification!.title,
-        message.notification!.body,
-        platformChannelSpecifics
-    );
-
   }
 
   static Future<bool> didNotificationLaunchApp() async {
