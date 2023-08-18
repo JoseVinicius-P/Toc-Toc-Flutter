@@ -52,7 +52,8 @@ class NotificationService{
   }
 
   static Future<void> backgroundMessageHandler(RemoteMessage message) async {
-    debugPrint("Entrada: backgroundMessageHandler");
+    //O firebase estava interceptando a chamada e enviando uma notificação padrão, o Cancel cancela todas e impede que a notificação automatica seja exibida
+    await _notification.cancelAll();
     initTimezone();
     NotificationService.fullScreenNotification(message, 'backgroundMessageHandler');
   }
@@ -83,15 +84,15 @@ class NotificationService{
     }
   }
 
-  /*static pushNotification(RemoteMessage message) async {
+  static pushNotification(RemoteMessage message) async {
     const int publicFlag = 1;
     var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
-      'Visitas',
-      'Visitas',
-      channelDescription: 'Notificação para visitas dos seus amigos',
-      priority: Priority.high,
-      importance: Importance.max,
-      sound: RawResourceAndroidNotificationSound('dingdong'),
+      'Configuração',
+      'Configuração',
+      channelDescription: 'Usado para configurações internas do app (Pode ser desativado)',
+      priority: Priority.low,
+      importance: Importance.low,
+      playSound: false,
     );
 
     var platformChannelSpecifics = NotificationDetails(
@@ -105,7 +106,7 @@ class NotificationService{
         platformChannelSpecifics
     );
 
-  }*/
+  }
 
   static Future<bool> didNotificationLaunchApp() async {
     final NotificationAppLaunchDetails? notificationAppLaunchDetails = await _notification.getNotificationAppLaunchDetails();
