@@ -18,6 +18,10 @@ exports.sendNotificationOnCallCreation = functions.firestore
           title: "Toc Toc!",
           body: callData.name + " está te visitando",
         },
+        data: {
+          name: callData.name,
+          profilePictureUrl: callData.profilePictureUrl,
+        },
         token: userToken,
       };
 

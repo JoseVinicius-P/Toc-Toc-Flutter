@@ -15,7 +15,10 @@ class FriendService {
         .doc(uid)
         .collection("Calls")
         .doc()
-        .set({"name" : snapshot.get("name")},);
+        .set({
+          "name" : snapshot.get("name"),
+          "profilePictureUrl" : snapshot.get("profilePictureUrl"),
+        });
   }
 
   Future<List<FriendModel>> getFriends() async {
