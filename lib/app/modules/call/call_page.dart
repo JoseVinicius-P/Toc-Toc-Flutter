@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/call/call_store.dart';
@@ -53,7 +54,7 @@ class CallPageState extends State<CallPage> {
                               height: 40.sw.roundToDouble(),
                               child:  CircleAvatar(
                                 backgroundImage: const AssetImage('assets/images/perfil.png'),
-                                foregroundImage: NetworkImage(
+                                foregroundImage: CachedNetworkImageProvider(
                                     data['profilePictureUrl']
                                 ),
                                 radius: 40.sw.roundToDouble(),
