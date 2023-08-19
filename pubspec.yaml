@@ -65,6 +65,7 @@ dependencies:
   shared_preferences: ^2.2.0
   flutter_local_notifications: ^15.1.0+1
   flutter_timezone: ^1.0.4
+  screen_state: ^3.0.0
 
 dev_dependencies:
   flutter_test:
