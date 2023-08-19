@@ -8,7 +8,15 @@ class CallModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => CallPage(data: args.data['data'],)),
+    ChildRoute('/', child: (_, args) {
+      String? data;
+      try{
+        data = args.data['data'];
+      }catch(e){
+        data = null;
+      }
+      return CallPage(data:data);
+    }),
   ];
 
 }

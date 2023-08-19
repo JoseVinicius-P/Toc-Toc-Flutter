@@ -12,7 +12,7 @@ import 'package:timezone/timezone.dart' as timezone;
 import 'package:flutter_timezone/flutter_timezone.dart';
 
 class NotificationService{
-  static final _notification = FlutterLocalNotificationsPlugin();
+  static final notification = FlutterLocalNotificationsPlugin();
 
   static void init(){
     initLocalNotifications();
@@ -23,7 +23,13 @@ class NotificationService{
 
   static void loadSound() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    if(prefs.getString('sound') == null){
+    String? sharedSound;
+    try{
+      sharedSound = prefs.getString('sound');
+    }catch(e){
+      debugPrint("$e");
+    }
+    if(sharedSound == null){
       DocumentReference docRef = FirebaseFirestore.instance.collection('Users').doc(FirebaseAuth.instance.currentUser!.uid);
       DocumentSnapshot snapshot = await docRef.get();
       if(snapshot.get('sound') != null){
@@ -41,7 +47,7 @@ class NotificationService{
   }
 
   static void initLocalNotifications() {
-    _notification.initialize(
+    notification.initialize(
       const InitializationSettings(
         android: AndroidInitializationSettings('@mipmap/ic_launcher'),
       ),
@@ -70,7 +76,7 @@ class NotificationService{
 
   static Future<void> backgroundMessageHandler(RemoteMessage message) async {
     //O firebase estava interceptando a chamada e enviando uma notificação padrão, o Cancel cancela todas e impede que a notificação automatica seja exibida
-    await _notification.cancelAll();
+    await notification.cancelAll();
     initTimezone();
     NotificationService.fullScreenNotification(message, 'backgroundMessageHandler');
   }
@@ -79,7 +85,7 @@ class NotificationService{
     try{
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       String sound = prefs.getString('sound')!.replaceAll('.mp3', '');
-      await _notification.zonedSchedule(
+      await notification.zonedSchedule(
           0,
           message.notification!.title,
           message.notification!.body,
@@ -106,7 +112,7 @@ class NotificationService{
   }
 
   static Future<bool> didNotificationLaunchApp() async {
-    final NotificationAppLaunchDetails? notificationAppLaunchDetails = await _notification.getNotificationAppLaunchDetails();
+    final NotificationAppLaunchDetails? notificationAppLaunchDetails = await notification.getNotificationAppLaunchDetails();
     return notificationAppLaunchDetails?.didNotificationLaunchApp ?? false;
   }
 }
