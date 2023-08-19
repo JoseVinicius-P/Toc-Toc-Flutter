@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -15,7 +16,7 @@ class SelectSoundPage extends StatefulWidget {
   @override
   SelectSoundPageState createState() => SelectSoundPageState();
 }
-class SelectSoundPageState extends State<SelectSoundPage> {
+class SelectSoundPageState extends State<SelectSoundPage> with WidgetsBindingObserver{
   final selectSoundStore = Modular.get<SelectSoundStore>();
   final soundReproductionStore = Modular.get<SoundReproductionStore>();
   final controller = Modular.get<PerfilController>();
@@ -24,11 +25,26 @@ class SelectSoundPageState extends State<SelectSoundPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     futureSounds = controller.findSounds(context);
     selectSoundStore.getSoundSelected();
   }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if(state != AppLifecycleState.resumed){
+      SystemNavigator.pop();
+    }
+    super.didChangeAppLifecycleState(state);
+  }
+
 
   @override
   Widget build(BuildContext context) {

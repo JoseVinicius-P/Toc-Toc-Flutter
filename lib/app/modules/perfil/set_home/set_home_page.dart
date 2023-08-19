@@ -19,7 +19,7 @@ class SetHomePage extends StatefulWidget {
   @override
   SetHomePageState createState() => SetHomePageState();
 }
-class SetHomePageState extends State<SetHomePage> {
+class SetHomePageState extends State<SetHomePage> with WidgetsBindingObserver{
   final store = Modular.get<SetHomeStore>();
   final controller = Modular.get<SetHomeController>();
   final bool isForHome = Modular.to.path.contains('/home');
@@ -27,14 +27,25 @@ class SetHomePageState extends State<SetHomePage> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     getLocation();
   }
 
   @override
   void dispose() {
-    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
     store.gpsService.stopLocationUpdates();
+    super.dispose();
   }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if(state != AppLifecycleState.resumed){
+      SystemNavigator.pop();
+    }
+    super.didChangeAppLifecycleState(state);
+  }
+
 
   /*O fluxo é o seguinte:
   1 - Verifica se a Localização já foi permitida

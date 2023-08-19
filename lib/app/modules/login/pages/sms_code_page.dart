@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -16,9 +17,29 @@ class SmsCodePage extends StatefulWidget {
   @override
   SmsCodePageState createState() => SmsCodePageState();
 }
-class SmsCodePageState extends State<SmsCodePage> {
+class SmsCodePageState extends State<SmsCodePage> with WidgetsBindingObserver{
   final store = Modular.get<LoginStore>();
   final controller = Modular.get<LoginController>();
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if(state != AppLifecycleState.resumed){
+      SystemNavigator.pop();
+    }
+    super.didChangeAppLifecycleState(state);
+  }
+
 
   @override
   Widget build(BuildContext context) {

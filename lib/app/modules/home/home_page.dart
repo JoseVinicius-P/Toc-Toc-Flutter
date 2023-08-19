@@ -1,5 +1,5 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -7,7 +7,6 @@ import 'package:toctoc/app/modules/home/home_controller.dart';
 import 'package:toctoc/app/modules/home/add_friend/add_friend_page.dart';
 import 'package:toctoc/app/modules/home/friend_list/friend_list_page.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
-import 'package:toctoc/app/shared/services/notification_service.dart';
 import 'home_store.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,12 +17,13 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   final store = Modular.get<HomeStore>();
   final controller = Modular.get<HomeController>();
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     Modular.dispose<HomeStore>();
     super.dispose();
   }
@@ -31,8 +31,17 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     Modular.to.navigate('./perfil/');
     controller.saveToken();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if(state != AppLifecycleState.resumed){
+      SystemNavigator.pop();
+    }
+    super.didChangeAppLifecycleState(state);
   }
 
   void _requestNotificationPermission(){

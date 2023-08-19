@@ -1,4 +1,3 @@
-import 'package:toctoc/app/shared/services/screen_service.dart';
 import 'package:toctoc/app/modules/call/call_module.dart';
 import 'package:toctoc/app/modules/perfil/your_data/services/user_data_service.dart';
 import 'package:toctoc/app/modules/perfil/set_home/services/home_service.dart';
@@ -15,7 +14,6 @@ import 'package:toctoc/app/shared/services/notification_service.dart';
 class AppModule extends Module {
   @override
   final List<Bind> binds = [
-    Bind.lazySingleton((i) => ScreenService()),
     Bind.lazySingleton((i) => HomeService()),
     Bind.lazySingleton((i) => AuthService()),
     Bind.lazySingleton((i) => AuthGuardService()),

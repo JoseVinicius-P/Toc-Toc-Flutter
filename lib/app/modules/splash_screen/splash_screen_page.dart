@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/splash_screen/splash_screen_controller.dart';
@@ -12,9 +13,30 @@ class SplashScreenPage extends StatefulWidget {
   @override
   SplashScreenPageState createState() => SplashScreenPageState();
 }
-class SplashScreenPageState extends State<SplashScreenPage> {
+class SplashScreenPageState extends State<SplashScreenPage> with WidgetsBindingObserver{
   final SplashScreenStore store = Modular.get();
   final controller = Modular.get<SplashScreenController>();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if(state != AppLifecycleState.resumed){
+      SystemNavigator.pop();
+    }
+    super.didChangeAppLifecycleState(state);
+  }
+
 
   @override
   Widget build(BuildContext context) {
