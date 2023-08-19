@@ -38,7 +38,7 @@ class YourDataPageState extends State<YourDataPage> with WidgetsBindingObserver{
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if(state != AppLifecycleState.resumed){
+    if(state == AppLifecycleState.hidden){
       SystemNavigator.pop();
     }
     super.didChangeAppLifecycleState(state);

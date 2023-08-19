@@ -36,7 +36,7 @@ class LoginPageState extends State<LoginPage>  with WidgetsBindingObserver{
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if(state != AppLifecycleState.resumed){
+    if(state == AppLifecycleState.hidden){
       SystemNavigator.pop();
     }
     super.didChangeAppLifecycleState(state);

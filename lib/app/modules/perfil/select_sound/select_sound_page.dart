@@ -39,7 +39,7 @@ class SelectSoundPageState extends State<SelectSoundPage> with WidgetsBindingObs
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if(state != AppLifecycleState.resumed){
+    if(state == AppLifecycleState.hidden){
       SystemNavigator.pop();
     }
     super.didChangeAppLifecycleState(state);
