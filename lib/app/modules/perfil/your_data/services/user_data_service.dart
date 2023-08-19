@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toctoc/app/modules/perfil/user_model.dart';
 
 class UserDataService {
@@ -41,6 +42,9 @@ class UserDataService {
       await db.collection("Users")
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .set({"sound" : nameSound}, SetOptions(merge: true));
+      //Salvando localmente
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('sound', nameSound);
       return true;
     }catch(e){
       return false;
