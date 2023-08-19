@@ -6,6 +6,7 @@ import 'package:toctoc/app/modules/home/add_friend/add_friend_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:toctoc/app/modules/home/home_controller.dart';
 import 'package:toctoc/app/modules/perfil/perfil_module.dart';
+import 'package:toctoc/app/shared/services/notification_guard_service.dart';
 import 'home_store.dart'; 
 
 import 'home_page.dart';
@@ -26,7 +27,7 @@ class HomeModule extends Module {
  final List<ModularRoute> routes = [
    ChildRoute('/', child: (_, args) => HomePage(), children: [
      ModuleRoute('./perfil', module: PerfilModule()),
-   ]),
+   ], guards: [NotificationGuardService()]),
 
  ];
 }
