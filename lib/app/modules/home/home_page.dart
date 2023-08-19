@@ -17,13 +17,12 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
+class _HomePageState extends State<HomePage>{
   final store = Modular.get<HomeStore>();
   final controller = Modular.get<HomeController>();
 
   @override
   void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
     Modular.dispose<HomeStore>();
     super.dispose();
   }
@@ -31,17 +30,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
     Modular.to.navigate('./perfil/');
     controller.saveToken();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if(state == AppLifecycleState.hidden){
-      SystemNavigator.pop();
-    }
-    super.didChangeAppLifecycleState(state);
   }
 
   void _requestNotificationPermission(){

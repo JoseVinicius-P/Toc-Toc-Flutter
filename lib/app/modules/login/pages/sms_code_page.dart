@@ -17,28 +17,9 @@ class SmsCodePage extends StatefulWidget {
   @override
   SmsCodePageState createState() => SmsCodePageState();
 }
-class SmsCodePageState extends State<SmsCodePage> with WidgetsBindingObserver{
+class SmsCodePageState extends State<SmsCodePage>{
   final store = Modular.get<LoginStore>();
   final controller = Modular.get<LoginController>();
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if(state == AppLifecycleState.hidden){
-      SystemNavigator.pop();
-    }
-    super.didChangeAppLifecycleState(state);
-  }
 
 
   @override

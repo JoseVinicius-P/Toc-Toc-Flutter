@@ -18,29 +18,9 @@ class LoginPage extends StatefulWidget {
   LoginPageState createState() => LoginPageState();
 }
 
-class LoginPageState extends State<LoginPage>  with WidgetsBindingObserver{
+class LoginPageState extends State<LoginPage>{
   final LoginStore store = Modular.get();
   final LoginController controller = Modular.get();
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if(state == AppLifecycleState.hidden){
-      SystemNavigator.pop();
-    }
-    super.didChangeAppLifecycleState(state);
-  }
 
   @override
   Widget build(BuildContext context) {

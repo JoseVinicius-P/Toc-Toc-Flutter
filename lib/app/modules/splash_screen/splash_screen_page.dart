@@ -13,30 +13,9 @@ class SplashScreenPage extends StatefulWidget {
   @override
   SplashScreenPageState createState() => SplashScreenPageState();
 }
-class SplashScreenPageState extends State<SplashScreenPage> with WidgetsBindingObserver{
+class SplashScreenPageState extends State<SplashScreenPage>{
   final SplashScreenStore store = Modular.get();
   final controller = Modular.get<SplashScreenController>();
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if(state == AppLifecycleState.hidden){
-      SystemNavigator.pop();
-    }
-    super.didChangeAppLifecycleState(state);
-  }
-
 
   @override
   Widget build(BuildContext context) {

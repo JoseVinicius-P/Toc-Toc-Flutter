@@ -18,7 +18,7 @@ class YourDataPage extends StatefulWidget {
   YourDataPageState createState() => YourDataPageState();
 }
 
-class YourDataPageState extends State<YourDataPage> with WidgetsBindingObserver{
+class YourDataPageState extends State<YourDataPage>{
   final store = Modular.get<YourDataStore>();
   final controller = Modular.get<PerfilController>();
   final bool isForHome = Modular.to.path.contains('home');
@@ -26,22 +26,7 @@ class YourDataPageState extends State<YourDataPage> with WidgetsBindingObserver{
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
     store.loadUserdata();
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if(state == AppLifecycleState.hidden){
-      SystemNavigator.pop();
-    }
-    super.didChangeAppLifecycleState(state);
   }
 
   @override

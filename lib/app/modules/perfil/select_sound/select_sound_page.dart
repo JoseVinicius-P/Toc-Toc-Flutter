@@ -16,7 +16,7 @@ class SelectSoundPage extends StatefulWidget {
   @override
   SelectSoundPageState createState() => SelectSoundPageState();
 }
-class SelectSoundPageState extends State<SelectSoundPage> with WidgetsBindingObserver{
+class SelectSoundPageState extends State<SelectSoundPage>{
   final selectSoundStore = Modular.get<SelectSoundStore>();
   final soundReproductionStore = Modular.get<SoundReproductionStore>();
   final controller = Modular.get<PerfilController>();
@@ -26,24 +26,10 @@ class SelectSoundPageState extends State<SelectSoundPage> with WidgetsBindingObs
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
     futureSounds = controller.findSounds(context);
     selectSoundStore.getSoundSelected();
   }
 
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if(state == AppLifecycleState.hidden){
-      SystemNavigator.pop();
-    }
-    super.didChangeAppLifecycleState(state);
-  }
 
 
   @override
