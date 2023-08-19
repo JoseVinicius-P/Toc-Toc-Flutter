@@ -1,8 +1,8 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/shared/services/notification_service.dart';
+import 'package:toctoc/app/shared/services/screen_service.dart';
 
 import 'app/app_module.dart';
 import 'app/app_widget.dart';
@@ -18,6 +18,7 @@ void main() async {
     );
 
     NotificationService.init();
+    ScreenService.initScreenLockListener();
 
     runApp(
         ResponsiveApp(builder: (context) => ModularApp(module: AppModule(), child: AppWidget())),
