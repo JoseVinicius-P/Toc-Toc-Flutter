@@ -7,18 +7,21 @@ class FriendService {
   final db = FirebaseFirestore.instance;
 
   void callFriend(String uid) async {
-    //Isso aqui tem mudar, pegar o nome do usuario logado com shared preferences
-    DocumentReference docRef = db.collection('Users').doc(FirebaseAuth.instance.currentUser!.uid);
-    DocumentSnapshot snapshot = await docRef.get();
 
-    await db.collection("Users")
+    //Isso aqui tem mudar, pegar o nome do usuario logado com shared preferences
+    DocumentReference userRef = db.collection('Users').doc(FirebaseAuth.instance.currentUser!.uid);
+    DocumentSnapshot snapshot = await userRef.get();
+
+    DocumentReference callRef = db.collection("Users")
         .doc(uid)
         .collection("Calls")
-        .doc()
-        .set({
-          "name" : snapshot.get("name"),
-          "profilePictureUrl" : snapshot.get("profilePictureUrl"),
-        });
+        .doc(FirebaseAuth.instance.currentUser!.uid);
+
+    await callRef.set({
+      "name" : snapshot.get("name"),
+      "profilePictureUrl" : snapshot.get("profilePictureUrl"),
+      "date_hour" : Timestamp.now(),
+    }, SetOptions(merge: true));
   }
 
   Future<List<FriendModel>> getFriends() async {

@@ -4,8 +4,8 @@ admin.initializeApp();
 
 exports.sendNotificationOnCallCreation = functions.firestore
     .document("Users/{userId}/Calls/{callId}")
-    .onCreate(async (snapshot, context) => {
-      const callData = snapshot.data();
+    .onWrite(async (snapshot, context) => {
+      const callData = snapshot.after.data();
       const userId = context.params.userId;
 
       const userDocRef = admin.firestore().doc("Users/"+userId);
