@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -8,6 +7,7 @@ import 'package:toctoc/app/modules/home/add_friend/add_friend_page.dart';
 import 'package:toctoc/app/modules/home/friend_list/friend_list_page.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 import 'home_store.dart';
+import 'package:toctoc/app/shared/services/notification_service.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
@@ -32,6 +32,7 @@ class _HomePageState extends State<HomePage>{
     super.initState();
     Modular.to.navigate('./perfil/');
     controller.saveToken();
+    NotificationService.loadSound();
   }
 
   void _requestNotificationPermission(){
