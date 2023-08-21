@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
+import 'package:is_lock_screen/is_lock_screen.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/perfil/set_home/widgets/alert_dialog_enable_location_widget.dart';
 import 'package:toctoc/app/modules/perfil/set_home/widgets/alert_dialog_permission_location_widget.dart';
@@ -19,7 +20,7 @@ class SetHomePage extends StatefulWidget {
   @override
   SetHomePageState createState() => SetHomePageState();
 }
-class SetHomePageState extends State<SetHomePage>{
+class SetHomePageState extends State<SetHomePage> with WidgetsBindingObserver{
   final store = Modular.get<SetHomeStore>();
   final controller = Modular.get<SetHomeController>();
   final bool isForHome = Modular.to.path.contains('/home');
@@ -27,14 +28,28 @@ class SetHomePageState extends State<SetHomePage>{
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     getLocation();
   }
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     store.gpsService.stopLocationUpdates();
     super.dispose();
   }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    super.didChangeAppLifecycleState(state);
+    bool? screenLock =  await isLockScreen();
+    if(screenLock != null){
+      if (state == AppLifecycleState.inactive && screenLock) {
+        SystemNavigator.pop();
+      }
+    }
+  }
+
 
 
   /*O fluxo é o seguinte:

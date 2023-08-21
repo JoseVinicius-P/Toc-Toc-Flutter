@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
+import 'package:is_lock_screen/is_lock_screen.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/login/login_controller.dart';
 import 'package:toctoc/app/modules/login/login_store.dart';
@@ -18,9 +19,33 @@ class LoginPage extends StatefulWidget {
   LoginPageState createState() => LoginPageState();
 }
 
-class LoginPageState extends State<LoginPage>{
+class LoginPageState extends State<LoginPage>  with WidgetsBindingObserver {
   final LoginStore store = Modular.get();
   final LoginController controller = Modular.get();
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    super.didChangeAppLifecycleState(state);
+    bool? screenLock =  await isLockScreen();
+    if(screenLock != null){
+      if (state == AppLifecycleState.inactive && screenLock) {
+        SystemNavigator.pop();
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

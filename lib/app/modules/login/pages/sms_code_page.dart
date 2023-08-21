@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
+import 'package:is_lock_screen/is_lock_screen.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/login/login_controller.dart';
 import 'package:toctoc/app/modules/login/login_store.dart';
@@ -17,9 +18,34 @@ class SmsCodePage extends StatefulWidget {
   @override
   SmsCodePageState createState() => SmsCodePageState();
 }
-class SmsCodePageState extends State<SmsCodePage>{
+class SmsCodePageState extends State<SmsCodePage> with WidgetsBindingObserver {
   final store = Modular.get<LoginStore>();
   final controller = Modular.get<LoginController>();
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    super.didChangeAppLifecycleState(state);
+    bool? screenLock =  await isLockScreen();
+    if(screenLock != null){
+      if (state == AppLifecycleState.inactive && screenLock) {
+        SystemNavigator.pop();
+      }
+    }
+  }
+
 
 
   @override

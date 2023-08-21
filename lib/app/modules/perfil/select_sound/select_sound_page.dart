@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
+import 'package:is_lock_screen/is_lock_screen.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/perfil/perfil_controller.dart';
 import 'package:toctoc/app/modules/perfil/select_sound/stores/select_sound_store.dart';
@@ -16,7 +17,7 @@ class SelectSoundPage extends StatefulWidget {
   @override
   SelectSoundPageState createState() => SelectSoundPageState();
 }
-class SelectSoundPageState extends State<SelectSoundPage>{
+class SelectSoundPageState extends State<SelectSoundPage> with WidgetsBindingObserver{
   final selectSoundStore = Modular.get<SelectSoundStore>();
   final soundReproductionStore = Modular.get<SoundReproductionStore>();
   final controller = Modular.get<PerfilController>();
@@ -26,8 +27,27 @@ class SelectSoundPageState extends State<SelectSoundPage>{
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     futureSounds = controller.findSounds(context);
     selectSoundStore.getSoundSelected();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    super.didChangeAppLifecycleState(state);
+    bool? screenLock =  await isLockScreen();
+    if(screenLock != null){
+      if (state == AppLifecycleState.inactive && screenLock) {
+        SystemNavigator.pop();
+      }
+    }
   }
 
 

@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
+import 'package:is_lock_screen/is_lock_screen.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/perfil/your_data/stores/your_data_store.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class YourDataPage extends StatefulWidget {
   YourDataPageState createState() => YourDataPageState();
 }
 
-class YourDataPageState extends State<YourDataPage>{
+class YourDataPageState extends State<YourDataPage> with WidgetsBindingObserver{
   final store = Modular.get<YourDataStore>();
   final controller = Modular.get<PerfilController>();
   final bool isForHome = Modular.to.path.contains('home');
@@ -26,7 +27,25 @@ class YourDataPageState extends State<YourDataPage>{
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     store.loadUserdata();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    super.didChangeAppLifecycleState(state);
+    bool? screenLock =  await isLockScreen();
+    if(screenLock != null){
+      if (state == AppLifecycleState.inactive && screenLock) {
+        SystemNavigator.pop();
+      }
+    }
   }
 
   @override

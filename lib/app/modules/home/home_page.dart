@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -8,6 +9,7 @@ import 'package:toctoc/app/modules/home/friend_list/friend_list_page.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 import 'home_store.dart';
 import 'package:toctoc/app/shared/services/notification_service.dart';
+import 'package:is_lock_screen/is_lock_screen.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
@@ -17,12 +19,13 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>{
+class _HomePageState extends State<HomePage> with WidgetsBindingObserver{
   final store = Modular.get<HomeStore>();
   final controller = Modular.get<HomeController>();
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     Modular.dispose<HomeStore>();
     super.dispose();
   }
@@ -30,9 +33,21 @@ class _HomePageState extends State<HomePage>{
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     Modular.to.navigate('./perfil/');
     controller.saveToken();
     NotificationService.loadSound();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    super.didChangeAppLifecycleState(state);
+    bool? screenLock =  await isLockScreen();
+    if(screenLock != null){
+      if (state == AppLifecycleState.inactive && screenLock) {
+        SystemNavigator.pop();
+      }
+    }
   }
 
   void _requestNotificationPermission(){
