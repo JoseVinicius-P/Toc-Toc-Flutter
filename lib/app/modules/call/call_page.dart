@@ -77,7 +77,7 @@ class CallPageState extends State<CallPage> {
                             ),
                             const SizedBox(height: 5,),
                             AutoSizeText(
-                              'Você está sendo visitado!',
+                              'Você está recebendo uma visita!',
                               style: theme.textTheme.labelMedium!.copyWith(fontSize: 18, color: MyColors.textColor.withOpacity(0.3)),
                               maxFontSize: 6.sw.roundToDouble(),
                               minFontSize: 3.sw.roundToDouble(),
