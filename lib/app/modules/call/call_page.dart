@@ -6,7 +6,6 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/call/call_store.dart';
 import 'package:flutter/material.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
-import 'package:toctoc/app/shared/services/notification_service.dart';
 
 class CallPage extends StatefulWidget {
   final String title;
@@ -94,6 +93,93 @@ class CallPageState extends State<CallPage> {
                 );
               }
             ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: MyColors.errorRed, // Altera a cor de fundo
+                          shape: const CircleBorder(),
+                          disabledBackgroundColor: MyColors.errorRed,
+                        ),
+                        onPressed: (){},
+                        child: const Padding(
+                          padding: EdgeInsets.all(13.0),
+                          child: Icon(Icons.close, color: Colors.white,),
+                        ),
+                      ),
+                      AutoSizeText(
+                        'Não estou\nem casa',
+                        style: theme.textTheme.titleSmall!.copyWith(fontSize: 15),
+                        maxFontSize: 6.sw.roundToDouble(),
+                        minFontSize: 3.sw.roundToDouble(),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: MyColors.blue, // Altera a cor de fundo
+                          shape: const CircleBorder(),
+                          disabledBackgroundColor: MyColors.blue,
+                        ),
+                        onPressed: (){},
+                        child: const Padding(
+                          padding: EdgeInsets.all(18.0),
+                          child: Icon(Icons.meeting_room_outlined, color: Colors.white, size: 30,),
+                        ),
+                      ),
+                      AutoSizeText(
+                        'Estou indo!\n ',
+                        style: theme.textTheme.titleSmall!.copyWith(fontSize: 18),
+                        maxFontSize: 6.sw.roundToDouble(),
+                        minFontSize: 3.sw.roundToDouble(),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 15,),
+                    ],
+                  ),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: MyColors.lightGray, // Altera a cor de fundo
+                          shape: const CircleBorder(),
+                          disabledBackgroundColor: MyColors.lightGray,
+                        ),
+                        onPressed: (){},
+                        child: const Padding(
+                          padding: EdgeInsets.all(13.0),
+                          child: Icon(Icons.door_back_door_outlined, color: MyColors.textColor,),
+                        ),
+                      ),
+                      AutoSizeText(
+                        'Ignorar\n ',
+                        style: theme.textTheme.titleSmall!.copyWith(fontSize: 15),
+                        maxFontSize: 6.sw.roundToDouble(),
+                        minFontSize: 3.sw.roundToDouble(),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            )
           ],
         )
     );
