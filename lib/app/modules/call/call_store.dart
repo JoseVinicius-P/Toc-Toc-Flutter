@@ -1,13 +1,14 @@
 import 'dart:convert';
-
+import 'package:toctoc/app/modules/call/call_service.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:toctoc/app/shared/services/notification_service.dart';
 
 class CallStore extends Store<Map<String, dynamic>> {
+  final CallService service;
 
-  CallStore() : super({
+  CallStore(this.service) : super({
     'name': '',
     'profilePictureUrl': ''
   });
@@ -32,6 +33,10 @@ class CallStore extends Store<Map<String, dynamic>> {
         Modular.to.pop();
       }
     }
+  }
+
+  void sendReply(String reply, String uidCall){
+    service.sendReply(reply, uidCall);
   }
 
 }

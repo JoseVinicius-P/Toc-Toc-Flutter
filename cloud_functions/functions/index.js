@@ -7,6 +7,7 @@ exports.sendNotificationOnCallCreation = functions.firestore
     .onWrite(async (snapshot, context) => {
       const callData = snapshot.after.data();
       const userId = context.params.userId;
+      const callId = context.params.callId;
 
       const userDocRef = admin.firestore().doc("Users/"+userId);
       const userDoc = await userDocRef.get();
@@ -17,6 +18,7 @@ exports.sendNotificationOnCallCreation = functions.firestore
         data: {
           name: callData.name,
           profilePictureUrl: callData.profilePictureUrl,
+          callId: callId,
         },
         notification: {
           title: "Toc Toc!",
