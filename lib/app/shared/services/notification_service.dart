@@ -53,7 +53,8 @@ class NotificationService{
       ),
       onDidReceiveNotificationResponse: (details){
         Modular.to.navigate("/call/", arguments: {
-          'data': details.payload
+          'data': details.payload,
+          'receivingCall' : true,
         });
       },
     );
@@ -62,7 +63,8 @@ class NotificationService{
   static void initMessagingListeners(){
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       Modular.to.navigate('/call/', arguments: {
-      'data': jsonEncode(message.data),
+        'data': jsonEncode(message.data),
+        'receivingCall' : true,
       });
     });
 

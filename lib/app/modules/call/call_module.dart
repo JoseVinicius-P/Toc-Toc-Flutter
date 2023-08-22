@@ -10,6 +10,7 @@ class CallModule extends Module {
     Bind.lazySingleton((i) => CallStore(i())),
   ];
 
+
   @override
   final List<ModularRoute> routes = [
     ChildRoute('/', child: (_, args) {
@@ -19,7 +20,8 @@ class CallModule extends Module {
       }catch(e){
         data = null;
       }
-      return CallPage(data:data);
+      bool receivingCall = args.data['receivingCall'];
+      return CallPage(data:data, receivingCall: receivingCall);
     }),
   ];
 
