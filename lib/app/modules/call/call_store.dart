@@ -13,7 +13,7 @@ class CallStore extends Store<Map<String, dynamic>> {
     'profilePictureUrl': ''
   });
 
-  Future<void> loadMessageData(String? receiveData) async {
+  Future<void> loadData(String? receiveData) async {
     if(receiveData != null){
       update(jsonDecode(receiveData));
     }else{
@@ -33,6 +33,10 @@ class CallStore extends Store<Map<String, dynamic>> {
         Modular.to.pop();
       }
     }
+  }
+
+  Future<void> callFriend(String friendUid) async {
+    await service.callFriend(friendUid);
   }
 
   void sendReply(String reply, String uidCall) async {

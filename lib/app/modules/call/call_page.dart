@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -25,7 +26,11 @@ class CallPageState extends State<CallPage> {
   @override
   void initState() {
     super.initState();
-    store.loadMessageData(widget.data);
+    store.loadData(widget.data);
+    if(!widget.receivingCall){
+      Map<String, dynamic> data = jsonDecode(widget.data!);
+      store.callFriend(data['friendUid']);
+    }
     startTimer();
   }
 

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -105,7 +107,17 @@ class FriendListPageState extends State<FriendListPage> {
                                     store: selectFriendStore,
                                     builder: (context, tripleSelectFriend) {
                                       return InkWell(
-                                        onTap: () => selectFriendStore.callFriend(friends[index]),
+                                        onTap: (){
+                                          String data = jsonEncode({
+                                            'name': friends[index].name,
+                                            'profilePictureUrl': friends[index].profilePictureUrl,
+                                            'friendUid': friends[index].uid
+                                          });
+                                          Modular.to.pushNamed('/call/', arguments: {
+                                            'data' : data,
+                                            'receivingCall': false,
+                                          });
+                                        },
                                         child: FriendItem(
                                           friend: friends[index],
                                           inCall: tripleSelectFriend.state as FriendModel == friends[index],
