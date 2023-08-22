@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 class CallService {
   final db = FirebaseFirestore.instance;
 
-  void sendReply(String reply, String uidCall) async {
+  Future<void> sendReply(String reply, String uidCall) async {
     DocumentReference callRef = db.collection("Users")
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .collection("Calls")

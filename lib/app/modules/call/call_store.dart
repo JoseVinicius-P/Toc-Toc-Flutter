@@ -35,8 +35,9 @@ class CallStore extends Store<Map<String, dynamic>> {
     }
   }
 
-  void sendReply(String reply, String uidCall){
-    service.sendReply(reply, uidCall);
+  void sendReply(String reply, String uidCall) async {
+    await service.sendReply(reply, uidCall);
+    Modular.to.pop();
   }
 
 }
