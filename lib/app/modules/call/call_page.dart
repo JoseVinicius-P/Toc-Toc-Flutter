@@ -10,6 +10,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/call/call_store.dart';
 import 'package:flutter/material.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
+import 'package:toctoc/app/shared/services/notification_service.dart';
 
 class CallPage extends StatefulWidget {
   final String title;
@@ -30,12 +31,17 @@ class CallPageState extends State<CallPage> {
     if(!widget.receivingCall){
       Map<String, dynamic> data = jsonDecode(widget.data!);
       store.callFriend(data['friendUid']);
+      startTimer(30);
+    }else{
+      NotificationService.stopNotificationDurationSecondsCount();
+      startTimer(30-NotificationService.notificationDurationSeconds);
+      NotificationService.notificationDurationSeconds = 0;
     }
-    startTimer();
+    
   }
 
-  void startTimer(){
-    timer = Timer(const Duration(seconds: 30), () {
+  void startTimer(int seconds){
+    timer = Timer(Duration(seconds: seconds), () {
       if(widget.receivingCall == true){
         SystemNavigator.pop();
       }else{

@@ -13,6 +13,8 @@ import 'package:flutter_timezone/flutter_timezone.dart';
 
 class NotificationService{
   static final notification = FlutterLocalNotificationsPlugin();
+  static Timer? timer;
+  static int notificationDurationSeconds = 0;
 
   static void init(){
     initLocalNotifications();
@@ -83,6 +85,24 @@ class NotificationService{
     NotificationService.fullScreenNotification(message, 'backgroundMessageHandler');
   }
 
+  static countDurationSecondsNotification(){
+    timer = Timer.periodic(const Duration(seconds: 1), (Timer t) async {
+        notificationDurationSeconds++;
+        if(notificationDurationSeconds >= 30){
+          timer!.cancel();
+          notificationDurationSeconds = 0;
+          await notification.cancelAll();
+        }
+    });
+  }
+
+  static stopNotificationDurationSecondsCount(){
+    if(timer != null){
+      timer!.cancel();
+    }
+  }
+
+
    static fullScreenNotification(RemoteMessage message, String origem) async {
     try{
       final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -108,6 +128,7 @@ class NotificationService{
           UILocalNotificationDateInterpretation.absoluteTime,
           payload: jsonEncode(message.data),
       );
+      countDurationSecondsNotification();
     }catch(e, s){
       debugPrint("ERRO: $e, $s");
     }
