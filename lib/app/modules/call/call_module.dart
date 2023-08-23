@@ -15,12 +15,17 @@ class CallModule extends Module {
   final List<ModularRoute> routes = [
     ChildRoute('/', child: (_, args) {
       String? data;
+      bool receivingCall;
       try{
         data = args.data['data'];
       }catch(e){
         data = null;
       }
-      bool receivingCall = args.data['receivingCall'];
+      try{
+        receivingCall = args.data['receivingCall'];
+      }catch(e){
+        receivingCall = true;
+      }
       return CallPage(data:data, receivingCall: receivingCall);
     }),
   ];
