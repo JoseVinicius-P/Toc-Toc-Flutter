@@ -54,7 +54,7 @@ class NotificationService{
         android: AndroidInitializationSettings('@mipmap/ic_launcher'),
       ),
       onDidReceiveNotificationResponse: (details){
-        Modular.to.navigate("/call/", arguments: {
+        Modular.to.pushNamed("/call/", arguments: {
           'data': details.payload,
           'receivingCall' : true,
         });
@@ -64,7 +64,7 @@ class NotificationService{
 
   static void initMessagingListeners(){
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      Modular.to.navigate('/call/', arguments: {
+      Modular.to.pushNamed('/call/', arguments: {
         'data': jsonEncode(message.data),
         'receivingCall' : true,
       });

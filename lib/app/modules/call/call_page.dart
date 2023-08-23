@@ -37,16 +37,11 @@ class CallPageState extends State<CallPage> {
       startTimer(30-NotificationService.notificationDurationSeconds);
       NotificationService.notificationDurationSeconds = 0;
     }
-    
   }
 
   void startTimer(int seconds){
     timer = Timer(Duration(seconds: seconds), () {
-      if(widget.receivingCall == true){
-        SystemNavigator.pop();
-      }else{
-        Modular.to.pop();
-      }
+      Modular.to.pop();
     });
   }
 
