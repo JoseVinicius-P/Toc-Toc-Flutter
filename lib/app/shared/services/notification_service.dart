@@ -60,6 +60,7 @@ class NotificationService{
         });
       },
     );
+    createDeafaultChannel();
   }
 
   static void initMessagingListeners(){
@@ -102,11 +103,41 @@ class NotificationService{
     }
   }
 
+  static createDeafaultChannel() async {
+
+    AndroidNotificationChannel androidNotificationChannel =
+    const AndroidNotificationChannel(
+      'Visitas',
+      'Visitas',
+      description: 'Notificação para visitas dos seus amigos',
+      playSound: false,
+    );
+
+    final List<AndroidNotificationChannel>? channels =
+    await notification
+        .resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin>()!
+        .getNotificationChannels();
+
+    if(channels == null){
+      await notification
+          .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
+          ?.createNotificationChannel(androidNotificationChannel);
+    }else if(channels.isEmpty || !channels.contains(androidNotificationChannel)){
+      await notification
+          .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
+          ?.createNotificationChannel(androidNotificationChannel);
+    }
+  }
 
    static fullScreenNotification(RemoteMessage message, String origem) async {
+    notificationDurationSeconds = 0;
     try{
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       String sound = prefs.getString('sound')!.replaceAll('.mp3', '');
+      print("Sound: $sound");
       await notification.zonedSchedule(
           0,
           message.notification!.title,
@@ -116,11 +147,11 @@ class NotificationService{
               android: AndroidNotificationDetails(
                 'Visitas - $sound',
                 'Visitas - $sound',
-                channelDescription: 'Notificação para visitas dos seus amigos com som $sound',
+                channelDescription: 'Notificação para visitas dos seus amigos com o som "$sound"',
                 priority: Priority.high,
                 importance: Importance.high,
                 fullScreenIntent: true,
-                sound: RawResourceAndroidNotificationSound(sound.toLowerCase())
+                sound: RawResourceAndroidNotificationSound(sound.toLowerCase()),
               )
           ),
           androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
