@@ -8,7 +8,6 @@ import 'package:toctoc/app/modules/home/add_friend/add_friend_page.dart';
 import 'package:toctoc/app/modules/home/friend_list/friend_list_page.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 import 'home_store.dart';
-import 'package:toctoc/app/shared/services/notification_service.dart';
 import 'package:is_lock_screen/is_lock_screen.dart';
 
 class HomePage extends StatefulWidget {
@@ -36,7 +35,6 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver{
     WidgetsBinding.instance.addObserver(this);
     Modular.to.navigate('./perfil/');
     controller.saveToken();
-    NotificationService.loadSound();
   }
 
   @override

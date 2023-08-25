@@ -34,6 +34,7 @@ class SelectSoundStore extends Store<String> {
       if(await service.saveSound(state)){
         perfilStore.setSound(state);
         whenToComplete();
+        setLoading(false);
       }else{
         setError("Algo deu errado, tente novamente!");
         setLoading(false);

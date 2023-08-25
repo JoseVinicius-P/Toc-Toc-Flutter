@@ -1,12 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/data/latest_all.dart' as timezone;
 import 'package:timezone/timezone.dart' as timezone;
 import 'package:flutter_timezone/flutter_timezone.dart';
@@ -20,26 +17,6 @@ class NotificationService{
     initLocalNotifications();
     initMessagingListeners();
     initTimezone();
-    loadSound();
-  }
-
-  static void loadSound() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? sharedSound;
-    try{
-      sharedSound = prefs.getString('sound');
-    }catch(e){
-      debugPrint("$e");
-    }
-    if(sharedSound == null){
-      DocumentReference docRef = FirebaseFirestore.instance.collection('Users').doc(FirebaseAuth.instance.currentUser!.uid);
-      DocumentSnapshot snapshot = await docRef.get();
-      if(snapshot.get('sound') != null){
-        prefs.setString('sound', snapshot.get('sound'));
-      }else{
-        prefs.setString('sound', 'TocToc');
-      }
-    }
   }
 
   static void initTimezone() async {
@@ -135,9 +112,7 @@ class NotificationService{
    static fullScreenNotification(RemoteMessage message, String origem) async {
     notificationDurationSeconds = 0;
     try{
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-      String sound = prefs.getString('sound')!.replaceAll('.mp3', '');
-      print("Sound: $sound");
+      String sound = (message.data['sound'] as String).replaceAll('.mp3', '');
       await notification.zonedSchedule(
           0,
           message.notification!.title,

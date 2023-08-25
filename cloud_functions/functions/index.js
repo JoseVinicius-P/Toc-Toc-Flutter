@@ -19,6 +19,7 @@ exports.sendNotificationOnCallCreation = functions.firestore
           name: callData.name,
           profilePictureUrl: callData.profilePictureUrl,
           callId: callId,
+          sound: userData.sound,
         },
         notification: {
           title: "Toc Toc!",
