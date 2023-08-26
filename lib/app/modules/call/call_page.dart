@@ -40,8 +40,8 @@ class CallPageState extends State<CallPage> {
   }
 
   void startTimer(int seconds){
-    timer = Timer(Duration(seconds: seconds), () {
-      Modular.to.pop();
+    timer = Timer(Duration(seconds: seconds), () async {
+      store.closeCallModule();
     });
   }
 
@@ -134,7 +134,7 @@ class CallPageState extends State<CallPage> {
                           ),
                           onPressed: () {
                             stopTimer();
-                            Modular.to.pop();
+                            store.closeCallModule();
                           },
                           child: const Padding(
                             padding: EdgeInsets.all(18.0),
@@ -224,7 +224,7 @@ class CallPageState extends State<CallPage> {
                               overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.center,
                             ),
-                            SizedBox(height: 15,),
+                            const SizedBox(height: 15,),
                           ],
                         ),
                         Column(
@@ -236,7 +236,7 @@ class CallPageState extends State<CallPage> {
                                 shape: const CircleBorder(),
                                 disabledBackgroundColor: MyColors.lightGray,
                               ),
-                              onPressed: (){},
+                              onPressed: () => store.closeCallModule(),
                               child: const Padding(
                                 padding: EdgeInsets.all(13.0),
                                 child: Icon(Icons.door_back_door_outlined, color: MyColors.textColor,),

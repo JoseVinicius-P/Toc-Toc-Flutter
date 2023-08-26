@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/services.dart';
 import 'package:toctoc/app/modules/call/call_service.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -41,7 +42,11 @@ class CallStore extends Store<Map<String, dynamic>> {
 
   void sendReply(String reply, String uidCall) async {
     await service.sendReply(reply, uidCall);
-    Modular.to.pop();
+    closeCallModule();
+  }
+
+  void closeCallModule() async {
+    SystemNavigator.pop();
   }
 
 }
