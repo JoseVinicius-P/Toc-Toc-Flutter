@@ -15,18 +15,24 @@ class CallModule extends Module {
   final List<ModularRoute> routes = [
     ChildRoute('/', child: (_, args) {
       String? data;
-      bool receivingCall;
+      bool isReceivingCall;
+      bool isAppInBackground;
       try{
         data = args.data['data'];
       }catch(e){
         data = null;
       }
       try{
-        receivingCall = args.data['receivingCall'];
+        isReceivingCall = args.data['receivingCall'];
       }catch(e){
-        receivingCall = true;
+        isReceivingCall = true;
       }
-      return CallPage(data:data, receivingCall: receivingCall);
+      try{
+        isAppInBackground = args.data['isAppInBackground'];
+      }catch(e){
+        isAppInBackground = true;
+      }
+      return CallPage(data:data, isReceivingCall: isReceivingCall, isAppInBackground: isAppInBackground);
     }),
   ];
 

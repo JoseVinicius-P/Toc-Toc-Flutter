@@ -15,8 +15,9 @@ import 'package:toctoc/app/shared/services/notification_service.dart';
 class CallPage extends StatefulWidget {
   final String title;
   final String? data;
-  final bool receivingCall;
-  const CallPage({Key? key, this.title = 'CallPage', this.data, required this.receivingCall}) : super(key: key);
+  final bool isReceivingCall;
+  final bool isAppInBackground;
+  const CallPage({Key? key, this.title = 'CallPage', this.data, required this.isReceivingCall, required this.isAppInBackground}) : super(key: key);
   @override
   CallPageState createState() => CallPageState();
 }
@@ -28,7 +29,7 @@ class CallPageState extends State<CallPage> {
   void initState() {
     super.initState();
     store.loadData(widget.data);
-    if(!widget.receivingCall){
+    if(!widget.isReceivingCall){
       Map<String, dynamic> data = jsonDecode(widget.data!);
       store.callFriend(data['friendUid']);
       startTimer(30);
@@ -41,13 +42,22 @@ class CallPageState extends State<CallPage> {
 
   void startTimer(int seconds){
     timer = Timer(Duration(seconds: seconds), () async {
-      store.closeCallModule(widget.receivingCall);
+      closeCallModule();
     });
   }
 
   void stopTimer(){
     if(timer != null){
       timer!.cancel();
+    }
+  }
+
+  void closeCallModule() async {
+    await NotificationService.notification.cancelAll();
+    if(widget.isReceivingCall && widget.isAppInBackground){
+      SystemNavigator.pop();
+    }else{
+      Modular.to.pop();
     }
   }
 
@@ -102,7 +112,7 @@ class CallPageState extends State<CallPage> {
                         ),
                         const SizedBox(height: 5,),
                         AutoSizeText(
-                          widget.receivingCall ? 'Você está recebendo uma visita!' : 'Você está fazendo uma visita!',
+                          widget.isReceivingCall ? 'Você está recebendo uma visita!' : 'Você está fazendo uma visita!',
                           style: theme.textTheme.labelMedium!.copyWith(fontSize: 18, color: MyColors.textColor.withOpacity(0.3)),
                           maxFontSize: 6.sw.roundToDouble(),
                           minFontSize: 3.sw.roundToDouble(),
@@ -117,7 +127,7 @@ class CallPageState extends State<CallPage> {
               }
             ),
             Visibility(
-              visible: !widget.receivingCall,
+              visible: !widget.isReceivingCall,
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Row(
@@ -134,7 +144,7 @@ class CallPageState extends State<CallPage> {
                           ),
                           onPressed: () {
                             stopTimer();
-                            store.closeCallModule(true);
+                            closeCallModule();
                           },
                           child: const Padding(
                             padding: EdgeInsets.all(18.0),
@@ -158,7 +168,7 @@ class CallPageState extends State<CallPage> {
               ),
             ),
             Visibility(
-              visible: widget.receivingCall,
+              visible: widget.isReceivingCall,
               child: TripleBuilder(
                 store: store,
                 builder: (context, triple) {
@@ -177,9 +187,10 @@ class CallPageState extends State<CallPage> {
                                 shape: const CircleBorder(),
                                 disabledBackgroundColor: MyColors.errorRed,
                               ),
-                              onPressed: () {
+                              onPressed: () async{
                                 stopTimer();
-                                store.sendReply("Não está em casa!", data['callId']);
+                                await store.sendReply("Não está em casa!", data['callId']);
+                                closeCallModule();
                               },
                               child: const Padding(
                                 padding: EdgeInsets.all(13.0),
@@ -206,9 +217,10 @@ class CallPageState extends State<CallPage> {
                                 shape: const CircleBorder(),
                                 disabledBackgroundColor: MyColors.blue,
                               ),
-                              onPressed: () {
+                              onPressed: () async {
                                 stopTimer();
-                                store.sendReply("Está vindo atender!", data['callId']);
+                                await store.sendReply("Estou indo!", data['callId']);
+                                closeCallModule();
                               },
                               child: const Padding(
                                 padding: EdgeInsets.all(18.0),
@@ -236,7 +248,7 @@ class CallPageState extends State<CallPage> {
                                 shape: const CircleBorder(),
                                 disabledBackgroundColor: MyColors.lightGray,
                               ),
-                              onPressed: () => store.closeCallModule(true),
+                              onPressed: () => closeCallModule(),
                               child: const Padding(
                                 padding: EdgeInsets.all(13.0),
                                 child: Icon(Icons.door_back_door_outlined, color: MyColors.textColor,),

@@ -116,6 +116,7 @@ class FriendListPageState extends State<FriendListPage> {
                                           Modular.to.pushNamed('/call/', arguments: {
                                             'data' : data,
                                             'receivingCall': false,
+                                            'isAppInBackground': false,
                                           });
                                         },
                                         child: FriendItem(
