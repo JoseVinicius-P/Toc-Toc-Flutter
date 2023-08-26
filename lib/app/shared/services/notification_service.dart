@@ -117,7 +117,7 @@ class NotificationService{
           0,
           message.notification!.title,
           message.notification!.body,
-          timezone.TZDateTime.now(timezone.local).add(const Duration(milliseconds: 50)),
+          timezone.TZDateTime.now(timezone.local).add(const Duration(seconds: 1)),
           NotificationDetails(
               android: AndroidNotificationDetails(
                 'Visitas - $sound',
