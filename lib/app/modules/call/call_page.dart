@@ -41,7 +41,7 @@ class CallPageState extends State<CallPage> {
 
   void startTimer(int seconds){
     timer = Timer(Duration(seconds: seconds), () async {
-      store.closeCallModule();
+      store.closeCallModule(widget.receivingCall);
     });
   }
 
@@ -134,7 +134,7 @@ class CallPageState extends State<CallPage> {
                           ),
                           onPressed: () {
                             stopTimer();
-                            store.closeCallModule();
+                            store.closeCallModule(true);
                           },
                           child: const Padding(
                             padding: EdgeInsets.all(18.0),
@@ -236,7 +236,7 @@ class CallPageState extends State<CallPage> {
                                 shape: const CircleBorder(),
                                 disabledBackgroundColor: MyColors.lightGray,
                               ),
-                              onPressed: () => store.closeCallModule(),
+                              onPressed: () => store.closeCallModule(true),
                               child: const Padding(
                                 padding: EdgeInsets.all(13.0),
                                 child: Icon(Icons.door_back_door_outlined, color: MyColors.textColor,),

@@ -42,11 +42,17 @@ class CallStore extends Store<Map<String, dynamic>> {
 
   void sendReply(String reply, String uidCall) async {
     await service.sendReply(reply, uidCall);
-    closeCallModule();
+    closeCallModule(true);
   }
 
-  void closeCallModule() async {
-    SystemNavigator.pop();
+  void closeCallModule(bool closeApp) async {
+    await NotificationService.notification.cancelAll();
+    if(closeApp){
+      SystemNavigator.pop();
+    }else{
+      Modular.to.pop();
+    }
+
   }
 
 }

@@ -124,8 +124,10 @@ class NotificationService{
                 'Visitas - $sound',
                 channelDescription: 'Notificação para visitas dos seus amigos com o som "$sound"',
                 priority: Priority.high,
-                importance: Importance.high,
+                importance: Importance.max,
                 fullScreenIntent: true,
+                ongoing: true,
+                autoCancel: false,
                 sound: RawResourceAndroidNotificationSound(sound.toLowerCase()),
               )
           ),
