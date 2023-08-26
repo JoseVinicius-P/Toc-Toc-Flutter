@@ -189,7 +189,7 @@ class CallPageState extends State<CallPage> {
                               ),
                               onPressed: () async{
                                 stopTimer();
-                                await store.sendReply("Não está em casa!", data['callId']);
+                                await store.sendReply("Não estou em casa!", data['callId']);
                                 closeCallModule();
                               },
                               child: const Padding(
