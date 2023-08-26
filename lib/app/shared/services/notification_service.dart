@@ -41,13 +41,6 @@ class NotificationService{
   }
 
   static void initMessagingListeners(){
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      Modular.to.pushNamed('/call/', arguments: {
-        'data': jsonEncode(message.data),
-        'receivingCall' : true,
-      });
-    });
-
     FirebaseMessaging.onMessage.listen((event) async {
       initTimezone();
       await NotificationService.fullScreenNotification(event, 'onMessage');
