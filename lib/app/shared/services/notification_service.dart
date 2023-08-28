@@ -45,7 +45,7 @@ class NotificationService{
   static void initMessagingListeners(){
     FirebaseMessaging.onMessage.listen((event) async {
       initTimezone();
-      await NotificationService.fullScreenNotification(event, 'foreground');
+      await NotificationService.fullScreenNotification(event, false);
     });
 
     FirebaseMessaging.onBackgroundMessage(backgroundMessageHandler);
@@ -55,7 +55,7 @@ class NotificationService{
     //O firebase estava interceptando a chamada e enviando uma notificação padrão, o Cancel cancela todas e impede que a notificação automatica seja exibida
     await notification.cancelAll();
     initTimezone();
-    NotificationService.fullScreenNotification(message, 'background');
+    NotificationService.fullScreenNotification(message, true);
   }
 
   static countDurationSecondsNotification(){
@@ -104,15 +104,12 @@ class NotificationService{
     }
   }
 
-   static fullScreenNotification(RemoteMessage message, String origin) async {
+   static fullScreenNotification(RemoteMessage message, bool isAppInBackground) async {
     notificationDurationSeconds = 0;
     try{
       String sound = (message.data['sound'] as String).replaceAll('.mp3', '');
-      if(origin == 'foreground'){
-        message.data.putIfAbsent('isAppInBackground', () => false);
-      }else{
-        message.data.putIfAbsent('isAppInBackground', () => true);
-      }
+      message.data.putIfAbsent('isAppInBackground', () => isAppInBackground);
+
       await notification.zonedSchedule(
           0,
           message.notification!.title,
