@@ -68,8 +68,18 @@ dependencies:
   is_lock_screen: ^2.0.0
 
 dev_dependencies:
+  #Para criação de icone
+  flutter_launcher_icons: "^0.13.1"
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "images/icon.jpg"
+  min_sdk_android: 21
+
   flutter_test:
     sdk: flutter
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
