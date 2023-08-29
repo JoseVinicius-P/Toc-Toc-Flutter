@@ -3,12 +3,14 @@ import 'dart:convert';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/modules/call/call_store.dart';
 import 'package:flutter/material.dart';
+import 'package:toctoc/app/modules/call/receiving_reply_call_store.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 import 'package:toctoc/app/shared/services/notification_service.dart';
 
@@ -22,17 +24,19 @@ class CallPage extends StatefulWidget {
   CallPageState createState() => CallPageState();
 }
 class CallPageState extends State<CallPage> {
-  final CallStore store = Modular.get();
+  final callStore = Modular.get<CallStore>();
+  final receivingReplyCallStore = Modular.get<ReceivingReplyCallStore>();
   Timer? timer;
 
   @override
   void initState() {
     super.initState();
-    store.loadData(widget.data);
+    callStore.loadData(widget.data);
     if(!widget.isReceivingCall){
       Map<String, dynamic> data = jsonDecode(widget.data!);
-      store.callFriend(data['friendUid']);
-      startTimer(30);
+      callStore.callFriend(data['friendUid']);
+      receivingReplyCallStore.messageListener(data['friendUid']);
+      //startTimer(30);
     }else{
       NotificationService.stopNotificationDurationSecondsCount();
       startTimer(30-NotificationService.notificationDurationSeconds);
@@ -72,7 +76,7 @@ class CallPageState extends State<CallPage> {
               color: Colors.white,
             ),
             TripleBuilder(
-              store: store,
+              store: callStore,
               builder: (context, triple) {
                 var data = triple.state as Map<String, dynamic>;
                 return Padding(
@@ -97,7 +101,8 @@ class CallPageState extends State<CallPage> {
                                 ),
                                 radius: 40.sw.roundToDouble(),
                               ),
-                            ),
+                            )
+
                           ],
                         ),
                         const SizedBox(height: 10,),
@@ -120,6 +125,36 @@ class CallPageState extends State<CallPage> {
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.center,
                         ),
+                        const SizedBox(height: 50,),
+                        TripleBuilder(
+                            store: receivingReplyCallStore,
+                            builder: (builder, triple){
+                              String reply = triple.state as String;
+                              if(reply != ''){
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(15),
+                                    ),
+                                    color: Colors.grey.withOpacity(0.1)
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: AutoSizeText(
+                                      reply,
+                                      style: theme.textTheme.labelMedium!.copyWith(fontSize: 18, color: MyColors.textColor),
+                                      maxFontSize: 6.sw.roundToDouble(),
+                                      minFontSize: 3.sw.roundToDouble(),
+                                      maxLines: 3,
+                                      overflow: TextOverflow.ellipsis,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                );
+                              }else{
+                                return const SizedBox();
+                              }
+                            }),
                       ],
                     ) ,
                   ),
@@ -170,7 +205,7 @@ class CallPageState extends State<CallPage> {
             Visibility(
               visible: widget.isReceivingCall,
               child: TripleBuilder(
-                store: store,
+                store: callStore,
                 builder: (context, triple) {
                   var data = triple.state as Map<String, dynamic>;
                   return Align(
@@ -189,7 +224,7 @@ class CallPageState extends State<CallPage> {
                               ),
                               onPressed: () async{
                                 stopTimer();
-                                await store.sendReply("Não estou em casa!", data['callId']);
+                                await callStore.sendReply("Não estou em casa!", data['callId']);
                                 closeCallModule();
                               },
                               child: const Padding(
@@ -219,7 +254,7 @@ class CallPageState extends State<CallPage> {
                               ),
                               onPressed: () async {
                                 stopTimer();
-                                await store.sendReply("Estou indo!", data['callId']);
+                                await callStore.sendReply("Estou indo!", data['callId']);
                                 closeCallModule();
                               },
                               child: const Padding(

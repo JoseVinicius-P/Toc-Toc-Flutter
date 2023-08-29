@@ -1,3 +1,4 @@
+import 'package:toctoc/app/modules/call/receiving_reply_call_store.dart';
 import 'package:toctoc/app/modules/call/call_service.dart';
 import 'package:toctoc/app/modules/call/call_page.dart';
 import 'package:toctoc/app/modules/call/call_store.dart';
@@ -7,6 +8,7 @@ class CallModule extends Module {
   @override
   final List<Bind> binds = [
     Bind.lazySingleton((i) => CallService()),
+    Bind.lazySingleton((i) => ReceivingReplyCallStore(i())),
     Bind.lazySingleton((i) => CallStore(i())),
   ];
 
