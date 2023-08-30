@@ -37,18 +37,22 @@ class CallService implements Disposable{
       "profilePictureUrl" : snapshot.get("profilePictureUrl"),
       "date_hour" : Timestamp.now(),
     }, SetOptions(merge: true));
+  }
 
+  Future<void> deleteOldReply(String friendUid) async {
     DocumentReference editableDataRef = db.collection("Users")
         .doc(friendUid)
         .collection("Calls")
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection("EditableData").
-        doc("editableData");
+    doc("editableData");
 
     await editableDataRef.delete();
   }
 
-  void messageListener(String friendUid, Function(String) update){
+  void messageListener(String friendUid, Function(String) update) async {
+    await deleteOldReply(friendUid);
+
     final documentReference = db.collection("Users")
         .doc(friendUid)
         .collection("Calls")
