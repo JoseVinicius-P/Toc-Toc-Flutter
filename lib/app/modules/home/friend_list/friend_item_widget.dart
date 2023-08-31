@@ -47,16 +47,23 @@ class _FriendItemState extends State<FriendItem> {
             const SizedBox(width: 10,),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: <Widget> [
                 Text(
                   widget.friend.name,
                   style: theme.textTheme.labelSmall!.copyWith(fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 5,),
-                Text(
-                  "Última visita a 2 dias",
-                  style: theme.textTheme.labelMedium!.copyWith(fontSize: 12, color: MyColors.textColor.withOpacity(0.5)),
-                ),
+                Visibility(
+                  visible: widget.friend.lastVisit != null,
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 5,),
+                      Text(
+                        widget.friend.lastVisit.toString(),
+                        style: theme.textTheme.labelMedium!.copyWith(fontSize: 12, color: MyColors.textColor.withOpacity(0.5)),
+                      ),
+                    ],
+                  )
+                )
               ],
             ),
             const Spacer(),
