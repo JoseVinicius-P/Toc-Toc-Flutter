@@ -35,7 +35,7 @@ class CallPageState extends State<CallPage> {
       Map<String, dynamic> data = jsonDecode(widget.data!);
       callStore.callFriend(data['friendUid']);
       receivingReplyCallStore.messageListener(data['friendUid']);
-      //startTimer(30);
+      startTimer(30);
     }else{
       NotificationService.stopNotificationDurationSecondsCount();
       startTimer(30-NotificationService.notificationDurationSeconds);
