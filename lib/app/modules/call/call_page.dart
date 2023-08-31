@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
@@ -86,7 +85,17 @@ class CallPageState extends State<CallPage> {
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const SizedBox(height: 35,),
+                        const SizedBox(height: 15,),
+                        AutoSizeText(
+                          widget.isReceivingCall ? 'Você está recebendo uma visita!' : 'Você está fazendo uma visita!',
+                          style: theme.textTheme.labelMedium!.copyWith(fontSize: 18, color: MyColors.textColor.withOpacity(0.1)),
+                          maxFontSize: 6.sw.roundToDouble(),
+                          minFontSize: 3.sw.roundToDouble(),
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 30,),
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -115,41 +124,55 @@ class CallPageState extends State<CallPage> {
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.center,
                         ),
-                        const SizedBox(height: 5,),
-                        AutoSizeText(
-                          widget.isReceivingCall ? 'Você está recebendo uma visita!' : 'Você está fazendo uma visita!',
-                          style: theme.textTheme.labelMedium!.copyWith(fontSize: 18, color: MyColors.textColor.withOpacity(0.3)),
-                          maxFontSize: 6.sw.roundToDouble(),
-                          minFontSize: 3.sw.roundToDouble(),
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 50,),
+                        const SizedBox(height: 10,),
                         TripleBuilder(
                             store: receivingReplyCallStore,
                             builder: (builder, triple){
                               String reply = triple.state as String;
                               if(reply != ''){
-                                return Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: const BorderRadius.all(
-                                      Radius.circular(15),
+                                return Stack(
+                                  children: [
+                                    Center(
+                                      child: Transform.rotate(
+                                        angle: 0.8,
+                                        child: Container(
+                                          width: 15,
+                                          height: 15,
+                                          decoration: BoxDecoration(
+                                              borderRadius: const BorderRadius.only(topLeft: Radius.circular(2)),
+                                              color: MyColors.lightGray
+                                          ),
+                                        ),
+                                      ),
                                     ),
-                                    color: Colors.grey.withOpacity(0.1)
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(12.0),
-                                    child: AutoSizeText(
-                                      reply,
-                                      style: theme.textTheme.labelMedium!.copyWith(fontSize: 18, color: MyColors.textColor),
-                                      maxFontSize: 6.sw.roundToDouble(),
-                                      minFontSize: 3.sw.roundToDouble(),
-                                      maxLines: 3,
-                                      overflow: TextOverflow.ellipsis,
-                                      textAlign: TextAlign.center,
+                                    Center(
+                                      child: Column(
+                                        children: [
+                                          const SizedBox(height: 7.5,),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: const BorderRadius.all(
+                                                Radius.circular(15),
+                                              ),
+                                              color: MyColors.lightGray
+                                            ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(12.0),
+                                              child: AutoSizeText(
+                                                reply,
+                                                style: theme.textTheme.labelMedium!.copyWith(fontSize: 18, color: Colors.black),
+                                                maxFontSize: 6.sw.roundToDouble(),
+                                                minFontSize: 3.sw.roundToDouble(),
+                                                maxLines: 3,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
+                                  ],
                                 );
                               }else{
                                 return const SizedBox();
@@ -186,6 +209,7 @@ class CallPageState extends State<CallPage> {
                             child: Icon(Icons.close_rounded, color: Colors.white, size: 30,),
                           ),
                         ),
+                        SizedBox(height: 15,),
                         AutoSizeText(
                           'Fechar',
                           style: theme.textTheme.titleSmall!.copyWith(fontSize: 18),
