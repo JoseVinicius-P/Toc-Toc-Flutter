@@ -9,7 +9,7 @@ class FriendService {
   Future<List<FriendModel>> getFriends() async {
     List<FriendModel> friends = [];
     try{
-      await db.collection("Users").doc(FirebaseAuth.instance.currentUser!.uid).collection("Friends").get().then(
+      await db.collection("Users").doc(FirebaseAuth.instance.currentUser!.uid).collection("Friends").orderBy('lastVisit').get().then(
             (querySnapshot) {
           for (var docSnapshot in querySnapshot.docs) {
             FriendModel? friend = FriendModel().fromDocumentSnapshot(docSnapshot);
