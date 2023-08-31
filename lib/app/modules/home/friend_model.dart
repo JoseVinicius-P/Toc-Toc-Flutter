@@ -5,6 +5,7 @@ class FriendModel{
   late String uid;
   late String profilePictureUrl;
   late GeoPoint? location;
+  late Timestamp? lastVisit;
 
   FriendModel();
 
@@ -12,6 +13,13 @@ class FriendModel{
     try{
       location = snapshot.get('location');
     }catch(e){
+      location = null;
+      print("ERRO: $e");
+    }
+    try{
+      lastVisit = snapshot.get('lastVisit');
+    }catch(e){
+      lastVisit = null;
       print("ERRO: $e");
     }
 
@@ -29,7 +37,8 @@ class FriendModel{
     return {
       "name": name,
       "profilePictureUrl": profilePictureUrl,
-      'location': location
+      "location": location,
+      "lastVisit": lastVisit
     };
   }
 
