@@ -22,6 +22,17 @@ class CallService implements Disposable{
     }, SetOptions(merge: true));
   }
 
+  void updateLastVisit(String uidFriend) async {
+    DocumentReference callRef = db.collection("Users")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection("Friends")
+        .doc(uidFriend);
+
+    await callRef.set({
+      "lastVisit" : Timestamp.now(),
+    }, SetOptions(merge: true));
+  }
+
   Future<void> callFriend(String friendUid) async {
     //Isso aqui tem mudar, pegar o nome do usuario logado com shared preferences
     DocumentReference userRef = db.collection('Users').doc(FirebaseAuth.instance.currentUser!.uid);

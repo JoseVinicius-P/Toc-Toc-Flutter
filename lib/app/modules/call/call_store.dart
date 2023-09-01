@@ -41,6 +41,10 @@ class CallStore extends Store<Map<String, dynamic>> {
 
   Future<void> sendReply(String reply, String uidCall) async {
     await service.sendReply(reply, uidCall);
+
+    if(reply == "Estou indo!"){
+      service.updateLastVisit(uidCall);
+    }
   }
 
 }
