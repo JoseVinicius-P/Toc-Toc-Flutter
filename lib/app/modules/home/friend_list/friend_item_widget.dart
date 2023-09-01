@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:toctoc/app/modules/home/friend_list/utilities/last_visit_interpreter.dart';
 import 'package:toctoc/app/modules/home/friend_model.dart';
 import 'package:toctoc/app/shared/my_colors.dart';
 
@@ -58,7 +59,7 @@ class _FriendItemState extends State<FriendItem> {
                     children: [
                       const SizedBox(height: 5,),
                       Text(
-                        widget.friend.lastVisit.toString(),
+                        LastVisitInterpretrer.getElapsedPeriod(widget.friend.lastVisit!),
                         style: theme.textTheme.labelMedium!.copyWith(fontSize: 12, color: MyColors.textColor.withOpacity(0.5)),
                       ),
                     ],
