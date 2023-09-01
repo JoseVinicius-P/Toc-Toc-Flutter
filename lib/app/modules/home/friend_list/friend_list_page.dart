@@ -98,39 +98,61 @@ class FriendListPageState extends State<FriendListPage> {
                             store: friendListStore,
                             builder: (context, tripleFriendList) {
                               List<FriendModel> friends = tripleFriendList.state as List<FriendModel>;
-                              return ListView.separated(
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: friends.length,
-                                shrinkWrap: true,
-                                itemBuilder: (context, index) {
-                                  return TripleBuilder(
-                                    store: selectFriendStore,
-                                    builder: (context, tripleSelectFriend) {
-                                      return InkWell(
-                                        onTap: (){
-                                          String data = jsonEncode({
-                                            'name': friends[index].name,
-                                            'profilePictureUrl': friends[index].profilePictureUrl,
-                                            'friendUid': friends[index].uid
-                                          });
-                                          Modular.to.pushNamed('/call/', arguments: {
-                                            'data' : data,
-                                            'receivingCall': false,
-                                            'isAppInBackground': false,
-                                          });
-                                        },
-                                        child: FriendItem(
-                                          friend: friends[index],
-                                          inCall: tripleSelectFriend.state as FriendModel == friends[index],
-                                        )
-                                      );
-                                    }
-                                  );
-                                },
-                                separatorBuilder: (BuildContext context, int index) {
-                                  return const SizedBox(height: 15);
-                                },
-                              );
+                              if(friends.isNotEmpty){
+                                return ListView.separated(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: friends.length,
+                                  shrinkWrap: true,
+                                  itemBuilder: (context, index) {
+                                    return TripleBuilder(
+                                        store: selectFriendStore,
+                                        builder: (context, tripleSelectFriend) {
+                                          return InkWell(
+                                              onTap: (){
+                                                String data = jsonEncode({
+                                                  'name': friends[index].name,
+                                                  'profilePictureUrl': friends[index].profilePictureUrl,
+                                                  'friendUid': friends[index].uid
+                                                });
+                                                Modular.to.pushNamed('/call/', arguments: {
+                                                  'data' : data,
+                                                  'receivingCall': false,
+                                                  'isAppInBackground': false,
+                                                });
+                                              },
+                                              child: FriendItem(
+                                                friend: friends[index],
+                                                inCall: tripleSelectFriend.state as FriendModel == friends[index],
+                                              )
+                                          );
+                                        }
+                                    );
+                                  },
+                                  separatorBuilder: (BuildContext context, int index) {
+                                    return const SizedBox(height: 15);
+                                  },
+                                );
+                              }else{
+                                return Column(
+                                  children: [
+                                    const SizedBox(height: 50,),
+                                    Center(
+                                      child: SizedBox(
+                                        width: 200,
+                                        child: AutoSizeText(
+                                          'Você ainda não adicionou nenhum amigo',
+                                          style: theme.textTheme.labelMedium!.copyWith(fontSize: 17, color: MyColors.textColor.withOpacity(0.3)),
+                                          maxFontSize: 6.sw.roundToDouble(),
+                                          minFontSize: 2.sw.roundToDouble(),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              }
                             }
                           ),
                           const SizedBox(height: 15,),

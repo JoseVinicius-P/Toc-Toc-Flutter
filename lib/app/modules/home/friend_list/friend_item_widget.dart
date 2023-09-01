@@ -59,7 +59,7 @@ class _FriendItemState extends State<FriendItem> {
                     children: [
                       const SizedBox(height: 5,),
                       Text(
-                        LastVisitInterpretrer.getElapsedPeriod(widget.friend.lastVisit!),
+                        LastVisitInterpretrer.getElapsedPeriod(widget.friend.lastVisit),
                         style: theme.textTheme.labelMedium!.copyWith(fontSize: 12, color: MyColors.textColor.withOpacity(0.5)),
                       ),
                     ],
