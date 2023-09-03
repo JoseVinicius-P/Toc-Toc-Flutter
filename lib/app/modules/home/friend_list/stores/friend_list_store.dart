@@ -13,10 +13,24 @@ class FriendListStore extends Store<List<FriendModel>> {
     setLoading(true);
     update(await friendService.getFriends());
     setLoading(false);
-    listenDistanceFriends();
   }
 
   void listenDistanceFriends(){
     gpsService.listenDistanceFriends(state, (friendList) => update(friendList));
+  }
+
+  Future<bool> permissionLocationIsAllowed() async{
+    setLoading(true);
+    return await gpsService.permissionLocationIsAllowed();
+  }
+
+  Future<bool> requestLocationPermission() async {
+    setLoading(true);
+    return gpsService.requestLocationPermission();
+  }
+
+  Future<bool> isLocationEnabled() async {
+    setLoading(true);
+    return gpsService.isLocationEnabled();
   }
 }
