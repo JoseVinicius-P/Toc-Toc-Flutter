@@ -79,6 +79,28 @@ class SetHomePageState extends State<SetHomePage> with WidgetsBindingObserver{
     }
   }
 
+  Future<bool> alertDialogPermissionLocationWidget() async {
+    return await showDialog(
+      context: context,
+      barrierColor: Colors.black.withOpacity(0.4),
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return const AlertDialogPermissionLocationWidget();
+      },
+    );
+  }
+
+  Future<void> alertDialogEnableLocationWidget() async {
+    return await showDialog(
+      context: context,
+      barrierColor: Colors.black.withOpacity(0.4),
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return const AlertDialogEnableLocationWidget();
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -215,28 +237,6 @@ class SetHomePageState extends State<SetHomePage> with WidgetsBindingObserver{
             ),
           ],
         )
-    );
-  }
-
-  Future<bool> alertDialogPermissionLocationWidget() async {
-    return await showDialog(
-      context: context,
-      barrierColor: Colors.black.withOpacity(0.4),
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return const AlertDialogPermissionLocationWidget();
-      },
-    );
-  }
-
-  Future<void> alertDialogEnableLocationWidget() async {
-    return await showDialog(
-      context: context,
-      barrierColor: Colors.black.withOpacity(0.4),
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return const AlertDialogEnableLocationWidget();
-      },
     );
   }
 
