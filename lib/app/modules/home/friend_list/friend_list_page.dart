@@ -27,6 +27,19 @@ class FriendListPageState extends State<FriendListPage> {
     friendListStore.loadFriends();
   }
 
+  void toCallFriendModule(FriendModel friend){
+    String data = jsonEncode({
+      'name': friend.name,
+      'profilePictureUrl': friend.profilePictureUrl,
+      'friendUid': friend.uid
+    });
+    Modular.to.pushNamed('/call/', arguments: {
+      'data' : data,
+      'receivingCall': false,
+      'isAppInBackground': false,
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -98,34 +111,16 @@ class FriendListPageState extends State<FriendListPage> {
                             store: friendListStore,
                             builder: (context, tripleFriendList) {
                               List<FriendModel> friends = tripleFriendList.state as List<FriendModel>;
+                              print("update");
                               if(friends.isNotEmpty){
                                 return ListView.separated(
                                   physics: const NeverScrollableScrollPhysics(),
                                   itemCount: friends.length,
                                   shrinkWrap: true,
                                   itemBuilder: (context, index) {
-                                    return TripleBuilder(
-                                        store: selectFriendStore,
-                                        builder: (context, tripleSelectFriend) {
-                                          return InkWell(
-                                              onTap: (){
-                                                String data = jsonEncode({
-                                                  'name': friends[index].name,
-                                                  'profilePictureUrl': friends[index].profilePictureUrl,
-                                                  'friendUid': friends[index].uid
-                                                });
-                                                Modular.to.pushNamed('/call/', arguments: {
-                                                  'data' : data,
-                                                  'receivingCall': false,
-                                                  'isAppInBackground': false,
-                                                });
-                                              },
-                                              child: FriendItem(
-                                                friend: friends[index],
-                                                inCall: tripleSelectFriend.state as FriendModel == friends[index],
-                                              )
-                                          );
-                                        }
+                                    return InkWell(
+                                        onTap: friends[index].distance < 5 ? () => toCallFriendModule(friends[index]) : null,
+                                        child: FriendItem(friend: friends[index])
                                     );
                                   },
                                   separatorBuilder: (BuildContext context, int index) {

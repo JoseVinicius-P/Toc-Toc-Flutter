@@ -7,9 +7,8 @@ import 'package:toctoc/app/shared/my_colors.dart';
 
 class FriendItem extends StatefulWidget {
   final FriendModel friend;
-  final bool inCall;
   const FriendItem({
-    super.key, required this.friend, required this.inCall,
+    super.key, required this.friend,
   });
 
   @override
@@ -20,7 +19,7 @@ class _FriendItemState extends State<FriendItem> {
   @override
   Widget build(BuildContext context) {
     var theme =  Theme.of(context);
-
+    debugPrint("Distancia: ${widget.friend.distance}");
     return Container(
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(
@@ -29,7 +28,7 @@ class _FriendItemState extends State<FriendItem> {
         border: Border.all(
           width: 1,
           style: BorderStyle.solid,
-          color: MyColors.lightGray,
+          color: widget.friend.distance > 5 ? MyColors.lightGray : MyColors.blue,
         ),
       ),
       child: Padding(
@@ -67,16 +66,6 @@ class _FriendItemState extends State<FriendItem> {
                 )
               ],
             ),
-            const Spacer(),
-            Visibility(
-              visible: widget.inCall,
-              child: Icon(
-                Icons.notifications_active_outlined,
-                color: MyColors.blue.withOpacity(0.8),
-                size: 27,
-              ),
-            ),
-            const SizedBox(width: 10,),
           ],
         ),
       ),

@@ -4,8 +4,9 @@ class FriendModel{
   late String name;
   late String uid;
   late String profilePictureUrl;
-  late GeoPoint? location;
-  late Timestamp? lastVisit;
+  GeoPoint? location;
+  Timestamp? lastVisit;
+  double distance = double.infinity;
 
   FriendModel();
 
