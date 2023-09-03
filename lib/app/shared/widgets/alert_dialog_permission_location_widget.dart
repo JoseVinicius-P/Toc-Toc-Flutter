@@ -24,7 +24,7 @@ class AlertDialogPermissionLocationWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            'Sua localização será usada para que seus amigos possam tocar a "campainha" quando estiverem próximos!',
+            'Sua localização será usada para que seus amigos possam tocar a "campainha" quando estiverem próximos, ou para sabermos quando você está fazendo uma visita!',
             style: theme.textTheme.titleSmall!.copyWith(fontSize: 16),
             textAlign: TextAlign.center,
           ),

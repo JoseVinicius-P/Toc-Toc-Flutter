@@ -5,8 +5,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:is_lock_screen/is_lock_screen.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:toctoc/app/modules/perfil/set_home/widgets/alert_dialog_enable_location_widget.dart';
-import 'package:toctoc/app/modules/perfil/set_home/widgets/alert_dialog_permission_location_widget.dart';
+import 'package:toctoc/app/shared/widgets/alert_dialog_enable_location_widget.dart';
+import 'package:toctoc/app/shared/widgets/alert_dialog_permission_location_widget.dart';
 import 'package:toctoc/app/modules/perfil/set_home/set_home_store.dart';
 import 'package:flutter/material.dart';
 import 'package:toctoc/app/modules/perfil/set_home/set_home_controller.dart';
@@ -49,8 +49,6 @@ class SetHomePageState extends State<SetHomePage> with WidgetsBindingObserver{
       }
     }
   }
-
-
 
   /*O fluxo é o seguinte:
   1 - Verifica se a Localização já foi permitida
