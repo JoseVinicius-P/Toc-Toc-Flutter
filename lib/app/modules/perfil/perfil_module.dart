@@ -1,6 +1,6 @@
 import 'package:toctoc/app/modules/perfil/perfil_store.dart';
 import 'package:toctoc/app/modules/perfil/perfil_page.dart';
-import 'package:toctoc/app/modules/perfil/set_home/services/gps_service.dart';
+import 'package:toctoc/app/modules/perfil/set_home/services/gps_set_home_service.dart';
 import 'package:toctoc/app/modules/perfil/set_home/services/set_home_guard_service.dart';
 import 'package:toctoc/app/modules/perfil/set_home/set_home_page.dart';
 import 'package:toctoc/app/modules/perfil/user_data_guard_service.dart';
@@ -24,7 +24,7 @@ class PerfilModule extends Module {
   final List<Bind> binds = [
     Bind.lazySingleton((i) => PerfilStore(i(), i())),
     Bind.lazySingleton((i) => SetHomeGuardService()),
-    Bind.lazySingleton((i) => GpsService()),
+    Bind.lazySingleton((i) => GpsSetHomeService()),
     Bind.lazySingleton((i) => SetHomeStore(i(), i(), i(), i())),
     Bind.lazySingleton((i) => SetHomeController()),
     Bind.lazySingleton((i) => UserDataGuardService()),

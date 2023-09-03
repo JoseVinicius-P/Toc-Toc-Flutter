@@ -3,8 +3,9 @@ import 'dart:async';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:toctoc/app/modules/home/friend_model.dart';
+import 'package:toctoc/app/shared/services/gps_service.dart';
 
-class GpsService implements Disposable{
+class GpsDistanceService extends GpsService implements Disposable{
   StreamSubscription<Position>? positionStream;
 
   void listenDistanceFriends(List<FriendModel> friendsList, Function(List<FriendModel>) update){

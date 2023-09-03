@@ -1,4 +1,4 @@
-import 'package:toctoc/app/modules/home/friend_list/gps_service.dart';
+import 'package:toctoc/app/modules/home/friend_list/gps_distance_service.dart';
 import 'package:toctoc/app/modules/home/friend_list/stores/select_friend_store.dart';
 import 'package:toctoc/app/modules/home/services/token_service.dart';
 import 'package:toctoc/app/modules/home/services/friend_service.dart';
@@ -14,7 +14,7 @@ import 'home_page.dart';
  
 class HomeModule extends Module {
   @override
-  final List<Bind> binds = [Bind.lazySingleton((i) => GpsService()),
+  final List<Bind> binds = [Bind.lazySingleton((i) => GpsDistanceService()),
     Bind.lazySingleton((i) => SelectFriendStore(i())),
     Bind.lazySingleton((i) => TokenService()),
     Bind.lazySingleton((i) => FriendListStore(i(), i())),

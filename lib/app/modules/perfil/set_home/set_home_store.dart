@@ -2,14 +2,13 @@ import 'package:flutter_triple/flutter_triple.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:toctoc/app/modules/perfil/set_home/set_home_controller.dart';
-import 'package:toctoc/app/modules/perfil/set_home/services/gps_service.dart';
+import 'package:toctoc/app/modules/perfil/set_home/services/gps_set_home_service.dart';
 import 'package:toctoc/app/modules/perfil/set_home/services/home_service.dart';
 import 'package:toctoc/app/modules/perfil/perfil_store.dart';
-import 'package:toctoc/app/modules/perfil/user_model.dart';
 
 class SetHomeStore extends Store<LatLng> {
   final SetHomeController controller;
-  final GpsService gpsService;
+  final GpsSetHomeService gpsService;
   final HomeService homeService;
   //Usado para dar reatividade a tela de perfil
   final PerfilStore perfilStore;
