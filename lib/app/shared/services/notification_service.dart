@@ -143,4 +143,14 @@ class NotificationService{
     final NotificationAppLaunchDetails? notificationAppLaunchDetails = await notification.getNotificationAppLaunchDetails();
     return notificationAppLaunchDetails?.didNotificationLaunchApp ?? false;
   }
+
+  static Future<bool?>? areNotificationsEnable(){
+    return notification.resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin>()?.areNotificationsEnabled();
+  }
+
+  static void requestNotificationPermission(){
+    notification.resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin>()?.requestPermission();
+  }
 }
