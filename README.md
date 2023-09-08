@@ -16,16 +16,17 @@ Este é um app flutter que possui como finalidade servir como uma campainha virt
 <p align="center">Realizando uma visita</p>
 
 Para este projeto foram usados muitos recursos, dentre eles estão: 
-
-•Firebase (firestore, firestorage, authentication, cloud functions e cloud messaging).
-•Flutter Modular: Essencial para organização e modularização do código.
-•Tripple: Adotado para aprimorar a reatividade.
-•Image Cropper: Usado para padronização das imagens de perfil.
-•Just Audio: Implementado para reprodução de áudio.
-•Flutter Map: Empregado para exibição de mapas.
-•Geolocator: Utilizado para obtenção da localização.
-•QR Code: Integrado para geração e leitura de QR codes.
-•Flutter local notifications: Para gerenciamento de notificações
+<ul>
+    <li>Firebase (Firestore, Firebase Storage, Autenticação, Funções na Nuvem e Mensagens na Nuvem)</li>
+    <li>Flutter Modular: Essencial para organização e modularização do código.</li>
+    <li>Tripple: Adotado para aprimorar a reatividade.</li>
+    <li>Image Cropper: Usado para padronização das imagens de perfil.</li>
+    <li>Just Audio: Implementado para reprodução de áudio.</li>
+    <li>Flutter Map: Empregado para exibição de mapas.</li>
+    <li>Geolocator: Utilizado para obtenção da localização.</li>
+    <li>QR Code: Integrado para geração e leitura de QR codes.</li>
+    <li>Flutter Local Notifications: Para gerenciamento de notificações.</li>
+</ul>
 
 <h2>Links úteis</h2>
 <p><a href="">• Faça o download do app Android (Google drive)</a></p>
