@@ -8,12 +8,12 @@ Este é um app flutter que possui como finalidade servir como uma campainha virt
 <p align="center">
   <img width="250" src="Media git/android.gif">
 </p>
-<p align="center"><a href="https://drive.google.com/file/d/19AYFikmg10WAe24CO28BkxiXxWQzjP8i/view?usp=drive_link">Criando a conta</p>
+<p align="center">Criando a conta</p>
 <h2>_</h2>
 <p align="center">
   <img width="600" src="Media git/site.gif">
 </p>
-<p align="center"><a href="https://josevinicius-p.github.io">Realizando uma visita</p>
+<p align="center">Realizando uma visita</p>
 
 Para este projeto foram usados muitos recursos, dentre eles estão: 
 
