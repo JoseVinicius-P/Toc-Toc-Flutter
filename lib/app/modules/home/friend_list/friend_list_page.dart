@@ -112,7 +112,7 @@ class FriendListPageState extends State<FriendListPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
+                  /*Container(
                     decoration: BoxDecoration(
                       color: MyColors.lightGray.withOpacity(0.7),
                       borderRadius: const BorderRadius.all(
@@ -144,8 +144,8 @@ class FriendListPageState extends State<FriendListPage> {
                         filled: false,
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 10,),
+                  ),*/
+                  //const SizedBox(height: 10,),
                   Expanded(
                     child: SingleChildScrollView(
                       child: Column(
