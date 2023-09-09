@@ -92,7 +92,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver{
           animation: controller.pageViewController,
           builder: (context, snapshot) {
             return Container(
-              height: 10.sh,
+              height: 11.sh,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.vertical(top: Radius.circular(16.0)),
                 boxShadow: [
@@ -106,7 +106,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver{
               child: ClipRRect(
                 borderRadius: const BorderRadius.vertical(top: Radius.circular(20.0)),
                 child: BottomNavigationBar(
-                  iconSize: 3.2.sh,
+                  iconSize: 3.sh,
                   showSelectedLabels: false,
                   backgroundColor: Colors.white,
                   //Definindo atributos e icones não selecionados
