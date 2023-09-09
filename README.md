@@ -1,12 +1,12 @@
 <p align="center">
-  <img width="600" src="Media git/capa.jpg">
+  <img width="600" src="Media Git/capa.jpg">
 </p>
 <h1 align="center">Toc Toc</h1>
 
 Este é um app flutter que possui como finalidade servir como uma campainha virtual para seus usuários. Na criação da sua conta o usuário pode escolher entre numero de telefone ou login com o google, depois ele fornecerá alguns dados para cadastro como: Nome, foto de perfil, localização da sua casa e toque de sua campainha. Após criar uma conta o usuário poderá adicionar amigos escaneando o Qr code e compartilhar sua conta com seus amigos deixando-os escanear o seu QR code, depois o usuário quando estiver próximo da casa de seus amigos para os visitar poderá tocar a campainha no app e "iniciar uma chamada", o amigo visitado receberá uma notificação em forma de alerta (Full screen notification), abaixo está o funcionamento do app:
 
 <p align="center">
-  <img width="250" src="Media git/android.gif">
+  <img width="450" src="Media Git/criando_conta.gif">
 </p>
 <p align="center">Criando a conta</p>
 <h2>_</h2>
