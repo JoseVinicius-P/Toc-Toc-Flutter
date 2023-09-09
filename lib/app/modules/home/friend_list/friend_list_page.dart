@@ -175,7 +175,7 @@ class FriendListPageState extends State<FriendListPage> {
                                   shrinkWrap: true,
                                   itemBuilder: (context, index) {
                                     return InkWell(
-                                        onTap: friends[index].distance < 5 ? () => toCallFriendModule(friends[index]) : null,
+                                        onTap: friends[index].distance < 25 ? () => toCallFriendModule(friends[index]) : null,
                                         child: FriendItem(friend: friends[index])
                                     );
                                   },
