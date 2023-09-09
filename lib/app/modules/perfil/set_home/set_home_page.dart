@@ -198,7 +198,7 @@ class SetHomePageState extends State<SetHomePage> with WidgetsBindingObserver{
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Visibility(
-                                visible: isForHome ? false : true,
+                                visible: false /*isForHome ? false : true*/,
                                 child: Expanded(
                                   child: Opacity(
                                     opacity: triple.isLoading ? 0.5 : 1,
