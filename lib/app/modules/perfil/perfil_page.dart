@@ -39,144 +39,44 @@ class PerfilPageState extends State<PerfilPage> {
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  TripleBuilder(
-                    store: store,
-                    builder: (context, triple){
-                      UserModel user = triple.state as UserModel;
-                      print("URL: ${user.profilePictureUrl}");
-                      return Column(
-                        children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: 40.sw.roundToDouble(),
-                                height: 40.sw.roundToDouble(),
-                                child:  CircleAvatar(
-                                  backgroundImage: const AssetImage('assets/images/perfil.png'),
-                                  foregroundImage: NetworkImage(
-                                    user.profilePictureUrl
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    TripleBuilder(
+                      store: store,
+                      builder: (context, triple){
+                        UserModel user = triple.state as UserModel;
+                        print("URL: ${user.profilePictureUrl}");
+                        return Column(
+                          children: [
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  width: 40.sw.roundToDouble(),
+                                  height: 40.sw.roundToDouble(),
+                                  child:  CircleAvatar(
+                                    backgroundImage: const AssetImage('assets/images/perfil.png'),
+                                    foregroundImage: NetworkImage(
+                                      user.profilePictureUrl
+                                    ),
+                                    radius: 40.sw.roundToDouble(),
                                   ),
-                                  radius: 40.sw.roundToDouble(),
                                 ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 30,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              const Icon(Icons.person_outline, color: Colors.grey),
-                              const SizedBox(width: 20,),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  AutoSizeText(
-                                    'Nome',
-                                    style: theme.textTheme.titleSmall!.copyWith(fontSize: 13, color: Colors.grey),
-                                    maxFontSize: 6.sw.roundToDouble(),
-                                    minFontSize: 3.sw.roundToDouble(),
-                                    maxLines: 3,
-                                    overflow: TextOverflow.ellipsis,
-                                    textAlign: TextAlign.start,
-                                  ),
-                                  const SizedBox(height: 5,),
-                                  AutoSizeText(
-                                    user.name,
-                                    style: theme.textTheme.titleSmall!.copyWith(fontSize: 18),
-                                    maxFontSize: 6.sw.roundToDouble(),
-                                    minFontSize: 3.sw.roundToDouble(),
-                                    maxLines: 3,
-                                    overflow: TextOverflow.ellipsis,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ],
-                              ),
-                              const Spacer(),
-                              IconButton(onPressed: () => Navigator.of(context).pushNamed('./your_data'), icon: const Icon(Icons.edit, color: MyColors.blue)),
-                              const SizedBox(width: 10,),
-                            ],
-                          ),
-                          const SizedBox(height: 10,),
-                          const Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Icon(Icons.person, color: Colors.transparent),
-                              SizedBox(width: 20,),
-                              Expanded(
-                                child: Divider(
-                                  color: MyColors.lightGray,  // Cor do divisor
-                                  height: 1,  // Altura do divisor
-                                  thickness: 1,  // Espessura do divisor
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 10,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              const Icon(Icons.notifications_active_outlined, color: Colors.grey),
-                              const SizedBox(width: 20,),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  AutoSizeText(
-                                    'Som da notificação',
-                                    style: theme.textTheme.titleSmall!.copyWith(fontSize: 13, color: Colors.grey),
-                                    maxFontSize: 6.sw.roundToDouble(),
-                                    minFontSize: 3.sw.roundToDouble(),
-                                    maxLines: 3,
-                                    overflow: TextOverflow.ellipsis,
-                                    textAlign: TextAlign.start,
-                                  ),
-                                  const SizedBox(height: 5,),
-                                  AutoSizeText(
-                                    user.sound.replaceAll('.mp3', ''),
-                                    style: theme.textTheme.titleSmall!.copyWith(fontSize: 18),
-                                    maxFontSize: 6.sw.roundToDouble(),
-                                    minFontSize: 3.sw.roundToDouble(),
-                                    maxLines: 3,
-                                    overflow: TextOverflow.ellipsis,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ],
-                              ),
-                              const Spacer(),
-                              IconButton(onPressed: () => Navigator.of(context).pushNamed('./select_sound'), icon: const Icon(Icons.edit, color: MyColors.blue)),
-                              const SizedBox(width: 10,),
-                            ],
-                          ),
-                          const SizedBox(height: 10,),
-                          const Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Icon(Icons.person, color: Colors.transparent),
-                              SizedBox(width: 20,),
-                              Expanded(
-                                child: Divider(
-                                  color: MyColors.lightGray,  // Cor do divisor
-                                  height: 1,  // Altura do divisor
-                                  thickness: 1,  // Espessura do divisor
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 10,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              const Icon(Icons.location_on_outlined, color: Colors.grey),
-                              const SizedBox(width: 20,),
-                              Expanded(
-                                child: Column(
+                              ],
+                            ),
+                            const SizedBox(height: 30,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                const Icon(Icons.person_outline, color: Colors.grey),
+                                const SizedBox(width: 20,),
+                                Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     AutoSizeText(
-                                      'Localização da sua casa',
+                                      'Nome',
                                       style: theme.textTheme.titleSmall!.copyWith(fontSize: 13, color: Colors.grey),
                                       maxFontSize: 6.sw.roundToDouble(),
                                       minFontSize: 3.sw.roundToDouble(),
@@ -185,116 +85,218 @@ class PerfilPageState extends State<PerfilPage> {
                                       textAlign: TextAlign.start,
                                     ),
                                     const SizedBox(height: 5,),
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius: const BorderRadius.all(
-                                                Radius.circular(15),
+                                    AutoSizeText(
+                                      user.name,
+                                      style: theme.textTheme.titleSmall!.copyWith(fontSize: 18),
+                                      maxFontSize: 6.sw.roundToDouble(),
+                                      minFontSize: 3.sw.roundToDouble(),
+                                      maxLines: 3,
+                                      overflow: TextOverflow.ellipsis,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                ),
+                                const Spacer(),
+                                IconButton(onPressed: () => Navigator.of(context).pushNamed('./your_data'), icon: const Icon(Icons.edit, color: MyColors.blue)),
+                                const SizedBox(width: 10,),
+                              ],
+                            ),
+                            const SizedBox(height: 10,),
+                            const Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Icon(Icons.person, color: Colors.transparent),
+                                SizedBox(width: 20,),
+                                Expanded(
+                                  child: Divider(
+                                    color: MyColors.lightGray,  // Cor do divisor
+                                    height: 1,  // Altura do divisor
+                                    thickness: 1,  // Espessura do divisor
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 10,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                const Icon(Icons.notifications_active_outlined, color: Colors.grey),
+                                const SizedBox(width: 20,),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    AutoSizeText(
+                                      'Som da notificação',
+                                      style: theme.textTheme.titleSmall!.copyWith(fontSize: 13, color: Colors.grey),
+                                      maxFontSize: 6.sw.roundToDouble(),
+                                      minFontSize: 3.sw.roundToDouble(),
+                                      maxLines: 3,
+                                      overflow: TextOverflow.ellipsis,
+                                      textAlign: TextAlign.start,
+                                    ),
+                                    const SizedBox(height: 5,),
+                                    AutoSizeText(
+                                      user.sound.replaceAll('.mp3', ''),
+                                      style: theme.textTheme.titleSmall!.copyWith(fontSize: 18),
+                                      maxFontSize: 6.sw.roundToDouble(),
+                                      minFontSize: 3.sw.roundToDouble(),
+                                      maxLines: 3,
+                                      overflow: TextOverflow.ellipsis,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                ),
+                                const Spacer(),
+                                IconButton(onPressed: () => Navigator.of(context).pushNamed('./select_sound'), icon: const Icon(Icons.edit, color: MyColors.blue)),
+                                const SizedBox(width: 10,),
+                              ],
+                            ),
+                            const SizedBox(height: 10,),
+                            const Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Icon(Icons.person, color: Colors.transparent),
+                                SizedBox(width: 20,),
+                                Expanded(
+                                  child: Divider(
+                                    color: MyColors.lightGray,  // Cor do divisor
+                                    height: 1,  // Altura do divisor
+                                    thickness: 1,  // Espessura do divisor
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 10,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                const Icon(Icons.location_on_outlined, color: Colors.grey),
+                                const SizedBox(width: 20,),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      AutoSizeText(
+                                        'Localização da sua casa',
+                                        style: theme.textTheme.titleSmall!.copyWith(fontSize: 13, color: Colors.grey),
+                                        maxFontSize: 6.sw.roundToDouble(),
+                                        minFontSize: 3.sw.roundToDouble(),
+                                        maxLines: 3,
+                                        overflow: TextOverflow.ellipsis,
+                                        textAlign: TextAlign.start,
+                                      ),
+                                      const SizedBox(height: 5,),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius: const BorderRadius.all(
+                                                  Radius.circular(15),
+                                                ),
+                                                border: Border.all(
+                                                  width: 1,
+                                                  style: BorderStyle.solid,
+                                                  color: MyColors.lightGray,
+                                                ),
                                               ),
-                                              border: Border.all(
-                                                width: 1,
-                                                style: BorderStyle.solid,
-                                                color: MyColors.lightGray,
-                                              ),
-                                            ),
-                                            child: ClipRRect(
-                                              borderRadius: const BorderRadius.all(
-                                                Radius.circular(15),
-                                              ),
-                                              child: SizedBox(
-                                                height: 100,
-                                                child: FlutterMap(
-                                                  mapController: controller.mapController,
-                                                  options: MapOptions(
-                                                    center: LatLng(user.location.latitude, user.location.longitude),
-                                                    zoom: 16.0,
-                                                    maxZoom: 16.0,
-                                                    minZoom: 16.0,
-                                                    interactiveFlags: InteractiveFlag.none,
-                                                  ),
-                                                  nonRotatedChildren: [
-                                                    TileLayer(
-                                                      urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                                                      userAgentPackageName: 'com.example.app',
+                                              child: ClipRRect(
+                                                borderRadius: const BorderRadius.all(
+                                                  Radius.circular(15),
+                                                ),
+                                                child: SizedBox(
+                                                  height: 100,
+                                                  child: FlutterMap(
+                                                    mapController: controller.mapController,
+                                                    options: MapOptions(
+                                                      center: LatLng(user.location.latitude, user.location.longitude),
+                                                      zoom: 16.0,
+                                                      maxZoom: 16.0,
+                                                      minZoom: 16.0,
+                                                      interactiveFlags: InteractiveFlag.none,
                                                     ),
-                                                    MarkerLayer(
-                                                      markers: [
-                                                        Marker(
-                                                          point: LatLng(user.location.latitude, user.location.longitude),
-                                                          width: 20,
-                                                          height: triple.isLoading ? 20 : 62,
-                                                          builder: (context) => triple.isLoading ?
-                                                          const CircularProgressIndicator(color: MyColors.blue,) :
-                                                          const Image(
-                                                            image: AssetImage('assets/images/marker.png'),
-                                                            fit: BoxFit.cover,
+                                                    nonRotatedChildren: [
+                                                      TileLayer(
+                                                        urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                                                        userAgentPackageName: 'com.example.app',
+                                                      ),
+                                                      MarkerLayer(
+                                                        markers: [
+                                                          Marker(
+                                                            point: LatLng(user.location.latitude, user.location.longitude),
+                                                            width: 20,
+                                                            height: triple.isLoading ? 20 : 62,
+                                                            builder: (context) => triple.isLoading ?
+                                                            const CircularProgressIndicator(color: MyColors.blue,) :
+                                                            const Image(
+                                                              image: AssetImage('assets/images/marker.png'),
+                                                              fit: BoxFit.cover,
+                                                            ),
                                                           ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(width: 15,),
-                              IconButton(onPressed: () => Navigator.of(context).pushNamed('./set_home'), icon: const Icon(Icons.edit, color: MyColors.blue)),
-                              const SizedBox(width: 10,),
-                            ],
-                          ),
-                          const SizedBox(height: 10,),
-                          const Row(
-                            mainAxisSize: MainAxisSize.max,
+                                const SizedBox(width: 15,),
+                                IconButton(onPressed: () => Navigator.of(context).pushNamed('./set_home'), icon: const Icon(Icons.edit, color: MyColors.blue)),
+                                const SizedBox(width: 10,),
+                              ],
+                            ),
+                            const SizedBox(height: 10,),
+                            const Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Icon(Icons.person, color: Colors.transparent),
+                                SizedBox(width: 20,),
+                                Expanded(
+                                  child: Divider(
+                                    color: MyColors.lightGray,  // Cor do divisor
+                                    height: 1,  // Altura do divisor
+                                    thickness: 1,  // Espessura do divisor
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 10,),
+                    InkWell(
+                      onTap: () => controller.signOut(),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          const Icon(Icons.exit_to_app, color: Colors.red, size: 20,),
+                          const SizedBox(width: 20,),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Icon(Icons.person, color: Colors.transparent),
-                              SizedBox(width: 20,),
-                              Expanded(
-                                child: Divider(
-                                  color: MyColors.lightGray,  // Cor do divisor
-                                  height: 1,  // Altura do divisor
-                                  thickness: 1,  // Espessura do divisor
-                                ),
+                              AutoSizeText(
+                                'Sair do app',
+                                style: theme.textTheme.titleSmall!.copyWith(fontSize: 15, color: Colors.redAccent),
+                                maxFontSize: 6.sw.roundToDouble(),
+                                minFontSize: 3.sw.roundToDouble(),
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.center,
                               ),
                             ],
                           ),
                         ],
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 10,),
-                  InkWell(
-                    onTap: () => controller.signOut(),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const Icon(Icons.exit_to_app, color: Colors.red, size: 20,),
-                        const SizedBox(width: 20,),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            AutoSizeText(
-                              'Sair do app',
-                              style: theme.textTheme.titleSmall!.copyWith(fontSize: 15, color: Colors.redAccent),
-                              maxFontSize: 6.sw.roundToDouble(),
-                              minFontSize: 3.sw.roundToDouble(),
-                              maxLines: 3,
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             )
           ),
