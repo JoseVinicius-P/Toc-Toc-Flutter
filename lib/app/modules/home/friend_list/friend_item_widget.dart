@@ -28,7 +28,7 @@ class _FriendItemState extends State<FriendItem> {
         border: Border.all(
           width: 1,
           style: BorderStyle.solid,
-          color: widget.friend.distance > 5 ? MyColors.lightGray : MyColors.blue,
+          color: widget.friend.distance > 25 ? MyColors.lightGray : MyColors.blue,
         ),
       ),
       child: Padding(
