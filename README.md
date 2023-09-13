@@ -10,6 +10,11 @@ Este é um app flutter que possui como finalidade servir como uma campainha virt
 </p>
 <p align="center">Criando a conta</p>
 <h2>_</h2>
+<p align="center">
+  <img width="450" src="Media Git/Visita.gif">
+</p>
+<p align="center">Fazendo visita</p>
+<h2>_</h2>
 
 Para este projeto foram usados muitos recursos, dentre eles estão: 
 <ul>
