@@ -30,13 +30,22 @@ class CallPageState extends State<CallPage> {
   @override
   void initState() {
     super.initState();
-    callStore.loadData(widget.data);
+    init();
+  }
+
+  Future<void> init() async {
+    await callStore.loadData(widget.data);
     if(!widget.isReceivingCall){
       Map<String, dynamic> data = jsonDecode(widget.data!);
       callStore.callFriend(data['friendUid']);
       receivingReplyCallStore.messageListener(data['friendUid']);
       startTimer(30);
     }else{
+      Map<String, dynamic> data = callStore.state;
+      if(data['autoReply'] != null){
+        callStore.sendReply(data['autoReply'], data['callId']);
+        closeCallModule();
+      }
       NotificationService.stopNotificationDurationSecondsCount();
       startTimer(30-NotificationService.notificationDurationSeconds);
       NotificationService.notificationDurationSeconds = 0;

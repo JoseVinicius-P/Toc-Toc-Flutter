@@ -22,7 +22,15 @@ class CallStore extends Store<Map<String, dynamic>> {
         try{
           String? dataEncode = notificationAppLaunchDetails!.notificationResponse?.payload;
           if(dataEncode != null){
-              update(jsonDecode(dataEncode));
+            var data = jsonDecode(dataEncode);
+            if(notificationAppLaunchDetails.notificationResponse != null){
+              if (notificationAppLaunchDetails.notificationResponse!.actionId == 'nao_estou_em_casa') {
+                data['autoReply'] = "Não Estou em casa!";
+              }else if(notificationAppLaunchDetails.notificationResponse!.actionId == 'estou_indo'){
+                data['autoReply'] = "Estou indo";
+              }
+            }
+            update(data);
           }else{
             Modular.to.pop();
           }

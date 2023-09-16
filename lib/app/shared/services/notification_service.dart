@@ -30,13 +30,34 @@ class NotificationService{
       const InitializationSettings(
         android: AndroidInitializationSettings('@mipmap/ic_launcher'),
       ),
-      onDidReceiveNotificationResponse: (details){
-        var data = jsonDecode(details.payload!);
-        Modular.to.pushNamed("/call/", arguments: {
-          'data': jsonEncode(data),
-          'receivingCall' : true,
-          'isAppInBackground' : data['isAppInBackground'],
-        });
+      onDidReceiveNotificationResponse: (NotificationResponse notificationResponse) async {
+        var data = jsonDecode(notificationResponse.payload!);
+        switch (notificationResponse.notificationResponseType) {
+          case NotificationResponseType.selectedNotification:
+            Modular.to.pushNamed("/call/", arguments: {
+              'data': jsonEncode(data),
+              'receivingCall' : true,
+              'isAppInBackground' : data['isAppInBackground'],
+            });
+            break;
+          case NotificationResponseType.selectedNotificationAction:
+            if (notificationResponse.actionId == 'nao_estou_em_casa') {
+              data['autoReply'] = "Não Estou em casa!";
+              Modular.to.pushNamed("/call/", arguments: {
+                'data': jsonEncode(data),
+                'receivingCall' : true,
+                'isAppInBackground' : data['isAppInBackground'],
+              });
+            }else if(notificationResponse.actionId == 'estou_indo'){
+              data['autoReply'] = "Estou indo";
+              Modular.to.pushNamed("/call/", arguments: {
+                'data': jsonEncode(data),
+                'receivingCall' : true,
+                'isAppInBackground' : data['isAppInBackground'],
+              });
+            }
+            break;
+        }
       },
     );
     createDeafaultChannel();
@@ -126,6 +147,11 @@ class NotificationService{
                 ongoing: true,
                 autoCancel: false,
                 sound: RawResourceAndroidNotificationSound(sound.toLowerCase()),
+                actions: <AndroidNotificationAction>[
+                  AndroidNotificationAction('nao_estou_em_casa', 'Ñ estou em casa', showsUserInterface: true),
+                  AndroidNotificationAction('estou_indo', 'Estou indo', showsUserInterface: true,),
+                  AndroidNotificationAction('ignorar', 'Ignorar', showsUserInterface: false),
+                ],
               )
           ),
           androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
