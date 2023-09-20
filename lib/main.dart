@@ -1,7 +1,7 @@
 import 'package:device_preview/device_preview.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_logs/flutter_logs.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:toctoc/app/shared/services/notification_service.dart';
@@ -15,6 +15,24 @@ import 'firebase_options.dart';
 
 void main() async {
     WidgetsFlutterBinding.ensureInitialized();
+
+    //Initialize Logging
+    await FlutterLogs.initLogs(
+        logLevelsEnabled: [
+            LogLevel.INFO,
+            LogLevel.WARNING,
+            LogLevel.ERROR,
+            LogLevel.SEVERE
+        ],
+        timeStampFormat: TimeStampFormat.TIME_FORMAT_READABLE,
+        directoryStructure: DirectoryStructure.FOR_DATE,
+        logTypesEnabled: ["device","network","errors"],
+        logFileExtension: LogFileExtension.LOG,
+        logsWriteDirectoryName: "LogsToctoc",
+        logsExportDirectoryName: "LogsToctoc/Exported",
+        debugFileOperations: true,
+        isDebuggable: true);
+
     await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform,
     );
@@ -25,7 +43,7 @@ void main() async {
         .then((_) {
         runApp(
             DevicePreview(
-                enabled: !kReleaseMode,
+                enabled: false,
                 builder: (context) => ResponsiveApp(builder: (context) => ModularApp(module: AppModule(), child: AppWidget())), // Wrap your app
             ),
         );
