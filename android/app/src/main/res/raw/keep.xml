@@ -1,3 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools"
-    tools:keep="@drawable/*,@raw/dingdong,@raw/interfone,@raw/palmas,@raw/toctoc" />
+    tools:keep="@mipmap-hdpi/launcher_icon,@mipmap-mdpi/launcher_icon,@mipmap-xhdpi/launcher_icon,@mipmap-xxhdpi/launcher_icon,@mipmap-xxxhdpi/launcher_icon,@raw/dingdong,@raw/interfone,@raw/palmas,@raw/toctoc,@values/*,@values-night/*" />

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_logs/flutter_logs.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:timezone/data/latest_all.dart' as timezone;
 import 'package:timezone/timezone.dart' as timezone;
@@ -28,7 +29,7 @@ class NotificationService{
   static void initLocalNotifications() {
     notification.initialize(
       const InitializationSettings(
-        android: AndroidInitializationSettings('@mipmap/ic_launcher'),
+        android: AndroidInitializationSettings('launcher_icon'),
       ),
       onDidReceiveNotificationResponse: (NotificationResponse notificationResponse) async {
         var data = jsonDecode(notificationResponse.payload!);
@@ -65,6 +66,7 @@ class NotificationService{
 
   static void initMessagingListeners(){
     FirebaseMessaging.onMessage.listen((event) async {
+      FlutterLogs.logInfo("Notification", "forground", "Entrou no onMessage");
       initTimezone();
       await NotificationService.fullScreenNotification(event, false);
     });
@@ -72,11 +74,18 @@ class NotificationService{
     FirebaseMessaging.onBackgroundMessage(backgroundMessageHandler);
   }
 
+  @pragma('vm:entry-point') //Esta linha corrige o bug que impedia que notificações fossem abertar em segundo plano
   static Future<void> backgroundMessageHandler(RemoteMessage message) async {
     //O firebase estava interceptando a chamada e enviando uma notificação padrão, o Cancel cancela todas e impede que a notificação automatica seja exibida
-    await notification.cancelAll();
-    initTimezone();
-    NotificationService.fullScreenNotification(message, true);
+    FlutterLogs.logInfo("Notification", "background", "Entrou no backgroundMessageHandler");
+    try{
+      await notification.cancelAll();
+      initTimezone();
+      NotificationService.fullScreenNotification(message, true);
+    }catch(e, s){
+      FlutterLogs.logError("Notification", "background", e.toString());
+      FlutterLogs.logError("Notification", "background", s.toString());
+    }
   }
 
   static countDurationSecondsNotification(){
@@ -147,6 +156,7 @@ class NotificationService{
                 ongoing: true,
                 autoCancel: false,
                 sound: RawResourceAndroidNotificationSound(sound.toLowerCase()),
+                icon: '@mipmap/launcher_icon',
                 actions: <AndroidNotificationAction>[
                   AndroidNotificationAction('nao_estou_em_casa', 'Ñ estou em casa', showsUserInterface: true),
                   AndroidNotificationAction('estou_indo', 'Estou indo', showsUserInterface: true,),
