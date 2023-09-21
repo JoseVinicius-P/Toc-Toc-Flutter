@@ -23,8 +23,11 @@ class GpsDistanceService extends GpsService implements Disposable{
                   friendsList[i].distance = Geolocator.distanceBetween(position.latitude, position.longitude, friendsList[i].location!.latitude, friendsList[i].location!.longitude);
                 }
               }
+              print("Tamanho da Lista: ${friendsList.length}");
               friendsList.sort((friend1, friend2) => friend1.distance.compareTo(friend2.distance));
+              print("Tamanho da Lista: ${friendsList.length}");
               update(List.from(friendsList));
+              print("Tamanho da Lista: ${List.from(friendsList).length}");
             }
       });
     }

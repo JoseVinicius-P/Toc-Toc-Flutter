@@ -33,4 +33,9 @@ class FriendListStore extends Store<List<FriendModel>> {
     setLoading(true);
     return gpsService.isLocationEnabled();
   }
+
+  void addFriend(FriendModel friend){
+    state.add(friend);
+    update(List.from(state));
+  }
 }

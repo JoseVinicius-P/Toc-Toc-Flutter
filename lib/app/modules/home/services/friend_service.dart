@@ -28,7 +28,7 @@ class FriendService {
     return friends;
   }
 
-  Future<bool> addFriend(String uid) async {
+  Future<FriendModel?> addFriend(String uid) async {
     FriendModel? friend = FriendModel();
     friend = friend.fromDocumentSnapshot(await getFriendData(uid));
 
@@ -37,12 +37,12 @@ class FriendService {
         await db.collection("Users/${FirebaseAuth.instance.currentUser!.uid}/Friends")
             .doc(friend.uid)
             .set(friend.toFirestore(), SetOptions(merge: true));
-        return true;
+        return friend;
       }catch(e){
-        return false;
+        return null;
       }
     }else{
-      return false;
+      return null;
     }
   }
 

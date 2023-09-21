@@ -19,7 +19,7 @@ class HomeModule extends Module {
     Bind.lazySingleton((i) => TokenService()),
     Bind.lazySingleton((i) => FriendListStore(i(), i())),
     Bind.lazySingleton((i) => FriendService()),
-    Bind.lazySingleton((i) => AddFriendStore(i(), i())),
+    Bind.lazySingleton((i) => AddFriendStore(i(), i(), i())),
     Bind.lazySingleton((i) => HomeStore()),
     Bind.lazySingleton((i) => HomeController(i())),
   ];
