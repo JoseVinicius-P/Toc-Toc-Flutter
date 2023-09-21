@@ -23,13 +23,6 @@ class CallStore extends Store<Map<String, dynamic>> {
           String? dataEncode = notificationAppLaunchDetails!.notificationResponse?.payload;
           if(dataEncode != null){
             var data = jsonDecode(dataEncode);
-            if(notificationAppLaunchDetails.notificationResponse != null){
-              if (notificationAppLaunchDetails.notificationResponse!.actionId == 'nao_estou_em_casa') {
-                data['autoReply'] = "Não Estou em casa!";
-              }else if(notificationAppLaunchDetails.notificationResponse!.actionId == 'estou_indo'){
-                data['autoReply'] = "Estou indo";
-              }
-            }
             update(data);
           }else{
             Modular.to.pop();
@@ -49,10 +42,6 @@ class CallStore extends Store<Map<String, dynamic>> {
 
   Future<void> sendReply(String reply, String uidCall) async {
     await service.sendReply(reply, uidCall);
-
-    if(reply == "Estou indo!"){
-      service.updateLastVisit(uidCall);
-    }
   }
 
 }

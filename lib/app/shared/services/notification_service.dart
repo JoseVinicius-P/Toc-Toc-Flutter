@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -8,6 +9,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:timezone/data/latest_all.dart' as timezone;
 import 'package:timezone/timezone.dart' as timezone;
 import 'package:flutter_timezone/flutter_timezone.dart';
+import 'package:toctoc/app/shared/services/CallReplyService.dart';
+import 'package:toctoc/firebase_options.dart';
 
 class NotificationService{
   static final notification = FlutterLocalNotificationsPlugin();
@@ -29,39 +32,37 @@ class NotificationService{
   static void initLocalNotifications() {
     notification.initialize(
       const InitializationSettings(
-        android: AndroidInitializationSettings('launcher_icon'),
+        android: AndroidInitializationSettings('@mipmap/launcher_icon'),
       ),
       onDidReceiveNotificationResponse: (NotificationResponse notificationResponse) async {
         var data = jsonDecode(notificationResponse.payload!);
-        switch (notificationResponse.notificationResponseType) {
-          case NotificationResponseType.selectedNotification:
-            Modular.to.pushNamed("/call/", arguments: {
-              'data': jsonEncode(data),
-              'receivingCall' : true,
-              'isAppInBackground' : data['isAppInBackground'],
-            });
-            break;
-          case NotificationResponseType.selectedNotificationAction:
-            if (notificationResponse.actionId == 'nao_estou_em_casa') {
-              data['autoReply'] = "Não Estou em casa!";
-              Modular.to.pushNamed("/call/", arguments: {
-                'data': jsonEncode(data),
-                'receivingCall' : true,
-                'isAppInBackground' : data['isAppInBackground'],
-              });
-            }else if(notificationResponse.actionId == 'estou_indo'){
-              data['autoReply'] = "Estou indo";
-              Modular.to.pushNamed("/call/", arguments: {
-                'data': jsonEncode(data),
-                'receivingCall' : true,
-                'isAppInBackground' : data['isAppInBackground'],
-              });
-            }
-            break;
+        if (notificationResponse.notificationResponseType == NotificationResponseType.selectedNotification) {
+          Modular.to.pushNamed("/call/", arguments: {
+            'data': jsonEncode(data),
+            'receivingCall' : true,
+            'isAppInBackground' : data['isAppInBackground'],
+          });
         }
       },
+      onDidReceiveBackgroundNotificationResponse: notificationTapBackground,
     );
     createDeafaultChannel();
+  }
+
+  @pragma('vm:entry-point')
+  static void notificationTapBackground(NotificationResponse notificationResponse) async {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    if(notificationResponse.notificationResponseType == NotificationResponseType.selectedNotificationAction){
+      var data = jsonDecode(notificationResponse.payload!);
+      var callReply = CallReplyService();
+      if (notificationResponse.actionId == 'nao_estou_em_casa') {
+        callReply.sendReply("Não Estou em casa!", data['callId']);
+      }else if(notificationResponse.actionId == 'estou_indo'){
+        callReply.sendReply("Estou indo", data['callId']);
+      }
+    }
   }
 
   static void initMessagingListeners(){
@@ -158,9 +159,9 @@ class NotificationService{
                 sound: RawResourceAndroidNotificationSound(sound.toLowerCase()),
                 icon: '@mipmap/launcher_icon',
                 actions: <AndroidNotificationAction>[
-                  AndroidNotificationAction('nao_estou_em_casa', 'Ñ estou em casa', showsUserInterface: true),
-                  AndroidNotificationAction('estou_indo', 'Estou indo', showsUserInterface: true,),
-                  AndroidNotificationAction('ignorar', 'Ignorar', showsUserInterface: false),
+                  AndroidNotificationAction('nao_estou_em_casa', 'Ñ estou em casa', showsUserInterface: false),
+                  AndroidNotificationAction('estou_indo', 'Estou indo'),
+                  AndroidNotificationAction('ignorar', 'Ignorar'),
                 ],
               )
           ),

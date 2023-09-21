@@ -41,11 +41,6 @@ class CallPageState extends State<CallPage> {
       receivingReplyCallStore.messageListener(data['friendUid']);
       startTimer(30);
     }else{
-      Map<String, dynamic> data = callStore.state;
-      if(data['autoReply'] != null){
-        callStore.sendReply(data['autoReply'], data['callId']);
-        closeCallModule();
-      }
       NotificationService.stopNotificationDurationSecondsCount();
       startTimer(30-NotificationService.notificationDurationSeconds);
       NotificationService.notificationDurationSeconds = 0;

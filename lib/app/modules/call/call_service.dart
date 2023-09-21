@@ -3,35 +3,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:toctoc/app/shared/services/CallReplyService.dart';
 
-class CallService implements Disposable{
+class CallService extends CallReplyService implements Disposable{
   final db = FirebaseFirestore.instance;
   StreamSubscription<DocumentSnapshot<Map<String, dynamic>>>? listener;
-
-
-  Future<void> sendReply(String reply, String uidCall) async {
-    DocumentReference callRef = db.collection("Users")
-      .doc(FirebaseAuth.instance.currentUser!.uid)
-      .collection("Calls")
-      .doc(uidCall)
-      .collection("EditableData")
-      .doc("editableData");
-
-    await callRef.set({
-      "reply" : reply,
-    }, SetOptions(merge: true));
-  }
-
-  void updateLastVisit(String uidFriend) async {
-    DocumentReference callRef = db.collection("Users")
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection("Friends")
-        .doc(uidFriend);
-
-    await callRef.set({
-      "lastVisit" : Timestamp.now(),
-    }, SetOptions(merge: true));
-  }
 
   Future<void> callFriend(String friendUid) async {
     //Isso aqui tem mudar, pegar o nome do usuario logado com shared preferences
