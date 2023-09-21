@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:toctoc/app/shared/services/CallReplyService.dart';
+import 'package:toctoc/app/shared/services/call_reply_service.dart';
 
 class CallService extends CallReplyService implements Disposable{
   final db = FirebaseFirestore.instance;

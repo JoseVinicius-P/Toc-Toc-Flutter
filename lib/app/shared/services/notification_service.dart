@@ -9,7 +9,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:timezone/data/latest_all.dart' as timezone;
 import 'package:timezone/timezone.dart' as timezone;
 import 'package:flutter_timezone/flutter_timezone.dart';
-import 'package:toctoc/app/shared/services/CallReplyService.dart';
+import 'package:toctoc/app/shared/services/call_reply_service.dart';
 import 'package:toctoc/firebase_options.dart';
 
 class NotificationService{
