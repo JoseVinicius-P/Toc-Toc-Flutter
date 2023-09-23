@@ -6,6 +6,8 @@ class UserModel{
   String profilePictureUrl = "";
   GeoPoint location = const GeoPoint(-10.2524869, -48.3256559);
 
+  UserModel.full({required this.name, required this.sound, required this.profilePictureUrl, required this.location});
+
   UserModel.empty();
 
   UserModel.copy(UserModel oldUserModel) {
@@ -37,9 +39,15 @@ class UserModel{
   }
 
   Map<String, dynamic> toFirestore() {
-    return {
-      "name": name,
-      "profilePictureUrl": profilePictureUrl
-    };
+    String name = this.name.trim();
+    if(name.isNotEmpty){
+      return {
+        "name": name,
+        "profilePictureUrl": profilePictureUrl
+      };
+    }else{
+      throw Exception("Variable name is empty");
+    }
+
   }
 }
