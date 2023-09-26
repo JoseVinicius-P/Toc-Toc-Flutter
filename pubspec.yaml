@@ -69,6 +69,7 @@ dependencies:
   permission_handler: ^10.4.5
   device_preview: ^1.1.0
   flutter_logs: ^2.1.11
+  mockito: ^5.4.2
 
 dev_dependencies:
   #Para criação de icone
