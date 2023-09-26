@@ -917,6 +917,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.2"
+  modular_test:
+    dependency: "direct main"
+    description:
+      name: modular_test
+      sha256: "97e20e1ffb690b78df9cd21fa5e4c5a64b59bad482329316123d93217924af61"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   nested:
     dependency: transitive
     description:

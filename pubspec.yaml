@@ -70,6 +70,7 @@ dependencies:
   device_preview: ^1.1.0
   flutter_logs: ^2.1.11
   mockito: ^5.4.2
+  modular_test: ^2.0.0
 
 dev_dependencies:
   #Para criação de icone
