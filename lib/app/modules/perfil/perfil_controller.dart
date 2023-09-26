@@ -42,7 +42,7 @@ class PerfilController implements Disposable{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if(await prefs.clear()){
       await FirebaseMessaging.instance.deleteToken();
-      await FirebaseAuth.instance.signOut().then((value) => Modular.to.navigate('/login/'));
+      await FirebaseAuth.instance.signOut().then((value) => Modular.to.navigate('/'));
     }
   }
 
