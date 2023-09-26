@@ -2,12 +2,13 @@
 
 import 'dart:async';
 
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:toctoc/app/modules/login/auth_service.dart';
 import 'package:toctoc/app/modules/login/login_controller.dart';
 
 //State é o tipo do login
-class LoginStore extends Store<String> {
+class LoginStore extends Store<String> implements Disposable{
   static const String GOOGLE_METHOD = 'GOOGLE_METHOD';
   static const String PHONE_NUMBER_METHOD = 'PHONENUMBER_METHOD';
 
@@ -89,5 +90,11 @@ class LoginStore extends Store<String> {
     }
   }
 
-
+  @override
+  void dispose() {
+    if(timer != null) {
+      timer!.cancel();
+      setError("");
+    }
+  }
 }
