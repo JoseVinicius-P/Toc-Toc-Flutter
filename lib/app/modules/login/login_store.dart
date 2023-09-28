@@ -19,16 +19,28 @@ class LoginStore extends Store<String> implements Disposable{
   LoginStore(this.authService, this.controller) : super(GOOGLE_METHOD);
 
   @override
+  void dispose() {
+    if(timer != null) {
+      timer!.cancel();
+      setError("");
+    }
+  }
+
+  @override
   void setError(newError, {bool force = false}) {
     super.setError(newError);
     if(newError != null){
-      if(timer != null) {
-        timer!.cancel();
-      }
-      timer = Timer(const Duration(seconds: 3), () {
-        setError("");
-      });
+      initTimer();
     }
+  }
+
+  void initTimer(){
+    if(timer != null) {
+      timer!.cancel();
+    }
+    timer = Timer(const Duration(seconds: 3), () {
+      setError("");
+    });
   }
 
   void signInWithGoogle() async {
@@ -87,14 +99,6 @@ class LoginStore extends Store<String> implements Disposable{
     }else{
       setError("Código inválido!");
       setLoading(false);
-    }
-  }
-
-  @override
-  void dispose() {
-    if(timer != null) {
-      timer!.cancel();
-      setError("");
     }
   }
 }
