@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:toctoc/app/modules/home/friend_list/gps_distance_service.dart';
 import 'package:toctoc/app/modules/home/friend_list/stores/select_friend_store.dart';
 import 'package:toctoc/app/modules/home/services/token_service.dart';
@@ -18,7 +19,8 @@ class HomeModule extends Module {
     Bind.lazySingleton((i) => SelectFriendStore(i())),
     Bind.lazySingleton((i) => TokenService()),
     Bind.lazySingleton((i) => FriendListStore(i(), i())),
-    Bind.lazySingleton((i) => FriendService()),
+    Bind.lazySingleton((i) => FirebaseFirestore.instance),
+    Bind.lazySingleton((i) => FriendService(i())),
     Bind.lazySingleton((i) => AddFriendStore(i(), i(), i())),
     Bind.lazySingleton((i) => HomeStore()),
     Bind.lazySingleton((i) => HomeController(i())),

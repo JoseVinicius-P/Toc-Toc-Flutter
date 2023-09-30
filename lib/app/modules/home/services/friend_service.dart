@@ -4,12 +4,22 @@ import 'package:toctoc/app/modules/home/friend_model.dart';
 
 class FriendService {
 
-  final db = FirebaseFirestore.instance;
+  final FirebaseFirestore db;
+
+  FriendService(this.db);
 
   Future<List<FriendModel>> getFriends() async {
     List<FriendModel> friends = [];
     try{
-      await db.collection("Users").doc(FirebaseAuth.instance.currentUser!.uid).collection("Friends").orderBy('lastVisit').get().then(
+      var querySnapshot = await db.collection("Users").doc(FirebaseAuth.instance.currentUser!.uid).collection("Friends").orderBy('lastVisit').get();
+
+      for (var docSnapshot in querySnapshot.docs) {
+        FriendModel? friend = FriendModel().fromDocumentSnapshot(docSnapshot);
+        if(friend != null){
+          friends.add(friend);
+        }
+      }
+      /*await db.collection("Users").doc(FirebaseAuth.instance.currentUser!.uid).collection("Friends").orderBy('lastVisit').get().then(
             (querySnapshot) {
           for (var docSnapshot in querySnapshot.docs) {
             FriendModel? friend = FriendModel().fromDocumentSnapshot(docSnapshot);
@@ -19,12 +29,10 @@ class FriendService {
           }
         },
         onError: (e) => print("Error completing: $e"),
-      );
+      );*/
     }catch(e){
       print("ERRO: $e");
     }
-
-
     return friends;
   }
 
