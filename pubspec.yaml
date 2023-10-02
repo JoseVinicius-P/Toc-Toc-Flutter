@@ -67,7 +67,6 @@ dependencies:
   flutter_timezone: ^1.0.4
   is_lock_screen: ^2.0.0
   permission_handler: ^10.4.5
-  device_preview: ^1.1.0
   flutter_logs: ^2.1.11
   modular_test: ^2.0.0
   mocktail: ^1.0.0

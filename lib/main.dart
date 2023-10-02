@@ -1,4 +1,3 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_logs/flutter_logs.dart';
@@ -42,10 +41,7 @@ void main() async {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
         .then((_) {
         runApp(
-            DevicePreview(
-                enabled: false,
-                builder: (context) => ResponsiveApp(builder: (context) => ModularApp(module: AppModule(), child: AppWidget())), // Wrap your app
-            ),
+          ResponsiveApp(builder: (context) => ModularApp(module: AppModule(), child: AppWidget())), // Wrap your app
         );
     });
 
