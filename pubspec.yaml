@@ -71,6 +71,8 @@ dependencies:
   flutter_logs: ^2.1.11
   modular_test: ^2.0.0
   mocktail: ^1.0.0
+  integration_test:
+    sdk: flutter
 
 dev_dependencies:
   #Para criação de icone
