@@ -35,7 +35,9 @@ class FriendListStore extends Store<List<FriendModel>> {
   }
 
   void addFriend(FriendModel friend){
-    state.add(friend);
+    if(!state.contains(friend)){
+      state.add(friend);
+    }
     update(List.from(state));
   }
 }
