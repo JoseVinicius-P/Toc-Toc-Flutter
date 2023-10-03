@@ -12,7 +12,7 @@ import 'package:toctoc/main.dart' as app;
 void main(){
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('Teste driver do app', (tester) async {
+  testWidgets('Teste no loguin', (tester) async {
     await tester.runAsync(() => app.main());
     await tester.pumpAndSettle();
     expect(find.byType(SplashScreenPage), findsOneWidget);
@@ -36,9 +36,40 @@ void main(){
       matching: find.byType(TextFormField),
     );
 
+    await tester.runAsync(() async => await tester.tap(sendCodeButton));
+    await tester.pumpAndSettle();
+    expect(errorText, findsOneWidget);
+    await tester.runAsync(() async => await Future.delayed(Duration(seconds: 3)));
+    await tester.pumpAndSettle();
+    expect(errorText, findsNothing);
+
+    await tester.enterText(textFormField, ' ');
+    await tester.runAsync(() async => await tester.tap(sendCodeButton));
+    await tester.pumpAndSettle();
+    expect(errorText, findsOneWidget);
+    await tester.runAsync(() async => await Future.delayed(Duration(seconds: 3)));
+    await tester.pumpAndSettle();
+    expect(errorText, findsNothing);
+
+    String fakePhoneNumber = "";
+    for(int i = 1; i < 11; i++) {
+      expect(errorText, findsNothing);
+      fakePhoneNumber += "9";
+      print("Testando com ${fakePhoneNumber.length} digitos");
+      await tester.enterText(textFormField, fakePhoneNumber);
+      await tester.pump();
+      expect(find.textContaining("(9"), findsOneWidget);
+      await tester.runAsync(() async => await tester.tap(sendCodeButton));
+      await tester.pumpAndSettle();
+      expect(errorText, findsOneWidget);
+      await tester.runAsync(() async => await Future.delayed(Duration(seconds: 3)));
+      await tester.pumpAndSettle();
+      expect(errorText, findsNothing);
+    }
+
     // Escrevendo o texto no campo de texto
     await tester.enterText(textFormField, '99999999999');
-    await tester.pump();
+    await tester.pumpAndSettle();
     // Verifiqcando se o texto foi inserido corretamente
     expect(find.text('(99) 9 9999-9999'), findsOneWidget);
 
